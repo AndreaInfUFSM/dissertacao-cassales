@@ -1,0 +1,234 @@
+\chapter{Metodologia}
+%-------------------------------------------------------------------
+Este capítulo descreve as etapas realizadas para atingir os objetivos deste trabalho. O trabalho foi dividido em seis etapas. A primeira etapa visou à instalação da versão 2.5 do Joomla, para aprofundar o manuseio na interface administrativa e para efeitos de testes de algumas extensões que se encaixavam no contexto do trabalho. Na segunda etapa foram instaladas mais duas interfaces administrativas do Joomla para abrir os \emph{sites} dos cursos de Sistemas de Informação (SI) e Ciência da Computação para gerar a alimentação de conteúdo. A terceira etapa destinou-se à avaliação das extensões de RSS e geração de feeds RSS e inserção das escolhidas no portal e \emph{sites} dos cursos. Durante a quarta etapa foram estudados os eventos que são ou poderiam ser interessantes para compor os calendários e como poderia ser desenvolvida a solução para os mesmos. Na quinta etapa foi instalada extensões do Joomla que possuiam integração com o \emph{Google Calendar} e escolhida a que iria agregar o serviço ao Portal. Na sexta etapa foi desenvolvida a solução escolhida para cada calendário e a sétima etapa foi dedicada à avaliação com os usuários.
+
+
+%-------------------------------------------------------------------
+\section{Instalação e testes de extensões no CMS Joomla}
+\subsection{Justificativa e Objetivos}
+O Joomla dispõe de diversas extensões que buscam auxiliar os usuários que procuram algo mais do que o que compõe a versão de instalação. Através do \emph{site} do Joomla, é possível visualizar uma variedade de opções de extensões em várias categorias. A maioria é sem custo algum, porém existem algumas extensões que são pagas.
+No contexto do trabalho, compreender melhor o funcionamento da interface administrativa possibilita que novas extensões possam ser integradas e opções possam ser mais facilmente manipuladas, uma vez que algumas extensões oferecem diversas opções de configuração.
+
+\subsection{Metodologia Aplicada}
+As extensões do Joomla são divididas em módulos, componentes e plugins. 
+O componente é o mais robusto, sendo que geralmente vai adicionar uma funcionalidade completamente nova ao \emph{site} ampliando as possibilidades de utilização. Um componente manipula bases de dados e ocupa a área principal do \emph{layout} da interface administrativa como pode ser visto na figura \ref{fig:JOOMLA}.
+Um módulo é visto como um complemento para alguma funcionalidade de uma parte do sistema. Normalmente oferece poucas opções configuráveis para um utilizador final e em geral, não manipula bases de dados. Usualmente um módulo não é foco principal de uma página, ocupando alguma parte secundária. 
+Um plugin é uma extensão avançada e são em essência manipuladores de eventos. Podem ser adicionados em qualquer local onde seja disparado um evento, isto é, na execução de um componente, de um módulo. Na versão 1.0 do Joomla eram chamados de "mambots". \cite{DocsJoomla}
+\begin{figure}[hbtn]
+   \centering
+   \includegraphics[width=15cm]{figuras/figura03-componentes-joomla.eps}
+   \caption{Exemplo de componentes na área principal da interface administrativa}
+   \label{fig:JOOMLA}
+\end{figure}
+
+No que contempla este trabalho, foram selecionadas algumas extensões de geradores de Feeds RSS bem como leitores RSS. 
+A técnica desenvolvida nesta etapa foi a instalação e análise das extensões mais populares disponíveis no \emph{link} http://extensions.joomla.org/extensions/ que tinham como requisito serem compatíveis com o Joomla 2.5 e gratuitas.
+
+\subsection{Resultados Alcançados}
+Foram instaladas as seguintes extensões:
+\begin{itemize}
+   \item Ninja RSS Syndicator
+   \item Coolfeed 
+   \item My RSS Reader
+   \item Simple RSS Feed Reader
+   \item RSS Browser 3.3
+\end{itemize}
+
+Todas as versões são compatíveis com a versão 2.5 do Joomla. Algumas tinham como pré-requisito a habilitação de módulos PHP.
+O Ninja RSS Syndicator é um componente que é utilizado para gerar \emph{feeds} RSS. É uma ferramenta muito fácil de ser instalada e configurada. Para criar um novo feed é possível escolher a tecnologia utilizada dentre as disponíveis (RSS 2.0, RSS 1.0, RSS 0.91, Atom, OPML, MBOX), limitar o número de mensagens dos \emph{feeds}, determinar um número de segundos para atualização da \emph{cache}, incluir ou excluir categorias para gerá-los.
+
+O Coolfeed é uma extensão que compreende um componente, um módulo e um plugin. Neste trabalho foi instalado apenas o módulo e o componente. No componente, pode ser configurado um novo \emph{feed}, grupos e estilos. Para criar um novo \emph{feed}, primeiro tem de ser configurado um novo estilo, o qual pode ser escolhido um template dentre os oferecidos pelo componente, ou utilizar o prefixo de uma classe utilizada no template utilizado pelo site. No estilo são configuradas algumas outras informações como se serão exibidos títulos, descrições, data, autor, barra de pesquisa, limite de palavras, opção para traduzir, entre outros. Feitos estes ajustes e criado um estilo é possível criar um \emph{feed}. A criação de um grupo é opcional. Na criação de um \emph{feed} é apenas inserida a URL do \emph{feed} se ele está publicado ou não e data de início e término da publicação. O módulo do Coolfeed é utilizado para indicar o local onde os \emph{feeds} serão exibidos. É uma extensão bastante robusta e oferece diversas opções de configuração.
+
+A extensão MyFeedRSS também compreende um módulo e um componente. Dentro do componente é possível adicionar categorias para os \emph{feeds}, suporte a várias fontes. O módulo é apenas para indicar onde aparecerão os \emph{feeds}. Esta extensão apresentou alguns problemas como não reconhecer a URL da fonte que estava sendo fornecida e por este motivo foi descartada.
+
+O Simple RSS Reader é um módulo bem compacto do Joomla. Dentro dele é possível configurar um layout ou utilizar os disponíveis, configurar o posicionamento e se quer esconder ou mostrar algumas opções como a descrição do item, data e outros. Ele não lê o \emph{feed} gerado pelo Ninja RSS Syndicator.
+
+Por fim o módulo RSS Browser 3.3 possibilita a inserção de várias fontes e a configuração de número de itens por \emph{feed}. Oferece a opção de mostrar \emph{tooltips} para cada fonte e abre o item para leitura em uma janela modal. O módulo não listou os \emph{feeds} das fontes de acordo com data ascendente ou descendente.
+
+\newcommand{\x}{$\times$}
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|c|}\hline
+Característica & Coolfeed & My Feed RSS & Simple RSS Reader & RSS Browser \\ \hline
+Suporte a múltiplas fontes & \x & \x & \x & \x \\ \hline
+Layout individual & \x &  &  \x & \x \\ \hline
+Fácil configuração &  &  & \x & \x \\ \hline
+Configurar formato de data &  &  & \x & \x \\ \hline
+Janela modal & \x &  &  & \x  \\ \hline
+\end{tabular}
+\caption{Principais características das extensões de leitura de RSS do CMS Joomla}
+\label{tab}
+\end{table}
+
+
+%-------------------------------------------------------------------
+\section{Desmembramento do Portal da Informática}
+\subsection{Justificativa e Objetivos}
+
+O Portal da Informática concentra atualmente o conteúdo e informações ao público-alvo dos cursos de Sistemas de Informação e Ciência da Computação. A ideia de manter um portal concentrador de notícias e desmembrá-lo em outros dois \emph{sites}, um para cada curso, surgiu da necessidade de separação de alguns conteúdos. Algumas informações são pertencentes a só um público-alvo de forma que torna-se desnecessário para algumas pessoas. A nova reformulação vai concentrar informações gerais sobre os cursos para que contemple a comunidade externa e integração de serviço de agenda para manter os alunos atualizados sobre prazos dos cursos. 
+
+Assim, inicialmente, foram feitas outras duas instalações do Joomla para que as administrações possam ser distintas e feitas pelas secretárias de cada curso, bem como para efetuar testes entre concentrador (portal) e alimentadores de conteúdo.
+
+Neste contexto, o objetivo das instalações nesta fase é apenas para fins de testes e divisão das interfaces administrativas.
+
+\subsection{Metodologia Aplicada}
+
+Para separar as interfaces administrativas foram instaladas duas vezes a versão do Joomla 2.5 no servidor disponível para testes do Laboratório de Sistemas de Computação (LSC). Inicialmente para efeito de testes manteve-se a base de dados do portal da informática. 
+
+\subsection{Resultados Alcançados}
+
+Alguns problemas foram percebidos durante a instalação, pois inicialmente a ideia foi clonar a instalação atual e apenas criar duas novas bases de dados distintas que manteriam conteúdo semelhante. Porém isso apresentou alguns problemas como não conseguir itens de configuração do site, mesmo fazendo as devidas configurações no arquivo "configuration.php" disponível na raiz de instalação do Joomla.
+Em razão disso, optou-se por instalar da forma tradicional uma das novas interfaces administrativas fazendo as devidas configurações, criando nova base de dados e importando o template desenvolvido para o portal. Um novo template pode ser facilmente importado ao Joomla assim como qualquer outra extensão através do menu de extensões -> gerenciador de extensões. Após importado, ele fica disponível no gerenciador de temas para torná-lo padrão e fazer alguns ajustes.
+
+%-------------------------------------------------------------------
+\section{Avaliação e inserção das extensões selecionadas}
+\subsection{Justificativa e Objetivos}
+
+A escolha de utilizar extensões baseou-se na oferta disponível. Se as atuais extensões suprem as necessidades, não há por que não utilizá-las. É claro que nem sempre desempenha o papel exatamente como desejado, mas ainda assim é menos custoso que desenvolver um componente do zero.
+
+\subsection{Metodologia Aplicada}
+Após copiadas, instaladas e testadas as extensões, foram selecionadas duas que mais se adequaram às necessidades do trabalho. Uma delas para gerar um \emph{feed} RSS baseado em categorias e uma para ler e concentrar esses \emph{feeds}.
+
+\subsection{Resultados Alcançados}
+As extensões escolhidas para concluir esta etapa do trabalho foram a Ninja RSS Syndicator e a Coolfeed. O Ninja RSS Syndicator foi escolhido por satisfazer a necessidade e facilidade de configuração. Já o Coolfeed foi escolhido dentre as opções testadas por oferecer a maior quantidade de recursos disponíveis e exibir os feeds da forma desejada. 
+Desta forma, foram gerados dois \emph{links} com \emph{feeds} das notícias dos cursos de Sistemas de Informação e Ciência da computação para agregar conteúdo ao Portal da Informática que concentra estas notícias com o leitor de RSS. A figura \ref{fig:Noticias-si} representa o resultado de um feed gerado pelo \emph{site} do Curso de Sistemas de Informação exibido no Portal da Informática
+
+\begin{figure}[hbtn]
+   \centering
+   \includegraphics[width=15cm]{figuras/figura04-aplicacao-noticiassi-portal.eps}
+   \caption{Exemplo de \emph{feed} no Portal da Informática do Curso de Sistemas de Informação}
+   \label{fig:Noticias-si}
+\end{figure}
+
+%-------------------------------------------------------------------
+\section{Calendários}
+\subsection{Justificativa e Objetivos}
+Atualmente quando é necessário divulgar um evento ou uma data importante de algum prazo dentro dos cursos ou da instituição a divulgação é feita no portal da informática como uma notícia ou muitas vezes a secretaria avisa por e-mail ou é divulgado em murais. Muitas vezes é executado os três meios. A grande maioria destes eventos possui uma periodicidade, que pode ser semestral, anual ou esporádica e portanto, para cada um deles tem de ser criadas uma ou mais notícias e enviar e-mails como lembrete. Oferecer o serviço de calendário no Portal da Informática integrado ao Google, é possível fazer com que cada aluno gerencie a sua própria agenda.
+
+\subsection{Metodologia Aplicada}
+Inserido no contexto dos cursos de Sistemas de Informação e Ciência da Computação e datas da instituição foram selecionados alguns desses eventos que iriam compor os calendários. Cada tipo de evento é alimentado por setores diferentes, porém até o momento para que fossem inseridos no portal teriam que ser postados por um usuário administrador do CMS. Foram selecionados para alimentar os calendários eventos que são regulares por algum período. Os tipos de eventos elencados foram:
+
+\begin{itemize}
+   \item Trabalhos de Graduação - Datas que compõe prazos inicias, de prévia e defesa
+   \item Matrículas e prazos gerais da Universidade
+   \item Eventos esporádicos - SAINF (Semana Acadêmica da Informática), Seminários, palestras e atividades dos PETs, entre outros
+   \item Prazos internos dos cursos
+\end{itemize}
+
+O calendário dos trabalhos de graduação são gerados, datas de prévia e defesa são gerados pela coordenação do curso. Este calendário é gerado uma vez por semestre. Períodos de matrícula, trancamento e outros prazos da universidade são gerados pela administração central que disponibiliza um documento no formato pdf no site da instituição. O calendário da instituição é feito anualmente. Os eventos esporádicos como SAINF, seminários, palestras e atividades do PET (Programa de Educação Tutorial) Sistemas de Informação e PET Ciência da Computação e são gerados por fontes diversas como o próprio PET, professores, coordenação, entre outros. Por fim, prazos internos dos cursos, em geral, são definidos pelas coordenações. Para cada um destes calendários foi pensada uma solução facilitadora. Todas as soluções foram pensadas em cima de serviços oferecidos na nuvem. Foram utilizados serviços do Google Drive, Google Docs, Google Calendar, para o desenvolvimento o Google Apps Script e extensões de Calendários do Joomla que oferecessem integração com o Google Calendar.
+
+\subsection{Resultados Encontrados}
+Os calendários foram separados
+
+
+\section{Extensões do Joomla para Calendários}
+\subsection{Justificativa}
+A fim de exibir os calendários Google no Portal de uma forma simplificada e expor uma interface que pudesse compor as páginas sem sobrecarregá-las procurou-se extensões do Joomla que fossem capazes de suprir esta necessidade. 
+
+\subsection{Metodologia Aplicada}
+Foram instaladas e testadas duas extensões do Joomla para Calendários com suporte ao Google Calendar. A GCalendar e a Scheduler.
+A extensão Scheduler é um componente que permite adicionar calendários de eventos Google e gerenciar outros tipos de eventos, calendários e compromissos. O componente oferece opção de exportação do calendário em PDF e iCal. No entanto ele não foi selecionado para utilização porque a visualização do calendário pelo componente é semelhante a visualização de um calendário do google como pode ser visto na figura \ref{fig:Scheduler} e o objetivo de ter uma extensão para visualizar um ou mais calendários Google era ocupar apenas uma parte da página como o calendário do atual portal da informática.
+\begin{figure}[hbtn]
+   \centering
+   \includegraphics[width=15cm]{figuras/figura06-componenteScheduler.eps}
+   \caption{Componente Scheduler}
+   \label{fig:Scheduler}
+\end{figure}
+
+
+A extensão GCalendar é uma extensão composta por 3 módulos, 2 plugins e um componente. A versão instalada foi a 3.1.2. Para a extensão funcionar corretamente é necessário instalar o módulo OpenSSL e iconv e também setar o fuso horário local. A interface do componente como pode ser visto na figura \ref{fig:GCalendar} permite gerenciar os calendários, ferramentas, suporte e adicionar calendários. Adicionar um calendário pode ser feito de duas formas: "Import Calendars" e "Add Calendar". Se escolhida a opção de importar calendários é feita uma requisição de login e senha de uma conta google. Através desta opção é mais simples gerenciar os calendários uma vez que são listados todos os calendários que estão vinculados à conta google e basta selecionar quais desejam ser importados. Já na opção "Add Calendar" é possível adicionar um calendário sem fazer login. Para calendários públicos basta dar um nome para o calendário no componente e adicionar o ID do Calendário informado pelo Google. Este ID é informado clicando-se no calendário corresponde e selecionando a opção "Configurações da Agenda". Onde encontra-se o endereço da agenda disponível nos formatos xml, ical e html, do lado encontra-se o ID do calendário. Já para calendários privados é necessário setar a magic cookie que é a chave privada de um calendário deste tipo. Da mesma forma que visualiza o endereço do ID da agenda se o calendário é privado abaixo tem-se endereço privado. É necessário clicar no "XML" e pegar o que está depois da palavra "private". Exemplo de um URL: https://www.google.com/calendar/feeds/IDCalendario/private-c937f6d1878252fa913fa515578a7efd/basic onde IDCalendário é o ID da agenda em questão e "c937f6d1878252fa913fa515578a7efd" é o magic cookie. Ou ainda é possível fornecendo o login e senha da conta google para ser gravado junto ao calendário, a fim de que este calendário privado possa ser lido através da conta. Os módulos do GCalendar servem para configurar a exibição dos calendários. GCalendar Overview, GCalendar Upcoming e GCalendar Next são os módulos que compõem a extensão. Os plugins integrados são o  Content - GCalendar Next Event e o Search GCalendar. 
+
+\begin{figure}[hbtn]
+   \centering
+   \includegraphics[width=15cm]{figuras/figura05-componenteGCalendar.eps}
+   \caption{Componente GCalendar}
+   \label{fig:GCalendar}
+\end{figure}
+
+O GCalendar Overview mostra os eventos em um formato de calendário propriamente dito. Os eventos podem ser mostrados na forma compacta, não compacta ou single. Na forma compacta todos eventos de um dia são apresentados em uma \emph{tooltip} que mostra título e horário e quando o usuário clicar em um dia que tem eventos marcados o calendário mostrando apenas o dia e os eventos. Na forma single, todos os eventos aparecem pequenos porém individuais e quando o usuário clicar no evento aparece apenas o evento selecionado. Ainda, na forma não compacta os eventos aparecem individualmente com detalhes. Algumas outras opções também podem ser configuradas, como o que deseja-se exibir na \emph{tooltip} e formato de data.
+O GCalendar Upcoming lista os próximos eventos. A configuração do módulo contém um campo que limita o número de eventos desta lista.
+Por fim, o GCalendarNext exibe um cronômetro do tempo restante para o evento mais próximo.
+O plugin de conteúdo serve para eventos em artigos e o plugin de pesquisa serve para procurar eventos do GCalendar.
+
+\subsection{Resultados Alcançados}
+A extensão GCalendar foi selecionada para fazer a ponte entre os Calendários do Google e o Portal. Os módulos selecionados para utilização resumem-se a combinação do módulo GCalendar Overview e GCalendar Upcoming. Na figura \ref{fig:GCalendar apresentacao} é possível visualizar a apresentação da extensão no Portal.
+
+\begin{figure}[hbtn]
+   \centering
+   \includegraphics[width=10cm]{figuras/figura07-moduloconfigurado.eps}
+   \caption{Visualização da extensão GCalendar com os módulos GCalendar Overview e GCalendar Upcoming}
+   \label{fig:GCalendar apresentacao}
+\end{figure}
+
+\section{Soluções individuais}
+\subsection{Justificativa e Objetivos}
+As soluções para compor os calendários foram pensadas de maneira individual por não serem geradas pelas mesmas fontes ou por possuir periodicidade distinta. 
+
+\subsection{Metodologia}
+
+Os eventos foram divididos em três calendários. 
+\begin{enumerate}
+\item Calendário Eventos Esporádicos
+\item Calendário de TGs dos Cursos de Ciência da Computação e Sistemas de Informação
+\item Calendário Letivo da Universidade e Prazos Internos
+\end{enumerate}
+
+Solução para o Calendário 1:
+
+Para o Calendário de Eventos Esporádicos que irá compor eventos do PET, SAINF, palestras e outros foi criado um calendário diretamente em uma conta Google e a cada vez que for definido um evento será inserido diretamente neste agenda.
+
+Solução para o Calendário 2:
+
+O Calendário dos Trabalhos de Graduação é construído semestralmente e formulado a partir de datas estipuladas pela instituição. Existem três momentos principais de alimentação deste calendário. As datas fixas, que geralmente são definidas no início do semestre, datas de apresentações de prévias e datas de defesa. Visto que, as datas de apresentação de prévia e de defesa tem de ser divulgadas publicamente e as datas de prazos para os alunos que desenvolvem o trabalho durante o semestre eram habitualmente postadas no portal ou mandadas por \emph{e-mail}. A solução foi criar um modelo de planilha a qual irá ser utilizado pelas coordenações ou secretarias durante o semestre. Um modelo é criado ou importado através da URL https://drive.google.com/a/inf.ufsm.br/templates onde é exibida uma listagem com os protótipos existentes. O padrão criado para os TGs foi uma planilha com cinco abas ou folhas. São elas: Calendário, Projeto, Prévia, Defesa e Configurações. Na aba "Calendário" foram colocadas as datas que são fixas durante o semestre para entregas, períodos de prévia e defesa. Nessa aba, só irão ser enviadas as datas que possuem um único dia, pois os períodos de andamento de sessões serão inseridos em abas posteriores, por ser um evento individual para cada aluno. Na aba "Projeto" são inseridos os dados de alunos, orientadores, co-orientadores se existirem. São solicitados alguns dados de alunos e orientadores como \emph{e-mail} e CPF. Estes dados não são usados para gerar o calendário mas poderão ser aplicados para a concepção de outros dados posteriores como a autorização de disponibilização do trabalho \emph{on-line}. A aba "Prévia" é composta dados dos alunos, orientador, co-orientador, banca, horário da sessão de andamento, sala e um campo "CheckIDApresentaçãoAluno" que não deve ser manuseado. Alguns campos são obrigatórios para inserção no calendário e estão marcados com "*". Se estes campos estiverem em branco não será adicionado nenhum dado ao calendário. Da mesma forma que na aba Projeto continha \emph{e-mail} e CPF nesta e repete-se na aba "Defesa" ocorre com os avaliadores pelo mesmo motivo. A coluna "Data da Sessão de Andamento" é preenchida para cada aluno e composta por validação de data. A data deve estar no formato "dd/mm/aaaa HH:mm" como pode ser visto na figura \ref{fig:PlanilhaData} para que possa ser inserida corretamente o horário da sessão de andamento do aluno. A aba "Defesa" configura-se da mesma forma que a anterior, a única alteração é a da data de defesa de cada aluno. A última aba, "Configurações" é a aba que contém configurações gerais utilizadas na planilha e no calendário como o nome do curso, que consta no cabeçalho de todas as outras abas, o \emph{link} das normas do curso para trabalhos de graduação e o ID do Calendário. A cada vez que um dado é inserido no Calendário é consultado o ID do calendário na célula "B4" este ID pode ser alterado caso desejar-se trocar o calendário, no entanto a célula onde ele está inserido não pode ser modificada. 
+
+\begin{figure}[hbtn]
+   \centering
+   \includegraphics[width=10cm]{figuras/figura08-tipodataplanilha.eps}
+   \caption{Tipo de data da planilha TGs}
+   \label{fig:PlanilhaData}
+\end{figure} 
+
+A comunicação da planilha com o calendário é feita através do \emph{Google Apps Script}. Para a manipulação desta planilha foram criados as seguintes opções de menu: 
+
+\begin{itemize}
+\item "Atualizar" que tem como itens de submenu "Dados (Projeto -> Prévia e Defesa)" e "Dados (Prévia -> Defesa)
+\item "Sincronizar com a agenda" que tem como itens de submenu Calendário, Prévia, Defesa;
+\item "Abrir" que não contém submenu;
+\end{itemize}
+
+O menu Atualizar serve para atualizar os campos que tem em comum de uma aba para a outra, evitando o retrabalho de digitá-los mais de uma vez.
+
+O menu Sincronizar com a agenda envia para o Calendário as informações que estiverem na aba selecionada de execução, sob as condições de os campos estarem com todos os campos necessários preenchidos.
+
+O menu Abrir apenas compreende um \emph{link} para o calendário que está sendo empregado.
+
+Solução para o calendário 3:
+
+O calendário letivo da universidade é elaborado anualmente e disponibilizado no formato PDF.  A manipulação deste documento para inserção no calendário será feita na mesma periodicidade. A maneira de resolução deste problema foi obtida juntamente com a intervenção de algum usuário. A fim de fosse possível editar o texto, foram consideradas maneiras de tornar o PDF um texto editável. Considerando o contexto do trabalho, no qual era desejável que todas as soluções fossem integradas na nuvem e, preferencialmente com o Google, foi explorado um meio que está inserido dentro do Google Drive. Para extrair texto de um PDF a partir do Google Drive é necessário fazer \emph{upload} deste documento. O \emph{upload} pode ser realizado clicando em uma seta que encontra-se ao lado do botão "Criar" no canto superior esquerdo da URL https://drive.google.com/ e na opção arquivos. Ao enviar um arquivo é necessário setar opções para que o arquivo PDF seja convertido em texto. As opções podem ser visualizadas quando o arquivo for selecionado para envio, aparece uma janela de envio onde tem um menu com "Configurações". As duas primeiras opções devem estar selecionadas como pode ser visto na figura \ref{fig:GDriveOptions}. Esta mesma configuração também pode ser feita através do ícone de Configurações do Google Drive, presente na interface no canto direito superior. Através deste ícone é exibida a opção "Configurações de \emph{Upload}" que contém as mesmas opções da imagem. Após ter sido concluído o \emph{upload} com estas opções irá ser gerado um documento de texto com uma página contendo respectivamente uma imagem da página e o texto da página a seguir, até o fim do documento.
+
+\begin{figure}[hbtn]
+   \centering
+   \includegraphics[width=10cm]{figuras/figura09-opcoespdf.eps}
+   \caption{Opções de upload de pdf no Google Drive}
+   \label{fig:GDriveOptions}
+\end{figure} 
+
+A manipulação deste documento a partir do momento da criação com as opções citadas acima foi composta por uma agregação do usuário juntamente com o \emph{Google Apps Script}. O processo de inserção do calendário é composto pelos seguintes passos:
+
+\begin{enumerate}
+\item Upload do PDF e geração do documento
+\item Tem-se um PDF com informações que não são relevantes ao contexto. Para resolver isto, desenvolveu-se uma função que retira as imagens e as datas na forma de calendário que encontram-se após o fim da listagem das datas e suas descrições. Além disso, tem de ser removido manualmente o cabeçalho do documento, pois pelo fato de não possuir uma padronização não pode ser excluído via \emph{script}.
+\item Via script, no documento gera-se uma planilha intermediária. Esta planilha intermediária irá conter cinco colunas. As cinco colunas são, respectivamente: "Data inicial", "Data final", "Acontecimento", "Aprovado", "Eventos adicionados". Data inicial é a data do início do prazo, evento ou fato. Quanto o evento é de um único dia contém apenas a data inicial. Data final é a data final de um evento que tem a duração maior que um dia. A coluna acontecimento contém a descrição do que destina-se a data inicial e final. A quarta coluna corresponde se um evento foi aprovado pela pessoa que está avaliando o calendário. Para eventos aprovados a coluna terá na linha correspondente o valor "Sim" e para eventos não aprovados ficará em branco. Esta planilha intermediária irá comportar um menu criado pelo Apps Script nomeado "Sincronizar" composto pelo submenu "Calendário". Através desta opção pode-se enviar os eventos para o Calendário que estiverem aprovados. O valor de inserção da descrição do evento é o valor que está na coluna correspondente ao acontecimento. Se deseja-se alterar o texto do acontecimento para fins de exibição, pode ser alterado antes de ser inserido no calendário.
+\item As datas sincronizadas aparecerão no calendário.
+
+\end{enumerate}
+
+\subsection{Resultados Alcançados}
+A criação dos calendários foi feita inicialmente em uma conta no domínio da Informática UFSM. Porém, os domínios educacionais possuem algumas limitações de opções de calendários para garantir a privacidade do domínio. Foi praticável criar um calendário público porém não foi possível setar a propriedade de ver todos os detalhes de eventos. Sem esta propriedade ativa, acessando a URL fornecida pelo calendário é exibida uma mensagem de que a agenda não está com o acesso público ativado. Em razão disto, os calendários foram criados em uma conta \emph{gmail} tradicional. No entanto, o restante da integração com o trabalho como o modelo da planilha dos TGs, documentos e scripts foram mantidos dentro do domínio da inf, para que não fosse necessário trocar de conta para acessar esses dados.
+
+
+\section{Avaliação com os Usuários}
+\subsection{Justificativa}
+
+\subsection{Metodologia}
+\subsection{Resultados Alcançados}

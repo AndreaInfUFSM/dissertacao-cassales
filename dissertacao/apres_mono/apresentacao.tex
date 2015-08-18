@@ -1,0 +1,549 @@
+\documentclass{beamer}
+
+\mode<presentation>{
+\usetheme{Dresden}
+\setbeamercovered{transparent}
+\usecolortheme{lsc}
+}
+
+\mode<handout>{
+  % tema simples para ser impresso
+  \usepackage[bar]{beamerthemetree}
+  % Colocando um fundo cinza quando for gerar transparências para serem impressas
+  % mais de uma transparência por página
+  \beamertemplatesolidbackgroundcolor{black!5}
+}
+
+\usepackage{amsmath,amssymb}
+\usepackage[brazil]{varioref}
+\usepackage[english,brazil]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{url}
+\usepackage{colortbl}
+
+\beamertemplatetransparentcovereddynamic
+
+\title[Desenvolvimento de um Escalonador Sensível ao Contexto para o \textit{Apache Hadoop} - Apresentação de Andamento]{Desenvolvimento de um Escalonador Sensível ao Contexto para o \textit{Apache Hadoop}}
+\author[Guilherme Weigert Cassales]{%
+  Guilherme Weigert Cassales\inst{1} \\
+  Orientadora: Profª Drª Andrea Schwertner Charão\inst{1}}
+  \institute[UFSM]{
+  \inst{1}%
+     Ciência da Computação\\
+     Universidade Federal de Santa Maria}
+
+% Se comentar a linha abaixo, irá aparecer a data quando foi compilada a apresentação  
+\date{20 de janeiro de 2014}
+
+\pgfdeclareimage[height=1cm]{inf}{figs/CienciaDaComputacao.png}
+
+% pode-se colocar o LOGO assim
+\logo{\pgfuseimage{inf}}
+
+\AtBeginSection[]{
+  \begin{frame}<beamer>
+    \frametitle{Roteiro}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Roteiro}
+\tableofcontents
+\end{frame}
+
+
+\section{Introdução}
+\frame{
+    \frametitle{Introdução}
+      \begin{itemize}
+         \item Relevância do \textit{framework Apache Hadoop}.
+         \item Problemas do \textit{Hadoop}:
+         \begin{itemize}
+         	\item desenvolvimento focado para \textit{clusters} homogêneos e dedicados;
+         	\item dificuldades de adaptação a ambientes heterogêneos.
+         \end{itemize}
+         \item Diversas soluções:
+         \begin{itemize}
+         	\item \textbf{escalonamento} de acordo com as \textit{características} dos nós;
+         	\item volatilidade dos nós utilizados no \textit{cluster};
+         	\item \textbf{auto configuração} do ambiente de execução.
+         \end{itemize}
+      \end{itemize}
+}
+
+\frame{
+    \frametitle{Objetivo e Justificativas}
+    \begin{itemize}   
+       \item Objetivo
+       \begin{itemize}
+           \item Tornar o escalonamento do Apache Hadoop sensível ao contexto.
+       \end{itemize}
+       
+       \item Justificativas:
+       \begin{itemize}
+       	   \item problemas de performance em situações de heterogeneidade;
+       	   \item problemas em manter um sistema homogêneo atualmente;
+       	   \item desperdício de capacidade (\textit{green computing}).
+       \end{itemize}
+   \end{itemize}
+}
+
+
+\section{Fundamentação}
+%\subsection{Arquitetura Geral do Hadoop}
+\pgfdeclareimage[height=6cm]{HadoopArq}{figs/Figura08-HadoooArchGeral.png}%
+\frame{
+    \frametitle{Arquitetura Geral do \textit{Hadoop}}
+    \pgfuseimage{HadoopArq}
+}
+
+\pgfdeclareimage[height=3cm]{YARNArq}{figs/Figura06-YarnArch.png}%
+\pgfdeclareimage[height=3cm]{HDFSArq}{figs/Figura07-HDFS.png}%
+\frame{
+	\begin{columns}
+    \frametitle{Arquitetura Geral do \textit{Hadoop}}
+        \column{3cm}
+            HDFS
+            \begin{itemize}
+            		\item \textit{NameNode}
+	            \item \textit{DataNode}
+            \end{itemize}
+            \pgfuseimage{HDFSArq}
+            \begin{tiny}
+            
+            (HADOOP, 2013)
+            \end{tiny}
+		\column{5cm}
+			YARN
+			\begin{itemize}
+				\item \textit{ResourceManager}
+				\item \textit{NodeManager}
+			\end{itemize}
+			\pgfuseimage{YARNArq}
+			\begin{tiny}
+            
+            (HADOOP, 2013)
+            \end{tiny}
+    \end{columns}
+}
+
+\frame{
+	\frametitle{MapReduce}
+	\begin{itemize}
+		\item O que é?
+		\item Qual a relação do \textit{MapReduce} com o YARN?
+		\begin{itemize}
+			\item Classes;
+			\item \textit{Containers};
+			\item Requisição de recursos.
+		\end{itemize}
+		\item Qual o ganho em utilizar?
+	\end{itemize}
+}
+
+\logo{\pgfuseimage{inf}}
+
+%\subsection{Sensibilidade ao Contexto}
+\frame{
+    \frametitle{Sensibilidade ao Contexto}
+    \begin{itemize}
+    		\item Contexto
+      	\begin{itemize}
+      		\item "qualquer \textbf{informação} que pode ser utilizada para \textbf{caracterizar} a \textbf{situação} de uma entidade (pessoa, lugar ou objeto) considerada \textbf{relevante} para a \textbf{interação} entre usuário e aplicação" (DEY, 2001).
+		\end{itemize}
+		\item Sensibilidade ao Contexto
+	    \begin{itemize}
+    			\item "se refere a habilidade de uma aplicação de \textbf{detectar e responder as mudanças no ambiente} de execução" (Maamar; Benslimane; Narendra, 2006).
+		\end{itemize}
+		\item Como um \textit{software} utiliza?
+		\item Por que utilizar?
+    \end{itemize}
+}
+
+%\subsection{Escalonadores do Hadoop}
+\frame{
+	\frametitle{Escalonadores Padrão}
+	\begin{itemize}
+		\item \textit{Internal}
+		\begin{itemize}
+			\item FIFO.
+		\end{itemize}
+		\item \textit{Fair}
+		\begin{itemize}
+			\item Distribuição igualitária de recursos.
+		\end{itemize}
+		\item \textit{Capacity}
+		\begin{itemize}
+			\item Divisão de um \textit{cluster} entre várias empresas.
+			\item Política de \textit{MinShare}.
+			\item Estrutura para utilização recursos.
+			\item Configuração dos recursos precária.
+		\end{itemize}		
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Trabalhos relacionados}
+	\begin{columns}
+		\column{5cm}
+		\begin{itemize}
+			\item (Kumar et al., 2012).
+			\item (Rasooli; Down, 2012).
+			\item (Chen et al., 2010).
+			\item (Xie et al., 2010).
+			\item (Tian et al., 2009).
+			\item (Isard et al., 2009).
+			\item (Zaharia et al., 2008).
+		\end{itemize}
+		
+		\column{7,5cm}
+			\begin{itemize}
+				\item Contextos mais comuns:
+				\begin{itemize}
+					\item classificação de \textit{jobs} e nós quanto ao potencial de E/S ou CPU;
+					\item avaliação do progresso da \textit{task} na decisão de lançar ou não uma \textit{task} especulativa.
+				\end{itemize}
+				
+				\item Objetivos mais comuns:
+				\begin{itemize}
+					\item melhorar o \textit{throughput};
+					\item diminuir o tempo de resposta.
+				\end{itemize}
+			\end{itemize}
+	\end{columns}
+}
+\section{Desenvolvimento}
+\logo{}
+\frame{
+    \frametitle{Estudo da Arquitetura}
+    \pgfdeclareimage[height=6.5cm]{RM}{figs/Figura14-RMHorton.png}
+    %TODO fig RM
+
+    \pgfuseimage{RM}
+    \begin{tiny}
+	{(HortonWorks,2014)}
+    \end{tiny}    
+}
+
+\frame{
+    \frametitle{Estudo da Arquitetura}
+    \center
+    \pgfdeclareimage[height=6.5cm]{NM}{figs/Figura15-NMHorton.png}
+    %TODO fig NM
+    \pgfuseimage{NM}
+    	\begin{tiny}
+    {(HortonWorks,2014)}
+    \end{tiny}
+}
+
+\logo{}
+\frame{
+    \frametitle{Estudo da Arquitetura}
+    \center
+    \pgfdeclareimage[height=5.5cm]{CDCS}{figs/Figura01-ClassDiagram.png}
+    \pgfuseimage{CDCS}
+}
+
+
+\logo{\pgfuseimage{inf}}
+\frame{
+    \frametitle{Estudo da política alocação}
+	Valores do \textbf{\textit{cluster}} para definir limites de alocação.
+    \begin{itemize}
+		\item XML:
+		\begin{itemize}
+			\item \textit{yarn.scheduler.minimum-allocation-mb} (1024);
+			\item \textit{yarn.scheduler.minimum-allocation-vcores} (1);
+			\item \textit{yarn.scheduler.maximum-allocation-mb} (8192);
+			\item \textit{yarn.scheduler.maximum-allocation-vcores} (32).
+		\end{itemize}
+		\item Código:
+		\begin{itemize}
+			\item \textbf{minimumAllocation};
+			\item \textbf{maximumAllocation}.
+		\end{itemize}
+    \end{itemize}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+	\frametitle{Estudo da política alocação}
+	Valores passados pela \textbf{aplicação}.
+	\begin{itemize}
+		\item XML:
+		\begin{itemize}
+			\item \textit{mapreduce.map.memory.mb} (1024);
+			\item \textit{mapreduce.map.cpu.vcores} (1);
+			\item \textit{mapreduce.reduce.memory.mb} (1024);
+			\item \textit{mapreduce.reduce.cpu.vcores} (1).
+		\end{itemize}
+		\item Código:
+		\begin{itemize}
+			\item \textbf{JobConf}.
+		\end{itemize}
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Experimento}
+	Realizado para melhor entendimento da política de alocação.
+	Foram utilizados 4 cenários de requisição:
+		\begin{itemize}
+			\item \textit{default}, nenhum valor alterado;
+			\item maior que máximo, o limite máximo foi alterado;
+			\item menor que mínimo, limite mínimo foi alterado;
+			\item dentro dos limites.
+		\end{itemize}
+}
+
+\frame{
+	\frametitle{Experimento}
+	Resultados:
+	\begin{table}
+		\begin{tabular}{|l|c|c|c|c|}
+		\hline 
+		Parâmetros & \textit{Default} & Maior & Menor & Dentro \\
+		\hline 
+		Requisição \textit{Map} (mb) & 1024 & 1024 & 1024 & 3456 \\
+		\hline 
+		Requisição \textit{Reduce} (mb) & 1024 & 1024 & 1024 & 3712 \\ 
+		\hline 
+		Limite mínimo (mb) & 1024 & 512 & 2048 & 512 \\
+		\hline 
+		Limite máximo (mb) & 8192 & 768 & 8192 & 8192 \\
+		\hline 
+		Alocação \textit{Map} (mb) & 1024 & ERRO & 2048 & 3584 \\
+		\hline 
+		Alocação \textit{Reduce} (mb) & 1024 & ERRO & 2048 & 4096 \\
+		\hline 
+		\end{tabular}
+	\end{table}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+	\frametitle{Experimento - cálculo}
+	\center
+	\pgfdeclareimage[height=6.5cm]{calc}{figs/Figura19-allocflow2.png}
+    %TODO fig calc
+    \pgfuseimage{calc}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+	\frametitle{Escalonamento sensível ao contexto}
+	\begin{itemize}
+		\item \textit{CapacityScheduler} já provem uma infra-estrutura.
+		\item Falhas/pontos fracos do funcionamento.
+		\item Oportunidade de melhora - \textbf{Coletor}.
+	\end{itemize}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+	\frametitle{Coletor}
+	\begin{itemize}
+		\item Coletor escolhido: PER-MARE \textit{Collector} (Kirsch-Pinheiro, M., 2013).
+		\item Organizado em: interface, classe abstrata e classes de implementação.
+		\item Integração com o Hadoop: estudo de como o \textit{CapacityScheduler} obtinha informação sobre os recursos de cada \textit{NodeManager}.
+	\end{itemize}
+}
+
+\logo{}
+\frame{
+	\frametitle{Integração do Coletor com o Hadoop}
+	\center
+	\pgfdeclareimage[height=6cm]{colectInt}{figs/Figura20-collectorfig.png}
+    %TODO fig colectInt
+    \pgfuseimage{colectInt}
+}
+
+\section{Resultados}
+\logo{\pgfuseimage{inf}}
+\frame{
+	\frametitle{Teste de integração do coletor}
+	Realizado no Grid'5000, para testar se o coletor fazia a coleta corretamente.
+	\begin{itemize}
+		\item Conf. \textit{Hardware}: 2 CPU AMD@1.7Ghz, 12 cores/CPU e 47GB RAM.
+		\item Conf. \textit{Software}: Ubuntu x64 12.04, Hadoop 2.2.0, Sun JDK 1.7.
+		\item Conf. Hadoop: \textit{default}. 
+		\begin{itemize}
+			\item \textit{yarn.nodemanager.resource.memory-mb} (8192)
+			\item \textit{yarn.nodemanager.resource.cpu-vcores} (8)
+		\end{itemize}
+	\end{itemize}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+	\frametitle{Teste de integração do coletor}
+	Recursos disponíveis por \textit{NodeManager} utilizando configuração \textit{default} e utilizando coletores de informação:
+	\begin{table}
+		\renewcommand{\figurename}{Table}
+		\centering
+		\begin{tabular}{|l|c|c|}
+			\hline 
+			  & \textit{Default} & Coletor \\ 
+			\hline 
+			\textit{Node} \textit{Memory} & 8192 & 48303 \\ 
+			\hline 
+			\textit{Node} Vcores & 8 & 24 \\ 
+			\hline 
+		\end{tabular}
+	\end{table}
+}
+
+\logo{}
+\frame{
+	\frametitle{Teste de integração do coletor}
+	Recursos disponíveis no cluster utilizando configuração \textit{default} e utilizando coletores de informação:
+	\pgfdeclareimage[height=6cm]{totalMemory}{figs/Figura10-totalMemory.png}
+    %TODO fig colectInt
+    \pgfuseimage{totalMemory}	
+}
+
+\logo{}
+\frame{
+	\frametitle{Teste de integração do coletor}
+	Recursos disponíveis no cluster utilizando configuração \textit{default} e utilizando coletores de informação:
+	\pgfdeclareimage[height=6cm]{totalVcores}{figs/Figura12-totalCores.png}
+    %TODO fig colectInt
+    \pgfuseimage{totalVcores}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+   \frametitle{Teste de execução: CapacityScheduler original X CapacityScheduler sensível ao contexto}
+   	Realizado no Grid'5000, para comparar o funcionamento do \textit{CapacityScheduler} original com o \textit{CapacityScheduler} sensível ao contexto.
+	\begin{itemize}
+		\item Configurações de \textit{Hardware}, \textit{Software} e Hadoop iguais ao experimento anterior.
+		\item Aplicação utilizada para \textit{benchmark}: \textit{TeraSort} de 5GB.
+	\end{itemize}
+}
+
+\logo{}
+\frame{
+   \frametitle{Teste de execução: CapacityScheduler original X CapacityScheduler sensível ao contexto}
+   	Resultados referentes aos limites de alocação e disponibilidade de recursos:
+	\begin{itemize}
+		\item \textit{CapacityScheduler} original:
+		\begin{itemize}
+			\item recursos totais: 32768 mb e 32 cores;
+			\item limite mínimo: 1024 mb e 1 core;
+			\item limite máximo: 8192 mb e 8 cores.
+			\item todos \textit{containers} de \textit{map} receberam 1024 mb e 1 core, o limite mínimo.
+		\end{itemize}
+		\item \textit{CapacityScheduler} sensível ao contexto:
+		\begin{itemize}
+			\item recursos totais: 193210 mb e 96 cores;
+			\item limite mínimo: 4830 mb e 2 cores;
+			\item limite máximo: 24151 mb e 12 cores.
+			\item todos \textit{containers} de \textit{map} receberam 4830 mb e 2 cores, o limite mínimo.			
+		\end{itemize}
+	\end{itemize}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+   \frametitle{Teste de execução: CapacityScheduler original X CapacityScheduler sensível ao contexto}
+   	Resultados referentes ao escalonamento dos recursos:
+   	
+  	apresentados em forma de gráfico de Gantt.
+	\pgfdeclareimage[height=2.5cm]{ganttDefault}{figs/Figura16-GanttDefault.png}
+    %TODO fig colectInt
+    \pgfuseimage{ganttDefault}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+   \frametitle{Teste de execução: CapacityScheduler original X CapacityScheduler sensível ao contexto}
+   	Resultados referentes ao escalonamento dos recursos:
+   	
+   	apresentados em forma de gráfico de Gantt.
+	\pgfdeclareimage[height=2.5cm]{ganttCtx}{figs/Figura17-GanttImproved.png}
+    %TODO fig colectInt
+    \pgfuseimage{ganttCtx}
+}
+
+\section{Conclusão e Trabalhos Futuros}
+\logo{\pgfuseimage{inf}}
+\frame{
+   \frametitle{Conclusão}
+   	\begin{itemize}
+   		\item O \textit{CapacityScheduler} é capaz de detectar e reagir conforme a informação do ambiente (memória e cpu dos \textit{NodeManagers}).
+   		\item O escalonamento foi melhorado.
+		\item Existem mais formas de melhorar o escalonamento.
+   	\end{itemize}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+   \frametitle{Trabalhos Futuros}
+   	\begin{itemize}
+   		\item Extender a classe \textit{Resources} para suportar outras informações de recurso como carga de cpu, espaço em disco disponível, entre outras.
+   		\item Melhorar o escalonamento do \textit{CapacityScheduler} / criar um novo escalonador que possa levar em consideração outros recursos.
+		\item Modificar o \textit{ApplicationMaster}.
+   	\end{itemize}
+}
+
+
+\section{Referências}
+\logo{}
+\frame{
+    \frametitle{Referências}
+    \begin{itemize}
+	\begin{tiny}
+    	   \item DEY, A. K. Understanding and Using Context. Personal Ubiquitous Comput., London, UK, UK, v.5, n.1, p.4-7, Jan. 2001.
+       \item MAAMAR, Z.; BENSLIMANE, D.; NARENDRA, N. C. What can context do for web services? Commun. ACM, New York, NY, USA, v.49, n.12, p.98-103, Dec. 2006.
+       \item KUMAR, K. A. et al. CASH: context aware scheduler for hadoop. In: INTERNATIONAL CONFERENCE ON ADVANCES IN COMPUTING, COMMUNICATIONS AND INFORMATICS, New York, NY, USA. Proceedings. . . ACM, 2012. p.52-61. (ICACCI '12).
+       \item ZAHARIA, M. et al. Improving MapReduce performance in heterogeneous environments. In: USENIX CONFERENCE ON OPERATING SYSTEMS DESIGN AND IMPLEMENTATION, 8., Berkeley, CA, USA. Proceedings. . . USENIX Association, 2008. p.29-42. (OSDI'08).
+       \item TIAN, C. et al. A Dynamic MapReduce Scheduler for Heterogeneous Workloads. In: EIGHTH INTERNATIONAL CONFERENCE ON GRID AND COOPERATIVE COMPUTING, 2009., Washington, DC, USA. Proceedings. . . IEEE Computer Society, 2009. p.218-224. (GCC '09).
+        \item CHEN, Q. et al. SAMR: a self-adaptive mapreduce scheduling algorithm in heterogeneous environment. In: IEEE INTERNATIONAL CONFERENCE ON COMPUTER AND INFORMATION TECHNOLOGY, 2010., Washington, DC, USA. Proceedings. . . IEEE Computer Society, 2010. p.2736-2743. (CIT '10).
+
+	\end{tiny}
+    \end{itemize}
+}
+
+\logo{}
+\frame{
+    \frametitle{Referências (Continuação)}
+    \begin{itemize}
+    \begin{tiny}
+       \item RASOOLI, A.; DOWN, D. G. Coshh: a classification and optimization based scheduler for heterogeneous hadoop systems. In: SC COMPANION: HIGH PERFORMANCE COMPUTING, NETWORKING STORAGE AND ANALYSIS, 2012., Washington, DC, USA. Proceedings. . . IEEE Computer Society, 2012. p.1284-1291. (SCC '12).
+       \item ISARD, M. et al. Quincy: fair scheduling for distributed computing clusters. In: ACM SIGOPS 22ND SYMPOSIUM ON OPERATING SYSTEMS PRINCIPLES, New York, NY, USA. Proceedings. . . ACM, 2009. p.261-276. (SOSP '09).
+       \item XIE, J. et al. Improving MapReduce performance through data placement in heterogeneous Hadoop clusters. In: PARALLEL AND DISTRIBUTED PROCESSING, WORKSHOPS AND PHD FORUM (IPDPSW). Anais. . . IEEE International Symposium, 2010.
+       \item HADOOP, A. Arquitetura do HDFS. http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/Federation.html, Acesso em novembro de 2013.
+       \item HADOOP, A. Arquitetura do YARN. http://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html, Acesso em novembro de 2013.
+
+	\end{tiny}
+    \end{itemize}
+}
+
+\logo{}
+\frame{
+	\frametitle{Referências (Continuação)}
+	\begin{itemize}
+	\begin{tiny}
+		\item HortonWorks. HortonWorks Hadoop YARN - ResourceManager. http://hortonworks.com/blog/apache-hadoop-yarn-resourcemanager/, acesso em janeiro de 2014.
+		\item HortonWorks. HortonWorks Hadoop YARN - NodeManager. http://hortonworks.com/blog/apache-hadoop-yarn-nodemanager/, acesso em janeiro de 2014.
+
+	\end{tiny}
+	\end{itemize}
+}
+
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\end{document}

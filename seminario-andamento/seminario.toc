@@ -1,0 +1,25 @@
+\select@language {brazilian}
+\contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{6}{chapter.1}
+\contentsline {section}{\numberline {1.1}Objetivos}{7}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Objetivo Geral}{7}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Objetivos Espec\IeC {\'\i }ficos}{7}{subsection.1.1.2}
+\contentsline {section}{\numberline {1.2}Justificativa}{7}{section.1.2}
+\contentsline {chapter}{\numberline {2}Fundamentos e Revis\IeC {\~a}o de Literatura}{8}{chapter.2}
+\contentsline {section}{\numberline {2.1}Hadoop}{8}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Arquitetura geral do \emph {Apache Hadoop}}{8}{subsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.1.1}HDFS}{9}{subsubsection.2.1.1.1}
+\contentsline {subsubsection}{\numberline {2.1.1.2}YARN}{9}{subsubsection.2.1.1.2}
+\contentsline {subsection}{\numberline {2.1.2}Configura\IeC {\c c}\IeC {\~a}o do ambiente de execu\IeC {\c c}\IeC {\~a}o do \emph {Hadoop}}{10}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}\emph {MapReduce}}{11}{subsection.2.1.3}
+\contentsline {section}{\numberline {2.2}Sensibilidade ao contexto}{11}{section.2.2}
+\contentsline {section}{\numberline {2.3}Escalonadores para Hadoop}{12}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}\emph {Hadoop Internal Scheduler}}{12}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}\emph {Fair Scheduler}}{12}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}\emph {Capacity Scheduler}}{13}{subsection.2.3.3}
+\contentsline {section}{\numberline {2.4}Trabalhos relacionados}{13}{section.2.4}
+\contentsline {chapter}{\numberline {3}Desenvolvimento}{16}{chapter.3}
+\contentsline {section}{\numberline {3.1}Configura\IeC {\c c}\IeC {\~a}o do ambiente de execu\IeC {\c c}\IeC {\~a}o}{16}{section.3.1}
+\contentsline {section}{\numberline {3.2}Altera\IeC {\c c}\IeC {\~a}o e compila\IeC {\c c}\IeC {\~a}o do c\IeC {\'o}digo fonte}{18}{section.3.2}
+\contentsline {section}{\numberline {3.3}Estudo da arquitetura do \emph {Apache Hadoop}}{19}{section.3.3}
+\contentsline {chapter}{\numberline {4}Pr\IeC {\'o}ximas Etapas}{22}{chapter.4}
+\contentsline {chapter}{Ap{\^e}ndices}{23}{section*.3}

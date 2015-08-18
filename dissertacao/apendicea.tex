@@ -1,0 +1,365 @@
+
+\chapter{Integração da Planilha de TGs com o Calendário Google}
+Este apêndice contém o código da integração do modelo de planilha de TGs com o Calendário através do \emph{Google Apps Script}.
+
+
+%IMPORTANTE: Se precisar usar alguma seção ou subseção dentro dos apêndices ou
+%anexos, utilizar o comando \tocless para não adicionar no Sumário
+%Exemplos: 
+% \tocless\section{Histórico}
+% \tocless\subsection{Detalhes}
+\lstset{language=Java,
+             basicstyle=\footnotesize,
+             numbers=left,
+             extendedchars=\true
+             showspaces = false,
+             numberstyle=\footnotesize,
+             frame=shadowbox,
+             breaklines = true}
+
+\begin{lstlisting}
+
+function onOpen() {
+   var planilha = SpreadsheetApp.getActiveSpreadsheet();
+   var menuEntries = [{name: "Calendário", functionName: "addDatasCalendario"}, {name: "Prévia", functionName: "myFunctionPrevia"}, {name: "Defesa", functionName: "myFunctionDefesa"}];
+   var menuEntries1 = [{name: "Calendário", functionName: "OpenCalendar"}]
+   var menuEntries2 = [{name: "Dados (Projeto -> Prévia e Defesa)", functionName: "AtualizaDadosProj"}, {name: "Dados (Prévia -> Defesa)", functionName: "AtualizaDadosPrevia"}]
+   planilha.addMenu("Atualizar", menuEntries2);
+   planilha.addMenu("Sincronizar com a agenda", menuEntries);
+   planilha.addMenu("Abrir", menuEntries1);
+}
+
+function addDatasCalendario() {
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+   var range, range1, range2, range3, range4; 
+   var i, j, cell, evento, datafinal;
+   var string = null;
+   var planilhacalendario = ss.getSheets()[ss.getSheetByName("Calendario").getIndex()-1];
+   var idagenda = BuscaIdCalendario();
+   var title = null;
+   var contador = 0;
+   var msg = false;
+   var data = null;
+   var idevento = null;
+   if(idagenda != null)
+      var agenda = CalendarApp.getCalendarById(idagenda);
+   var linha = 7;
+   var range = planilhacalendario.getRange(7, 4, 6, 5);
+   var values = range.getValues();
+   for (var row in values) {
+      for (var col in values[row]) {
+         if(row != 2 && row != 4) {
+            title = values[row][0];
+            data = values[row][1];
+            idevento = values[row][4];
+         }
+         else {
+            title = null;
+            data = null;
+            idevento = null;
+         }
+      }      
+      if(title && data) {
+         if(idevento != "") {
+             contador++;
+             var msg = true;
+         }
+         else {
+            evento = agenda.createAllDayEvent(title, data);
+            range = planilhacalendario.getRange(linha,8);
+            range.setValue(evento.getId());
+         }
+      }
+      linha++;
+   }
+   if(contador > 0) {
+      if(contador >= 4) {
+         Browser.msgBox("Todos os eventos deste calendario ja foram adicionados");
+      }
+      else 
+         Browser.msgBox("Foram adicionados ao calendario "+contador+" de 4 datas");
+   }
+}
+
+function myFunctionPrevia() {
+   var idagenda = BuscaIdCalendario();
+   if(idagenda != null)
+      var agenda = CalendarApp.getCalendarById(idagenda);
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+   var id = null;
+   var planilhaprevia = ss.getSheets()[ss.getSheetByName("Previa").getIndex()-1];
+   var curso = planilhaprevia.getRange(3,1).getValue();
+   var range, colunadata; 
+   var contador = 0;
+   var i, j, cell;
+   var evento, idevento = null, novorange = null;
+   novorange = planilhaprevia.getRange(9,14).getFormula();
+   var aluno = null, titulotrab = null, orientador = null, coorientador = null, nomeavaliador1 = null, emailavaliador1, cpfavaliador1, nomeavaliador2 = null, emailavaliador2, cpfavaliador2, datasessao = null, duracao = null, sala = null, dataf = null, horario = null, update = null;
+   var lin = planilhaprevia.getLastRow();
+   var col = planilhaprevia.getLastColumn();
+   for(i = 9; i <= lin; i++) { //a partir da linha que tem conteudo
+      for(j = 1; j <= col; j++) {
+         range = planilhaprevia.getRange(i, j);
+         if(!range.isBlank()) {
+            cell = range.getValue();
+            switch(j) {
+               case 1: //nome do aluno
+                  aluno = cell;
+                  break;
+               case 2:  //titulo
+                  titulotrab = cell;
+                  break;
+               case 3: //orientador
+                  orientador = cell;
+                  break;
+               case 4: //co-orientador
+                  coorientador = cell; 
+                  break;
+               case 5: //avaliador1
+                  nomeavaliador1 = cell;
+                  break;
+               case 6: //avaliador2
+                  emailavaliador1 = cell;
+                  break;
+               case 7: //data sessao de andamento
+                  cpfavaliador1 = cell
+                  break;
+               case 8:
+                  nomeavaliador2 = cell;
+                  break;
+               case 9:
+                  emailavaliador2 = cell;
+                  break;     
+               case 10:
+                  cpfavaliador2 = cell;
+                  break;  
+               case 11:
+                  datasessao = cell;
+                  dataf = new Date(datasessao);
+                  horario = cell.getHours();
+                  horario++;
+                  dataf.setHours(horario);
+                  dataf = new Date(dataf);
+                  break;
+               case 12:
+                  sala = cell;
+                  break;  
+               case 13:
+                  idevento = cell;
+                  break; 
+               case 14:
+                  update = cell;
+                  break;
+               default:
+                  break;
+          } 
+        } 
+      }
+      if(aluno && titulotrab && orientador && nomeavaliador1 && nomeavaliador2 && datasessao && sala && !idevento) { //todos os dados estao completos
+         evento = agenda.createEvent(curso+' - Sessao Publica de Andamento do Aluno: ' + aluno, datasessao, dataf, {location: 'Universidade Federal de Santa Maria, Centro de Tecnologia, Sala: '+sala, description: 'Trabalho: '+titulotrab+' Orientador: '+orientador+' Banca: '+nomeavaliador1+', '+nomeavaliador2});
+         range = planilhaprevia.getRange(i,13);
+         range.setValue(evento.getId());   
+         contador++;
+      }
+      else { 
+         if(aluno && titulotrab && orientador && nomeavaliador1 && nomeavaliador2 && datasessao && sala && idevento && update) { //dar update na data
+             var event = agenda.getEventSeriesById(idevento); 
+             event.deleteEventSeries();
+             evento = agenda.createEvent(curso+' - Sessao Publica de Andamento do Aluno: ' + aluno, datasessao, dataf, {location: 'Universidade Federal de Santa Maria, Centro de Tecnologia, Sala: '+sala, description: 'Trabalho: '+titulotrab+' Orientador: '+orientador+' Banca: '+nomeavaliador1+', '+nomeavaliador2});
+             range = planilhaprevia.getRange(i,13);
+             range.setValue(evento.getId());  
+             var range2 = planilhaprevia.getRange(i,14);
+             range2.clear();
+         }
+      }
+      aluno = null, titulotrab = null, orientador = null, coorientador = null, nomeavaliador1 = null, emailavaliador1 = null, cpfavaliador1 = null, nomeavaliador2 = null, emailavaliador2 = null, cpfavaliador2 = null, datasessao = null, sala = null, idevento = null, dataf = null, horario = null, update = null;
+   }  //fecha for i
+   if(contador == 0) {
+      Browser.msgBox("Nenhuma modificacao foi feita no calendario");
+   }
+   else { 
+      Browser.msgBox("Foram adicionados "+contador+" eventos ao calendario");
+   }
+}
+  
+function myFunctionDefesa() {
+   var idagenda = BuscaIdCalendario();
+   if(idagenda != null)
+      var agenda = CalendarApp.getCalendarById(idagenda);
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+   var planilhadefesa = ss.getSheets()[ss.getSheetByName("Defesa").getIndex()-1];
+   var range, colunadata; 
+   var i, j, cell, contador = 0;
+   var curso = planilhadefesa.getRange(3,1).getValue();
+   var evento, idevento = null;
+   var aluno = null, titulotrab = null, orientador = null, coorientador = null, nomeavaliador1 = null, emailavaliador1, cpfavaliador1, nomeavaliador2 = null, emailavaliador2, cpfavaliador2, datadefesa = null, duracao = null, sala = null, horario = null, dataf = null, update = null;
+   var lin = planilhadefesa.getLastRow();
+   var col = planilhadefesa.getLastColumn();
+   for(i = 9; i <= lin; i++) { //a partir da linha que tem conteudo
+      for(j = 1; j <= col; j++) {
+         range = planilhadefesa.getRange(i, j);
+         if(!range.isBlank()) {
+            cell = range.getValue();
+            switch(j) {
+               case 1: //nome do aluno
+                  aluno = cell;
+                  break;
+               case 2:  //titulo
+                  titulotrab = cell;
+                  break;
+               case 3: //orientador
+                  orientador = cell;
+                  break;
+               case 4: //co-orientador
+                  coorientador = cell; 
+                  break;
+               case 5: 
+                  nomeavaliador1 = cell;
+                  break;
+               case 6:
+                  emailavaliador1 = cell;
+                  break;
+               case 7: 
+                  cpfavaliador1 = cell
+                  break;
+               case 8:
+                  nomeavaliador2 = cell;
+                  break;
+               case 9:
+                  emailavaliador2 = cell;
+                  break;     
+               case 10:
+                  cpfavaliador2 = cell;
+                  break;  
+               case 11:
+                  datadefesa = cell;
+                  dataf = new Date(datadefesa);
+                  var horario = cell.getHours();
+                  horario++;
+                  dataf.setHours(horario);
+                  dataf = new Date(dataf);
+                  break;
+               case 12:
+                  sala = cell;
+                  break;  
+               case 13:
+                  idevento = cell;
+                  break;  
+               case 14:
+                  update = cell;
+                  break;
+               default:
+                  break;
+          } 
+        } 
+      }
+      if(aluno && titulotrab && orientador && nomeavaliador1 && nomeavaliador2 && datadefesa && sala && !idevento) { //todos os dados estao completos
+         evento = agenda.createEvent(curso+' - Sessao de Defesa do Aluno: ' + aluno, datadefesa, dataf, {location: 'Universidade Federal de Santa Maria, Centro de Tecnologia, Sala: '+sala, description: 'Trabalho: '+titulotrab+' Orientador: '+orientador+' Banca: '+nomeavaliador1+', '+nomeavaliador2});
+         range = planilhadefesa.getRange(i,13);
+         range.setValue(evento.getId());   
+         contador++;
+      }
+      else { 
+         if(aluno && titulotrab && orientador && nomeavaliador1 && nomeavaliador2 && datadefesa && sala && idevento && update) { //dar update na data
+             var event = agenda.getEventSeriesById(idevento); 
+             event.deleteEventSeries();
+           evento = agenda.createEvent(curso+' - Sessao de Defesa do Aluno: ' + aluno, datadefesa, dataf, {location: 'Universidade Federal de Santa Maria, Centro de Tecnologia, Sala: '+sala, description: 'Trabalho: '+titulotrab+' Orientador: '+orientador+' Banca: '+nomeavaliador1+', '+nomeavaliador2});
+             range = planilhaprevia.getRange(i,13);
+             range.setValue(evento.getId());  
+             var range2 = planilhaprevia.getRange(i,14);
+             range2.clear();
+         }
+      }
+      aluno = null, titulotrab = null, orientador = null, coorientador = null, nomeavaliador1 = null, emailavaliador1 = null, cpfavaliador1 = null, nomeavaliador2 = null, emailavaliador2 = null, cpfavaliador2 = null, datadefesa = null, sala = null, idevento = null, dataf = null, horario = null, update = null;
+   }
+   if(contador == 0) {
+      Browser.msgBox("Nenhuma modificacao foi feita no calendario");
+   }
+   else { 
+      Browser.msgBox("Foram adicionados "+contador+" eventos ao calendario");
+   }
+}
+
+function OpenCalendar () {
+  var idagenda = BuscaIdCalendario();
+  var app = UiApp.createApplication().setHeight(50).setWidth(200);
+  var link = app.createAnchor("Calendario", "https://www.google.com/calendar/embed?src="+idagenda+"&ctz=America/Sao_Paulo").setId("Calendario");
+  app.add(link);  
+  var doc = SpreadsheetApp.getActive();
+  doc.show(app);
+}
+
+function BuscaIdCalendario() {
+   var id = null;
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+   var range = null, idagenda = null;
+   var planilhaconfig = ss.getSheets()[ss.getSheetByName("Configuracoes").getIndex()-1];
+   range = planilhaconfig.getRange(4,2);
+   if(!range.isBlank()) {
+      idagenda = range.getValue();
+   }  
+   else 
+      Browser.msgBox("O ID do calendario nao se encontra na celula B4");
+   return idagenda;
+}
+
+function AtualizaDadosProj() {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var planilhaproj = ss.getSheets()[ss.getSheetByName("Projeto").getIndex()-1];
+    var planilhaprevia = ss.getSheets()[ss.getSheetByName("Previa").getIndex()-1];
+    var planilhadefesa = ss.getSheets()[ss.getSheetByName("Defesa").getIndex()-1];
+    var lin = planilhaproj.getLastRow();
+    var col = planilhaproj.getLastColumn();
+    var cell, range;
+    for(i = 9; i <= lin; i++) {
+       for(j = 1; j <= col; j++) {
+           range = planilhaproj.getRange(i, j);
+           if(!range.isBlank()) { // conteudo nao esta vazio
+              cell = planilhaproj.getRange(i, j).getValue();
+              Logger.log(cell);
+              switch(j) {
+              case 2:  
+                  planilhaprevia.getRange(i,1).setValue(cell);
+                  planilhadefesa.getRange(i,1).setValue(cell);
+                  break;
+              case 6: //titulo trab
+                  planilhaprevia.getRange(i,2).setValue(cell);
+                  planilhadefesa.getRange(i,2).setValue(cell);
+                  break;
+              case 7: //nome orientador
+                  planilhaprevia.getRange(i,3).setValue(cell);
+                  planilhadefesa.getRange(i,3).setValue(cell);
+                  break;
+              case 10: //nome co-orientador
+                  planilhaprevia.getRange(i,4).setValue(cell);
+                  planilhadefesa.getRange(i,4).setValue(cell);
+                  break;
+              default:
+                  break;
+            }
+         }
+      }
+   }
+}
+
+function AtualizaDadosPrevia() {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var planilhaprevia = ss.getSheets()[ss.getSheetByName("Previa").getIndex()-1];
+    var planilhadefesa = ss.getSheets()[ss.getSheetByName("Defesa").getIndex()-1];
+    var lin = planilhaprevia.getLastRow();
+    var col = planilhaprevia.getLastColumn();
+    var cell, range;
+    for(i = 9; i <= lin; i++) {
+       for(j = 1; j <= col; j++) {
+           range = planilhaprevia.getRange(i, j);
+           if(!range.isBlank()) { // conteudo nao esta vazio
+              cell = planilhaprevia.getRange(i, j).getValue();
+              if(j <= 10) {
+                  planilhadefesa.getRange(i, j).setValue(cell);
+              }
+           }
+       }
+   }
+}
+
+\end{lstlisting}

@@ -1,0 +1,68 @@
+@misc{AtomEnabled,
+    author = {{AtomEnabled}},
+    title = {What is Atom},
+    year = {2007},
+    note = {http://www.atomenabled.org, Acesso em 28/03/2013}
+}
+@book{Ben05,
+    author = {Ben Hammersley},
+    title = {Developing Feeds with RSS and Atom},
+    year = {2005}
+}
+@misc{GoogleApps,
+	author = {{Google}},
+	title = {Google Apps Script},
+	year = {2013},
+	note = {https://developers.google.com/apps-script/, Acesso em 26/06/2013}
+}
+@misc{Mark,
+	author = {Mark Nottingham},
+	title = {RSS Tutorial},
+	year = {2005},
+	note = {http://www.open-of-course.org/courses/mod/resource/view.php?id=775, Acesso em 28/03/2013}
+}
+@misc{Joomla,
+	author = {{Joomla}},
+	title = {What is Joomla},
+	year = {2013},
+	note = {http://www.joomla.org/about-joomla.html, Acesso em 02/04/2013}
+}
+@TECHREPORT{Jonatas,
+   author = {Jonatas Costenaro Corteze},
+   title = {Desenvolvimento de Portal Web de Instituição de Ensino com Foco em Usabilidade},
+   address = {Centro de Tecnologia, Universidade Federal de Santa Maria},
+   note = {Santa Maria: Monografia (Bacharelado em Ciência da Computação)},
+   year = {2012}
+}
+@TECHREPORT{SCHOLZ07,
+   author = {Rodrigo André Scholz},
+   title = {Modernização  do Portal da Informática da UFSM Utilizando um Sistema de Gestão de Conteúdo Web},
+   address = {Centro de Tecnologia, Universidade Federal de Santa Maria},
+   note = {Santa Maria: Monografia (Bacharelado em Ciência da Computação)},
+   year = {2007}
+}
+@misc{DocsJoomla,
+	author = {{Joomla}},
+	title = {Extension types (general definition)},
+	note = {http://www.joomla.org/about-joomla.html, Acesso em 02/06/2013},
+	year = {2011}
+}
+@misc{infowester,
+	author = {{ALECRIM, E}},
+	title = {O que é RSS},
+	note = {http://www.infowester.com/rss.php, Acesso em 02/06/2013},
+	year = {2011}	
+}
+@misc{imasters,
+	author = {{AVOYAN, H}},
+	title = {18 sistemas de gerenciamento de conteúdo de código aberto – Parte 01},
+	note = {http://imasters.com.br/artigo/24336/cms/18-sistemas-de-gerenciamento-de-conteudo-de-codigo-aberto-parte-01/, Acesso em 02/06/2013},
+	year = {2011}	
+}
+
+@misc{GCalendar,
+	author = {{GCalendar}},
+	title = {Calendar Management},
+	note = {http://g4j.digital-peak.com/docu/gcalendar/98-calendar-management, Acesso em 25/06/2013},
+	year = {2013}	
+}

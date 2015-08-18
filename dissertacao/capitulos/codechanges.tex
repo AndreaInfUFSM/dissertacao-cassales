@@ -1,0 +1,116 @@
+\chapter{Main code changes performed}
+\label{chap:codechanges}
+
+The changes that had the greatest impact on the behavior were the collector integration and the allocation re-scaling. The collector code is available on the link at the references, therefore, only the usage of the package will be inserted here in comparison to the original.
+
+\lstset{language=Java,
+             basicstyle=\footnotesize,
+             numbers=left,
+             extendedchars=\true
+             showspaces = false,
+             numberstyle=\footnotesize,
+             frame=shadowbox,
+             breaklines = true}
+
+Starting with the original NodeManager creation, in which the totalResources are gotten. Note how the memoryMB and virtualCores variables are taken from the conf, which is the pointer to the default xml file. This method is from the NodeStatusUpdaterImpl class.
+
+\begin{lstlisting}
+
+protected void serviceInit(Configuration conf) throws Exception {
+    int memoryMb = 
+        conf.getInt(
+            YarnConfiguration.NM_PMEM_MB, YarnConfiguration.DEFAULT_NM_PMEM_MB);
+    float vMemToPMem =             
+        conf.getFloat(
+            YarnConfiguration.NM_VMEM_PMEM_RATIO, 
+            YarnConfiguration.DEFAULT_NM_VMEM_PMEM_RATIO); 
+    int virtualMemoryMb = (int)Math.ceil(memoryMb * vMemToPMem);
+    
+    int virtualCores =
+        conf.getInt(
+            YarnConfiguration.NM_VCORES, YarnConfiguration.DEFAULT_NM_VCORES);
+
+    this.totalResource = recordFactory.newRecordInstance(Resource.class);
+
+    this.totalResource.setMemory(memoryMb);
+    this.totalResource.setVirtualCores(virtualCores);
+	metrics.addResource(totalResource);
+    this.tokenKeepAliveEnabled = isTokenKeepAliveEnabled(conf);
+    this.tokenRemovalDelayMs =
+        conf.getInt(YarnConfiguration.RM_NM_EXPIRY_INTERVAL_MS,
+            YarnConfiguration.DEFAULT_RM_NM_EXPIRY_INTERVAL_MS);
+    
+    // Default duration to track stopped containers on nodemanager is 10Min.
+    // This should not be assigned very large value as it will remember all the
+    // containers stopped during that time.
+    durationToTrackStoppedContainers =
+        conf.getLong(YARN_NODEMANAGER_DURATION_TO_TRACK_STOPPED_CONTAINERS,
+          600000);
+    if (durationToTrackStoppedContainers < 0) {
+      String message = "Invalid configuration for "
+        + YARN_NODEMANAGER_DURATION_TO_TRACK_STOPPED_CONTAINERS + " default "
+          + "value is 10Min(600000).";
+      LOG.error(message);
+      throw new YarnException(message);
+    }
+    if (LOG.isDebugEnabled()) {
+      LOG.debug(YARN_NODEMANAGER_DURATION_TO_TRACK_STOPPED_CONTAINERS + " :"
+        + durationToTrackStoppedContainers);
+    }
+    super.serviceInit(conf);
+    LOG.info("Initialized nodemanager for " + nodeId + ":" +
+        " physical-memory=" + memoryMb + " virtual-memory=" + virtualMemoryMb +
+        " virtual-cores=" + virtualCores);
+  }
+\end{lstlisting}
+
+Then the changes made in the method to enable collectors. The rest of the method was not altered. The reason for the double casting is that the collector returns a Float and Double value and it's not possible to cast directly to int.
+
+\begin{lstlisting}
+protected void serviceInit(Configuration conf) throws Exception {
+	PhysicalMemoryCollector memoryCollector = new PhysicalMemoryCollector();
+    TotalProcessorsCollector processorsCollector = new TotalProcessorsCollector();
+
+    int memoryMb = (int)(float)memoryCollector.collect().get(0)/1024;
+    int virtualCores = (int)(double)processorsCollector.collect().get(0);
+
+    this.totalResource = recordFactory.newRecordInstance(Resource.class);
+\end{lstlisting}
+
+The other change that had a strong impact in CapacityScheduler behavior was the insertion of recalculations of allocation limits inside the addNode method. This method belongs to the CapacityScheduler class. Starting with the original code.
+
+\begin{lstlisting}
+private synchronized void addNode(RMNode nodeManager) {
+    this.nodes.put(nodeManager.getNodeID(), new FiCaSchedulerNode(nodeManager,
+        usePortForNodeName));
+    Resources.addTo(clusterResource, nodeManager.getTotalCapability());
+    root.updateClusterResource(clusterResource);
+    ++numNodeManagers;
+  }
+\end{lstlisting}
+
+The same changes made on the addNode were also made on removeNode. Thus, when a node is killed, or is not accessible for a long period, it will be removed and the limits will be adjusted too.
+
+\begin{lstlisting}
+private synchronized void addNode(RMNode nodeManager) {
+    this.nodes.put(nodeManager.getNodeID(), new FiCaSchedulerNode(nodeManager,
+        usePortForNodeName));
+    Resource oldCap = Resources.clone(clusterResource);
+    Resources.addTo(clusterResource, nodeManager.getTotalCapability());
+    root.updateClusterResource(clusterResource);
+    ++numNodeManagers;
+    LOG.info("MEU Added node " + nodeManager.getNodeAddress() +
+        " clusterResource before: " + oldCap + " nodecapability: " + nodeManager.getTotalCapability() + " clusterResource now: " + clusterResource);
+    LOG.info("MEU Changing allocation minimum & maximum. Actual minimum: " + this.minimumAllocation + "actual maximum: " + this.maximumAllocation + ".\nDefault settings: cluster must have capacity for at least " + minimumContainers + " containers, and no more than " + maximumContainers + "containers. 8GB RAM cluster would have 1GB minimum/maximum, 80GB RAM cluster would have 4GB minimum and 10GB maximum.");
+    this.minimumAllocation.setMemory(clusterResource.getMemory() / maximumContainers);
+    this.minimumAllocation.setVirtualCores(clusterResource.getVirtualCores() / maximumContainers);
+    this.maximumAllocation.setMemory(clusterResource.getMemory() / minimumContainers);
+    this.maximumAllocation.setVirtualCores(clusterResource.getVirtualCores() / minimumContainers);
+    if (this.minimumAllocation.getMemory() < minimumMemory)
+       this.minimumAllocation.setMemory(minimumMemory);
+    if (this.minimumAllocation.getVirtualCores() < minimumVcores)
+       this.minimumAllocation.setVirtualCores(minimumVcores);
+    if (this.maximumAllocation.getMemory() < this.minimumAllocation.getMemory())
+       this.maximumAllocation = this.minimumAllocation;
+    LOG.info("MEU New minimumAllocation settings: " + minimumAllocation + "\nNew maximumAllocation settings: " + maximumAllocation);
+\end{lstlisting}

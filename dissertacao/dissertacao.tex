@@ -1,0 +1,243 @@
+%\listfiles
+\documentclass[tg]{mdtufsm}
+% um tipo específico de monografia pode ser informado como parâmetro opcional:
+%\documentclass[tese]{mdtufsm}
+% a opção `openright' pode ser usada para forçar inícios de capítulos
+% em páginas ímpares
+% \documentclass[openright]{mdtufsm}
+% para gerar uma versão frente-e-verso, use a opção 'twoside':
+% \documentclass[twoside]{mdtufsm}
+
+\usepackage[T1]{fontenc}        % pacote para conj. de caracteres correto
+\usepackage{fix-cm} %para funcionar corretamente o tamanho das fontes da capa
+\usepackage{times, color, xcolor}       % pacote para usar fonte Adobe Times e cores
+\usepackage[utf8]{inputenc}   % pacote para acentuação
+\usepackage{graphicx}  % pacote para importar figuras
+\usepackage{amsmath,latexsym,amssymb} %Pacotes matemáticos
+\usepackage{listings}
+\usepackage{url}
+\usepackage[%hidelinks%, 
+            bookmarksopen=true,linktoc=none,colorlinks=true,
+            linkcolor=black,citecolor=black,filecolor=magenta,urlcolor=blue,
+            pdftitle={Desenvolvimento de um escalonador sensível ao contexto para o Apache Hadoop},
+            pdfauthor={Guilherme Weigert Cassales},
+            pdfsubject={Trabalho de Graduação},
+            pdfkeywords={Apache Hadoop, escalonador, sensível ao contexto, Informática, UFSM}
+            ]{hyperref} %hidelinks disponível no pacote hyperref a partir da versão 2011-02-05  6.82a
+%Nesse caso, hidelinks retira os retângulos em volta dos links das referências
+
+%Margens conforme MDT 7ª edição, arrumar diretamente no mdtufsm.cls para funcionar a opção twoside *PENDENTE*
+\usepackage[inner=30mm,outer=20mm,top=30mm,bottom=20mm]{geometry} 
+\usepackage{epstopdf}
+\usepackage{graphicx}
+
+
+%==============================================================================
+% Se o pacote hyperref foi carregado a linha abaixo corrige um bug na hora
+% de montar o sumário da lista de figuras e tabelas
+% Se o pacote não foi carregado, comentar a linha %
+%==============================================================================
+\input{macros/bugcaption}
+
+%==============================================================================
+% Identificação do trabalho
+%==============================================================================
+\title{Desenvolvimento de um escalonador sensível ao contexto para o Apache Hadoop}
+
+\author{Cassales}{Guilherme Weigert}
+
+\course{Curso de Ciência da Computação}
+\altcourse{Curso de Ciência da Computação}
+
+\institute{Centro de Tecnologia}
+\degree{Bacharel em Ciência da Computação}
+
+% Número do TG (verificar na secretaria do curso)
+% Para mestrado deixar sem opção dentro do {}
+\trabalhoNumero{365}
+
+%Orientador
+\advisor[]{Profª. Drª.}{Charão}{Andrea Schwertner}
+%Se for uma ``orientadora'' descomentar a linha baixo
+\orientadoratrue
+
+%Avaliadores (Banca)
+\committee[Prof. Dr.]{Stein}{Benhur de Oliveira}{UFSM}
+\committee[Profª. Drª.]{Barcelos}{Patrícia Pitthan de Araújo}{UFSM}
+
+
+% a data deve ser a da defesa; se nao especificada, são gerados
+% mes e ano correntes
+\date{20}{Janeiro}{2014}
+
+%Palavras chave
+\keyword{Apache Hadoop} 
+\keyword{Escalonador}
+\keyword{Sensibilidade ao Contexto}
+
+%%=============================================================================
+%% Início do documento
+%%=============================================================================
+\begin{document}
+
+%%=============================================================================
+%% Capa e folha de rosto
+%%=============================================================================
+\maketitle
+
+%%=============================================================================
+%% Catalogação (obrigatório para mestrado) e Folha de aprovação
+%%=============================================================================
+%Somente obrigatório para dissertação, para TG, remover as linhas	77	%
+%Como a CIP vai ser impressa atrás da página de rosto, as margens inner e outer	
+%devem ser invertidas.
+%\newgeometry{inner=20mm,outer=30mm,top=30mm,bottom=20mm}	
+%\makeCIP{nomedoautor@gmail.com} %email do autor		
+%\restoregeometry
+
+%Se for usar a catalogação gerada pelo gerador do site da biblioteca comentar as linhas
+%acima e utilizar o comando abaixo
+%\includeCIP{CIP.pdf}
+
+%folha de aprovação
+\makeapprove
+
+
+%%=============================================================================
+%% Agradecimentos (opcional)
+%%=============================================================================
+\chapter*{Agradecimentos}
+Agradeço à minha família por todo apoio, não só durante os longos anos de graduação, mas em todas as etapas de minha vida.
+
+À minha namorada Raíssa, não só pelo apoio em mais um TG e mais uma graduação, mas por todo crescimento conjunto que tivemos durante um ano e quase noventa meses.
+
+Aos amigos mais próximos, que mesmo estando fisicamente distantes ou que a rotina tenha impedido um convívio diário, por sempre estarem dispostos a compartilhar experiências.
+
+À professora Andrea Charão, por todo suporte prestado tanto no papel de orientadora como de coordenadora do curso.
+
+Agradeço também, a todos que tornaram possível e/ou participaram na realização deste trabalho.
+
+
+%%=============================================================================
+%% Resumo
+%%=============================================================================
+\begin{abstract}
+Hoje em dia, o volume de dados gerados é muito maior do que a capacidade de processamento dos computadores. Como solução para esse problema, algumas tarefas podem ser paralelizadas ou distribuidas. O \emph{framework Apache Hadoop} \cite{Hadoop}, é uma delas e poupa o programador as terefas de gerenciamento, como tolerância à falhas, particionamento dos dados entre outros.
+Um problema no escalonador do \emph{Apache Hadoop} é que seu foco é em ambientes homogêneos, o que muitas vezes não é possível de se manter. O foco deste trabalho foi na melhora de um escalonador já existente, possuindo como objetivo torná-lo sensível ao contexto, permitindo que as capacidades físicas de cada máquina sejam consideradas na hora da distribuição das tarefas submetidas. Optou-se por inserir coletores de informações de contexto (memória e cpu) no  CapacityScheduler, tornando o comportamento desse sensível ao contexto. Através das mudanças feitas e de experimentos feitos usando um benchmark bem conhecido (TeraSort), foi possível demonstrar uma melhora no escalonamento em relação ao escalonador original com a configuração padrão.
+\end{abstract}
+
+
+%%=============================================================================
+%% Abstract
+%%=============================================================================
+% resumo em inglês
+
+\begin{englishabstract}
+{Development of a context-aware scheduler for Apache Hadoop}
+{Undergraduate Program in Computer Science}
+{Apache Hadoop. Scheduler. Context-aware}
+{January}
+{th}
+Nowadays the volume of data generated by the services provided for end users, is way larger than the processing capacity of one computer alone. As a solution to this problem, some tasks can be parallelized. The Apache Hadoop framework, is one of these parallelized solutions and it spares the programmer of management tasks such as fault tolerance, data partitioning, among others.
+One problem on this framework is the scheduler, which is designed for homogeneous environments. It is worth to remember that maintaining a homogeneous environment is somewhat difficult today, given the fast development of new, cheaper and more powerful hardware. This work focuses on altering the Capacity Scheduler, in order to make it more context-aware towards resources on the cluster. Making it possible to consider the the physical capacities of the machines when scheduling the submitted tasks. It was chosen to insert context information (memory and cpu) collectors on CapacityScheduler, making his scheduling more context-aware. Through the changes and experiments made using a common and well known benchmark (TeraSort), it was possible to notice a improvement on scheduling in relation to the original scheduler using the default configuration.
+\end{englishabstract}
+
+%% Lista de Ilustrações (opc)
+%% Lista de Símbolos (opc)
+%% Lista de Anexos e Apêndices (opc)
+
+%%=============================================================================
+%% Lista de figuras (comentar se não houver)
+%%=============================================================================
+\renewcommand{\listfigurename}{Figure List}
+\listoffigures
+
+
+%%=============================================================================
+%% Lista de tabelas (comentar se não houver)
+%%=============================================================================
+%%\listoftables
+
+%%=============================================================================
+%% Lista de Apêndices (comentar se não houver)
+%%=============================================================================
+\renewcommand{\listappendixname}{Appendix List}
+\listofappendix
+
+%%=============================================================================
+%% Lista de Anexos (comentar se não houver)
+%%=============================================================================
+%\listofannex
+
+%%=============================================================================
+%% Lista de abreviaturas e siglas
+%%=============================================================================
+ %o parametro deve ser a abreviatura mais longa
+%\begin{listofabbrv}{UbiComp}
+%   \item [BNF] \textit{Backus-Naur Form}
+%   \item [UbiComp] Computação Ubíqua
+%\end{listofabbrv}
+
+
+%%=============================================================================
+%% Lista de simbolos (opcional)
+%%=============================================================================
+%Simbolos devem aparecer conforme a ordem em que aparecem no texto
+% o parametro deve ser o símbolo mais longo
+%\begin{listofsymbols}{teste}
+%  \item [$\varnothing$] vazio
+%  \item [$\Gamma$]  Gama
+%  \item [$\forall$] Para todo
+%\end{listofsymbols}
+
+%%=============================================================================
+%% Sumário
+%%=============================================================================
+\renewcommand{\contentsname}{Index}
+\renewcommand{\appendixsname}{Appendix}
+\tableofcontents
+
+%%=============================================================================
+%% Início da dissertação
+%%=============================================================================
+\setlength{\baselineskip}{1.5\baselineskip}
+
+%Adiciona cada capitulo
+\include{capitulos/introducao}
+\include{capitulos/fundamentacao}
+\include{capitulos/desenvolvimento}
+\include{capitulos/resultados}
+\include{capitulos/conclusao}
+
+\setlength{\baselineskip}{\baselineskip}
+
+%%=============================================================================
+%% Referências
+%%=============================================================================
+\renewcommand{\bibname}{References}
+\bibliographystyle{abnt}
+\bibliography{referencias/referencias}
+
+%IMPORTANTE: Se precisar usar alguma seção ou subseção dentro dos apêndices ou
+%anexos, utilizar o comando \tocless para não adicionar no Sumário
+%Exemplos: 
+% \tocless\section{Histórico}
+%%=============================================================================
+%% Apêndices
+%%=============================================================================
+\renewcommand{\appendixname}{Appendix}
+\appendix
+\include{capitulos/grafosRM}
+\include{capitulos/confg5k}
+\include{capitulos/confcomp}
+\include{capitulos/logexample}
+\include{capitulos/codechanges}
+
+%%=============================================================================
+%% Anexos
+%%=============================================================================
+%\annex
+%\include{capitulos/anexoa}
+%\include{capitulos/anexob}
+
+\end{document}

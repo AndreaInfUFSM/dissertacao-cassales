@@ -1,0 +1,336 @@
+\documentclass{beamer}
+
+\mode<presentation>{
+\usetheme{Dresden}
+\setbeamercovered{transparent}
+\usecolortheme{lsc}
+}
+
+\mode<handout>{
+  % tema simples para ser impresso
+  \usepackage[bar]{beamerthemetree}
+  % Colocando um fundo cinza quando for gerar transparências para serem impressas
+  % mais de uma transparência por página
+  \beamertemplatesolidbackgroundcolor{black!5}
+}
+
+\usepackage{amsmath,amssymb}
+\usepackage[brazil]{varioref}
+\usepackage[english,brazil]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{url}
+\usepackage{colortbl}
+
+\beamertemplatetransparentcovereddynamic
+
+\title[Desenvolvimento de um Escalonador Sensível ao Contexto para o \textit{Apache Hadoop} - Apresentação de Andamento]{Desenvolvimento de um Escalonador Sensível ao Contexto para o \textit{Apache Hadoop}}
+\author[Guilherme Weigert Cassales]{%
+  Guilherme Weigert Cassales\inst{1} \\
+  Orientador: Profª Drª Andrea Schwertner Charão\inst{1}}
+  \institute[UFSM]{
+  \inst{1}%
+     Ciência da Computação\\
+     Universidade Federal de Santa Maria}
+
+% Se comentar a linha abaixo, irá aparecer a data quando foi compilada a apresentação  
+\date{13 de novembro de 2013}
+
+\pgfdeclareimage[height=1cm]{inf}{figs/CienciaDaComputacao.png}
+
+% pode-se colocar o LOGO assim
+\logo{\pgfuseimage{inf}}
+
+\AtBeginSection[]{
+  \begin{frame}<beamer>
+    \frametitle{Roteiro}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Roteiro}
+\tableofcontents
+\end{frame}
+
+
+\section{Introdução}
+\frame{
+    \frametitle{Introdução}
+      \begin{itemize}
+         \item Relevância do \textit{framework Apache Hadoop}.
+         \item Problemas do \textit{Hadoop}:
+         \begin{itemize}
+         	\item desenvolvimento muito específico;
+         	\item pouco adaptável.
+         \end{itemize}
+         \item Diversas soluções:
+         \begin{itemize}
+         	\item \textbf{escalonamento} de acordo com as \textit{características} dos nós;
+         	\item volatilidade dos nós utilizados no \textit{cluster};
+         	\item auto configuração do ambiente de execução.
+         \end{itemize}
+      \end{itemize}
+}
+
+\frame{
+    \frametitle{Objetivo e Justificativas}
+    \begin{itemize}   
+       \item Objetivo
+       \begin{itemize}
+           \item Desenvolvimento de um escalonador sensível ao contexto.
+       \end{itemize}
+       
+       \item Justificativas:
+       \begin{itemize}
+       	   \item problemas de performance em situações de heterogeneidade;
+       	   \item problemas em manter um sistema homogêneo atualmente.
+       \end{itemize}
+   \end{itemize}
+}
+
+
+\section{Fundamentação}
+%\subsection{Sensibilidade ao Contexto}
+\frame{
+    \frametitle{Sensibilidade ao Contexto}
+    \begin{itemize}
+    		\item Contexto
+      	\begin{itemize}
+      		\item "qualquer informação que pode ser utilizada para caracterizar a situação de uma entidade (pessoa, lugar ou objeto) considerada relevante para a interação entre usuário e aplicação" (DEY, 2001).
+		\end{itemize}
+		\item Sensibilidade ao Contexto
+	    \begin{itemize}
+    			\item "se refere a habilidade de uma aplicação de detectar e responder as mudanças no ambiente de execução" (Maamar; Benslimane; Narendra, 2006).
+		\end{itemize}
+		\item Ganhos na utilização
+		\item Como um \textit{software} utiliza?
+    \end{itemize}
+}
+
+%\subsection{Arquitetura Geral do Hadoop}
+\pgfdeclareimage[height=6cm]{HadoopArq}{figs/Figura08-HadoooArchGeral.png}%
+\frame{
+    \frametitle{Arquitetura Geral do \textit{Hadoop}}
+    \pgfuseimage{HadoopArq}
+}
+\pgfdeclareimage[height=3cm]{YARNArq}{figs/Figura06-YarnArch.png}%
+\pgfdeclareimage[height=3cm]{HDFSArq}{figs/Figura07-HDFS.png}%
+\frame{
+	\begin{columns}
+    \frametitle{Arquitetura Geral do \textit{Hadoop}}
+        \column{3cm}
+            HDFS
+            \begin{itemize}
+            		\item NameNode
+	            \item DataNode
+            \end{itemize}
+            \pgfuseimage{HDFSArq}
+            \begin{tiny}
+            
+            (HADOOP, 2013)
+            \end{tiny}
+		\column{5cm}
+			YARN
+			\begin{itemize}
+				\item ResourceManager
+				\item NodeManager
+			\end{itemize}
+			\pgfuseimage{YARNArq}
+			\begin{tiny}
+            
+            (HADOOP, 2013)
+            \end{tiny}
+    \end{columns}
+}
+
+\logo{\pgfuseimage{inf}}
+
+%\subsection{Escalonadores do Hadoop}
+\frame{
+	\frametitle{Escalonadores Padrão}
+	\begin{itemize}
+		\item Internal
+		\begin{itemize}
+			\item FIFO.
+		\end{itemize}
+		\item Fair
+		\begin{itemize}
+			\item Distribuição igualitária de recursos.
+			\item Dois níveis de fila.
+		\end{itemize}
+		\item Capacity
+		\begin{itemize}
+			\item Divisão de um \textit{cluster} entre várias empresas.
+			\item Política de \textit{MinShare}.
+		\end{itemize}		
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Trabalhos relacionados}
+	\begin{columns}
+		\column{5cm}
+		\begin{itemize}
+			\item (Kumar et al., 2012).
+			\item (Rasooli; Down, 2012).
+			\item (Chen et al., 2010).
+			\item (Xie et al., 2010).
+			\item (Tian et al., 2009).
+			\item (Isard et al., 2009).
+			\item (Zaharia et al., 2008).
+		\end{itemize}
+		
+		\column{7,5cm}
+			\begin{itemize}
+				\item Contextos mais comuns:
+				\begin{itemize}
+					\item classificação de \textit{jobs} e nós quanto ao potencial de E/S ou CPU;
+					\item avaliação do progresso da \textit{task} na decisão de lançar ou não uma \textit{task} especulativa.
+				\end{itemize}
+				
+				\item Objetivos mais comuns:
+				\begin{itemize}
+					\item melhorar o \textit{throughput};
+					\item diminuir o tempo de resposta.
+				\end{itemize}
+			\end{itemize}
+	\end{columns}
+}
+
+\section{Desenvolvimento}
+\logo{}
+\frame{
+    \frametitle{Estudo da Arquitetura}
+    \pgfdeclareimage[height=6.5cm]{ClassDiag}{figs/Figura01-ClassDiagram.png}%
+    \pgfuseimage{ClassDiag}
+}
+
+
+\logo{\pgfuseimage{inf}}
+\frame{
+    \frametitle{Etapas de Preparação}
+    Realizadas com intuito de entender como o novo escalonador iria ser incluso e utilizado numa nova versão do \textit{Hadoop}.
+    \begin{itemize}
+    		\item Grid'5000
+    		\begin{itemize}
+    			\item Diferenças na instalação/configuração.
+    			\item Material/Recursos produzidos.
+    		\end{itemize}
+    		\item Compilação e testes
+    		\begin{itemize}
+    			\item Compilar uma nova classe.
+    			\item Utilizar nova classe no Grid'5000.
+    		\end{itemize}
+    		
+    \end{itemize}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+    \pgfdeclareimage[height=5cm]{FifoComp}{figs/FifoAppComparator.png}%
+    \frametitle{Escalonamento}
+    \pgfuseimage{FifoComp}
+}
+
+\frame{
+	\pgfdeclareimage[height=6.7cm]{Leaf}{figs/LeafQueue.png}%
+    \frametitle{Escalonamento}
+	\pgfuseimage{Leaf}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+    \frametitle{Desenvolvimento}
+    \begin{itemize}
+    		\item Grafos de máquinas de estado contendo ciclos de execução
+    		\begin{itemize}
+    			\item Como foram gerados?
+    			\item Por que são importantes?
+    		\end{itemize}
+    \end{itemize}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+    \pgfdeclareimage[height=6.7cm]{Attemp}{figs/RMAppAtt.png}%
+    \frametitle{\emph{RMAppAttempt}}
+	\pgfuseimage{Attemp}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+    \pgfdeclareimage[height=6.7cm]{App}{figs/RMApp.png}%
+    \frametitle{\emph{RMApp}}
+	\pgfuseimage{App}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+    \pgfdeclareimage[height=6.7cm]{Cont}{figs/RMCont.png}%
+    \frametitle{\emph{RMContainer}}
+	\pgfuseimage{Cont}
+}
+
+\logo{\pgfuseimage{inf}}
+\frame{
+    \pgfdeclareimage[height=6.7cm]{Node}{figs/RMNode.png}%
+    \frametitle{\emph{RMNode}}
+	\pgfuseimage{Node}
+}
+
+\section{Desenvolvimento Futuro}
+\logo{\pgfuseimage{inf}}
+\frame{
+   \frametitle{Desenvolvimento Futuro}
+   \begin{itemize}
+      \item Contexto possível de ser utilizado.
+      \item Métricas adequadas para utilização.
+      \item Implementação.
+   \end{itemize}
+}
+
+\section{Referências}
+\logo{}
+\frame{
+    \frametitle{Referências}
+    \begin{itemize}
+	\begin{tiny}
+    	   \item DEY, A. K. Understanding and Using Context. Personal Ubiquitous Comput., London, UK, UK, v.5, n.1, p.4-7, Jan. 2001.
+       \item MAAMAR, Z.; BENSLIMANE, D.; NARENDRA, N. C. What can context do for web services? Commun. ACM, New York, NY, USA, v.49, n.12, p.98-103, Dec. 2006.
+       \item KUMAR, K. A. et al. CASH: context aware scheduler for hadoop. In: INTERNATIONAL CONFERENCE ON ADVANCES IN COMPUTING, COMMUNICATIONS AND INFORMATICS, New York, NY, USA. Proceedings. . . ACM, 2012. p.52-61. (ICACCI '12).
+       \item ZAHARIA, M. et al. Improving MapReduce performance in heterogeneous environments. In: USENIX CONFERENCE ON OPERATING SYSTEMS DESIGN AND IMPLEMENTATION, 8., Berkeley, CA, USA. Proceedings. . . USENIX Association, 2008. p.29-42. (OSDI'08).
+       \item TIAN, C. et al. A Dynamic MapReduce Scheduler for Heterogeneous Workloads. In: EIGHTH INTERNATIONAL CONFERENCE ON GRID AND COOPERATIVE COMPUTING, 2009., Washington, DC, USA. Proceedings. . . IEEE Computer Society, 2009. p.218-224. (GCC '09).
+        \item CHEN, Q. et al. SAMR: a self-adaptive mapreduce scheduling algorithm in heterogeneous environment. In: IEEE INTERNATIONAL CONFERENCE ON COMPUTER AND INFORMATION TECHNOLOGY, 2010., Washington, DC, USA. Proceedings. . . IEEE Computer Society, 2010. p.2736-2743. (CIT '10).
+
+	\end{tiny}
+    \end{itemize}
+}
+
+\logo{}
+\frame{
+    \frametitle{Referências (Continuação)}
+    \begin{itemize}
+    \begin{tiny}
+       \item RASOOLI, A.; DOWN, D. G. Coshh: a classification and optimization based scheduler for heterogeneous hadoop systems. In: SC COMPANION: HIGH PERFORMANCE COMPUTING, NETWORKING STORAGE AND ANALYSIS, 2012., Washington, DC, USA. Proceedings. . . IEEE Computer Society, 2012. p.1284-1291. (SCC '12).
+       \item ISARD, M. et al. Quincy: fair scheduling for distributed computing clusters. In: ACM SIGOPS 22ND SYMPOSIUM ON OPERATING SYSTEMS PRINCIPLES, New York, NY, USA. Proceedings. . . ACM, 2009. p.261-276. (SOSP '09).
+       \item XIE, J. et al. Improving MapReduce performance through data placement in heterogeneous Hadoop clusters. In: PARALLEL AND DISTRIBUTED PROCESSING, WORKSHOPS AND PHD FORUM (IPDPSW). Anais. . . IEEE International Symposium, 2010.
+       \item HADOOP, A. Arquitetura do HDFS. http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/Federation.html, Acesso em novembro de 2013.
+       \item HADOOP, A. Arquitetura do YARN. http://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html, Acesso em novembro de 2013.
+
+	\end{tiny}
+    \end{itemize}
+}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\end{document}

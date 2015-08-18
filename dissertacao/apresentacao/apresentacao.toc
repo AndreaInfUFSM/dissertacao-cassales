@@ -1,0 +1,8 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {brazil}
+\beamer@sectionintoc {1}{Introdu\c c\~ao}{3}{0}{1}
+\beamer@sectionintoc {2}{Fundamenta\c c\~ao}{6}{0}{2}
+\beamer@sectionintoc {3}{Desenvolvimento}{13}{0}{3}
+\beamer@sectionintoc {4}{Resultados}{25}{0}{4}
+\beamer@sectionintoc {5}{Conclus\~ao e Trabalhos Futuros}{34}{0}{5}
+\beamer@sectionintoc {6}{Refer\^encias}{37}{0}{6}

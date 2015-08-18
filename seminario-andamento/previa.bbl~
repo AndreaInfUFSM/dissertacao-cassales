@@ -1,0 +1,83 @@
+\begin{thebibliography}{\hspace{\parindent}}
+
+\bibitem[{Apache}(2013){Apache}]{Apache} {Apache}. The Apache Software
+  Foundation. In:  \textbf{Anais{\ldots}} [S.l.:~s.n.], 2013.
+  http://www.apache.org, Acesso em agosto de 2013.
+
+\bibitem[{Apache Hadoop}(2013){Apache Hadoop}]{Hadoop} {Apache Hadoop}.
+  Apache™ Hadoop®. In:  \textbf{Anais{\ldots}} [S.l.:~s.n.], 2013.
+  http://hadoop.apache.org/, Acesso em agosto de 2013.
+
+\bibitem[{Apache Nutch}(2013){Apache Nutch}]{Nutch} {Apache Nutch}. Apache
+  Nutch™. In:  \textbf{Anais{\ldots}} [S.l.:~s.n.], 2013.
+  http://nutch.apache.org, Acesso em agosto de 2013.
+
+\bibitem[{Chen, Quan and Zhang, Daqiang and Guo, Minyi and Deng, Qianni and
+  Guo, Song}(2010){Chen, Quan and Zhang, Daqiang and Guo, Minyi and Deng,
+  Qianni and Guo, Song}]{SAMR} {Chen, Quan and Zhang, Daqiang and Guo, Minyi
+  and Deng, Qianni and Guo, Song}. SAMR: a self-adaptive mapreduce scheduling
+  algorithm in heterogeneous environment. In: IEEE INTERNATIONAL CONFERENCE ON
+  COMPUTER AND INFORMATION TECHNOLOGY, 2010. \textbf{Proceedings{\ldots}} IEEE
+  Computer Society, 2010.
+
+\bibitem[{Fair Scheduler}(2013){Fair Scheduler}]{FairScheduler} {Fair
+  Scheduler}. Hadoop MapReduce Next Generation - Fair Scheduler. In: IEEE
+  COMPUTER SOCIETY. \textbf{Anais{\ldots}} [S.l.:~s.n.], 2013.
+  http://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/FairSched%
+uler.html, Acesso em agosto de 2013.
+
+\bibitem[{Google}(2013){Google}]{Google} {Google}. Google. In:
+  \textbf{Anais{\ldots}} [S.l.:~s.n.], 2013. www.google.com, Acesso em agosto
+  2013.
+
+\bibitem[{Isard, Michael and Prabhakaran, Vijayan and Currey, Jon and Wieder,
+  Udi and Talwar, Kunal and Goldberg, Andrew}(2009){Isard, Michael and
+  Prabhakaran, Vijayan and Currey, Jon and Wieder, Udi and Talwar, Kunal and
+  Goldberg, Andrew}]{Quincy} {Isard, Michael and Prabhakaran, Vijayan and
+  Currey, Jon and Wieder, Udi and Talwar, Kunal and Goldberg, Andrew}. Quincy:
+  fair scheduling for distributed computing clusters. In: ACM SIGOPS 22ND
+  SYMPOSIUM ON OPERATING SYSTEMS PRINCIPLES. \textbf{Proceedings{\ldots}} ACM,
+  2009.
+
+\bibitem[{Kumar, K. Arun and Konishetty, Vamshi Krishna and Voruganti, Kaladhar
+  and Rao, G. V. Prabhakara}(2012){Kumar, K. Arun and Konishetty, Vamshi
+  Krishna and Voruganti, Kaladhar and Rao, G. V. Prabhakara}]{CASH} {Kumar, K.
+  Arun and Konishetty, Vamshi Krishna and Voruganti, Kaladhar and Rao, G. V.
+  Prabhakara}. CASH: context aware scheduler for hadoop. In: INTERNATIONAL
+  CONFERENCE ON ADVANCES IN COMPUTING, COMMUNICATIONS AND INFORMATICS.
+  \textbf{Proceedings{\ldots}} ACM, 2012.
+
+\bibitem[{Rasooli, Aysan and Down, Douglas G.}(2012){Rasooli, Aysan and Down,
+  Douglas G.}]{COBS} {Rasooli, Aysan and Down, Douglas G.} A Hybrid Scheduling
+  Approach for Scalable Heterogeneous Hadoop Systems. In: SC COMPANION: HIGH
+  PERFORMANCE COMPUTING, NETWORKING STORAGE AND ANALYSIS, 2012.
+  \textbf{Proceedings{\ldots}} IEEE Computer Society, 2012.
+
+\bibitem[{Tian, Chao and Zhou, Haojie and He, Yongqiang and Zha,
+  Li}(2009){Tian, Chao and Zhou, Haojie and He, Yongqiang and Zha, Li}]{DMRSHW}
+  {Tian, Chao and Zhou, Haojie and He, Yongqiang and Zha, Li}. A Dynamic
+  MapReduce Scheduler for Heterogeneous Workloads. In: GCC.
+  \textbf{Anais{\ldots}} IEEE Computer Society, 2009.
+
+\bibitem[{Xie, Jiong and Yin, Shu and Ruan, Xiaojun and Ding, Zhiyang and Tian,
+  Yun and Majors, James and Manzanares, Adam and Qin, Xiao}(2010){Xie, Jiong
+  and Yin, Shu and Ruan, Xiaojun and Ding, Zhiyang and Tian, Yun and Majors,
+  James and Manzanares, Adam an]{IMRPDPHHC} {Xie, Jiong and Yin, Shu and Ruan,
+  Xiaojun and Ding, Zhiyang and Tian, Yun and Majors, James and Manzanares,
+  Adam and Qin, Xiao}. Improving MapReduce performance through data placement
+  in heterogeneous Hadoop clusters. In: IPDPS WORKSHOPS. \textbf{Anais{\ldots}}
+  [S.l.:~s.n.], 2010.
+
+\bibitem[{Yahoo}(2013){Yahoo}]{Yahoo} {Yahoo}. Yahoo. In:
+  \textbf{Anais{\ldots}} [S.l.:~s.n.], 2013. www.yahoo.com, Acesso em agosto
+  2013.
+
+\bibitem[{Zaharia, Matei and Konwinski, Andy and Joseph, Anthony D. and Katz,
+  Randy and Stoica, Ion}(2008){Zaharia, Matei and Konwinski, Andy and Joseph,
+  Anthony D. and Katz, Randy and Stoica, Ion}]{LATE} {Zaharia, Matei and
+  Konwinski, Andy and Joseph, Anthony D. and Katz, Randy and Stoica, Ion}.
+  Improving MapReduce performance in heterogeneous environments. In: USENIX
+  CONFERENCE ON OPERATING SYSTEMS DESIGN AND IMPLEMENTATION, 8.
+  \textbf{Proceedings{\ldots}} USENIX Association, 2008.
+
+\end{thebibliography}

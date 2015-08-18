@@ -1,0 +1,11 @@
+
+\chapter{Source code edition and compilation}
+This appendix has the necessary steps in order to setup a correctly working compilation environment.
+
+Given the project nature of generating a improved, context-aware, scheduler for the Apache Hadoop, it is necessary that this scheduler is included on the final distribution. Not only it has to be included, it has to be available for use by everyone who wants to try it. In order to achieve this, new jar files have to be generated from the modified code. Because of this a previous study was made about the necessary requisites in order to compile and generate these jar files.
+
+The study began with the official documentation consultation, which included Apache Hadoop web site and help files included on the source code distributions. This way it was possible to create some steps required to compile the code. Starting from this list it was possible to identify the required dependencies to compile the code, which were then installed. The dependencies were: JDK 1.6 or higher, Maven 3.0, ProtocolBuffer 2.4.1 or higher and Cmake2.6 or higher.
+
+The greatest objective of this process was to discover how the compilation took place and also how it would behave with the addition of new classes to standard code. Aiming to achieve this objective, a new but simple scheduler class was added. After the compilation process ended, the generated jar files were then copied to the Grid'5000 and deployed there in order to test if it would be possible to execute the compiled version in that environment.
+
+Once the Hadoop services were deployed, it could be proven that the new scheduler was being used. It was also possible to identify the same vulnerability in the previous stage, in which the service has to be restarted in order to modify some of the Hadoop's parameters. 
