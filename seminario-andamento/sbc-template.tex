@@ -10,23 +10,12 @@
      
 \sloppy
 
-\title{Instructions for Authors of SBC Conferences\\ Papers and Abstracts}
+\title{Seminário de Andamento\\Escalonamento Adaptativo para o Apache Hadoop}
 
-\author{Luciana P. Nedel\inst{1}, Rafael H. Bordini\inst{2}, Flávio Rech
-  Wagner\inst{1}, Jomi F. Hübner\inst{3} }
+\author{Guilherme Weigert Cassales\inst{1}, Andrea Schwertner Charão\inst{1}}
 
-
-\address{Instituto de Informática -- Universidade Federal do Rio Grande do Sul
-  (UFRGS)\\
-  Caixa Postal 15.064 -- 91.501-970 -- Porto Alegre -- RS -- Brazil
-\nextinstitute
-  Department of Computer Science -- University of Durham\\
-  Durham, U.K.
-\nextinstitute
-  Departamento de Sistemas e Computação\\
-  Universidade Regional de Blumenal (FURB) -- Blumenau, SC -- Brazil
-  \email{\{nedel,flavio\}@inf.ufrgs.br, R.Bordini@durham.ac.uk,
-  jomi@inf.furb.br}
+\address{Laboratório de Sistemas Computacionais\\Universidade Federal de Santa Maria (UFSM)\\Santa Maria -- RS -- Brazil
+  \email{\{cassales,andrea\}@inf.ufsm.br}
 }
 
 \begin{document} 
@@ -34,129 +23,105 @@
 \maketitle
 
 \begin{abstract}
-  This meta-paper describes the style to be used in articles and short papers
-  for SBC conferences. For papers in English, you should add just an abstract
-  while for the papers in Portuguese, we also ask for an abstract in
-  Portuguese (``resumo''). In both cases, abstracts should not have more than
-  10 lines and must be in the first page of the paper.
+This article proposes to improve Apache Hadoop scheduling through the usage of context-awareness. Apache Hadoop is the most popular implementation of the MapReduce paradigm for distributed computing, but its design doesn't adapt automatically to computing nodes' context and capabilities. By introducing context-awareness into Hadoop, we intent to dynamically adapt its scheduling to the execution environment. The solution has been incorporated into Hadoop and evaluated through controlled experiments. The experiments demonstrate that context-awareness provides comparative performance gains, especially when part of the resources disappear during execution.
 \end{abstract}
      
 \begin{resumo} 
-  Este meta-artigo descreve o estilo a ser usado na confecção de artigos e
-  resumos de artigos para publicação nos anais das conferências organizadas
-  pela SBC. É solicitada a escrita de resumo e abstract apenas para os artigos
-  escritos em português. Artigos em inglês deverão apresentar apenas abstract.
-  Nos dois casos, o autor deve tomar cuidado para que o resumo (e o abstract)
-  não ultrapassem 10 linhas cada, sendo que ambos devem estar na primeira
-  página do artigo.
+Este trabalho propõe uma melhoria no escalonamento do Apache Hadoop através da utilização de informações de contexto sobre os nós de um \textit{cluster}. O Apache Hadoop é a implementação mais popular do paradigma MapReduce em computação distribuída, porém possui alguns problemas de performance em ambientes dinâmicos. Ao introduzir sensibilidade ao contexto no Hadoop, espera-se que o escalonamento dos \textit{jobs} adapte-se às mudanças do ambiente. A solução foi implementada no Apache Hadoop e testes preliminares indicam que houve uma melhora de performance, especialmente quando parte dos recursos desaparece durante a execução.
 \end{resumo}
 
 
-\section{General Information}
+\section{Introdução}
+Apache Hadoop is a framework for distributed and parallel computing, implementing the MapReduce programming paradigm, which aims at processing big data sets. Hadoop is designed to scale up from a single server to thousands of machines, each offering local computation and storage. Without specific configuration by the administrator, Apache Hadoop supposes the use of dedicated homogeneous clusters for executing MapReduce applications. As the overall performance depends on the task scheduling, Hadoop performance may be seriously impacted when running on heterogeneous and dynamic environments, for which it was not designed for.
 
-All full papers and posters (short papers) submitted to some SBC conference,
-including any supporting documents, should be written in English or in
-Portuguese. The format paper should be A4 with single column, 3.5 cm for upper
-margin, 2.5 cm for bottom margin and 3.0 cm for lateral margins, without
-headers or footers. The main font must be Times, 12 point nominal size, with 6
-points of space before each paragraph. Page numbers must be suppressed.
-
-Full papers must respect the page limits defined by the conference.
-Conferences that publish just abstracts ask for \textbf{one}-page texts.
-
-\section{First Page} \label{sec:firstpage}
-
-The first page must display the paper title, the name and address of the
-authors, the abstract in English and ``resumo'' in Portuguese (``resumos'' are
-required only for papers written in Portuguese). The title must be centered
-over the whole page, in 16 point boldface font and with 12 points of space
-before itself. Author names must be centered in 12 point font, bold, all of
-them disposed in the same line, separated by commas and with 12 points of
-space after the title. Addresses must be centered in 12 point font, also with
-12 points of space after the authors' names. E-mail addresses should be
-written using font Courier New, 10 point nominal size, with 6 points of space
-before and 6 points of space after.
-
-The abstract and ``resumo'' (if is the case) must be in 12 point Times font,
-indented 0.8cm on both sides. The word \textbf{Abstract} and \textbf{Resumo},
-should be written in boldface and must precede the text.
-
-\section{CD-ROMs and Printed Proceedings}
-
-In some conferences, the papers are published on CD-ROM while only the
-abstract is published in the printed Proceedings. In this case, authors are
-invited to prepare two final versions of the paper. One, complete, to be
-published on the CD and the other, containing only the first page, with
-abstract and ``resumo'' (for papers in Portuguese).
-
-\section{Sections and Paragraphs}
-
-Section titles must be in boldface, 13pt, flush left. There should be an extra
-12 pt of space before each title. Section numbering is optional. The first
-paragraph of each section should not be indented, while the first lines of
-subsequent paragraphs should be indented by 1.27 cm.
-
-\subsection{Subsections}
-
-The subsection titles must be in boldface, 12pt, flush left.
-
-\section{Figures and Captions}\label{sec:figs}
+\section{Referencial teórico}
 
 
-Figure and table captions should be centered if less than one line
-(Figure~\ref{fig:exampleFig1}), otherwise justified and indented by 0.8cm on
-both margins, as shown in Figure~\ref{fig:exampleFig2}. The caption font must
-be Helvetica, 10 point, boldface, with 6 points of space before and after each
-caption.
+\subsection{Sensibilidade ao contexto}
+...
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.5\textwidth]{fig1.jpg}
-\caption{A typical figure}
-\label{fig:exampleFig1}
-\end{figure}
+\subsection{Escalonamento no Hadoop}
+The Apache Hadoop framework is organized in a master and slave architecture, with two main services: storage (HDFS) and processing (YARN). Both services have their own master and slave components, as presented on Fig. 1. It is possible to see the NameNode and ResourceManager services, which are the masters of the HDFS and YARN respectively, and their slave counterparts, the DataNode and NodeManager. It is also possible to note the ApplicationMaster, the component responsible for internal application (job) management, or simply task scheduling. While ResourceManager is the component responsible for job scheduling. Each node also runs a set of Containers, where the execution of Map and Reduce tasks takes place.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.3\textwidth]{fig2.jpg}
-\caption{This figure is an example of a figure caption taking more than one
-  line and justified considering margins mentioned in Section~\ref{sec:figs}.}
-\label{fig:exampleFig2}
-\end{figure}
+Concerning job scheduling, Hadoop offers several options. The simplest scheduler, called Hadoop Internal Scheduler, processes all jobs in arrival order (FIFO). This scheduler has a good performance in dedicated clusters where the competition for resources is not a problem. Another scheduler available is the Fair Scheduler, mainly used to compute batches of small jobs. It uses a two level scheduling to fairly distribute the resources 12 . The third scheduler available is the Capacity Scheduler. The CapacityScheduler is designed to run Hadoop MapReduce as a shared, multi-tenant cluster in an operator-friendly manner while maximizing the throughput and the utilization of the cluster while running Map-Reduce applications. The CapacityScheduler is designed to allow sharing a large cluster while giving each organization a minimum capacity guarantee. The central idea is that the available resources in the Hadoop MapReduce cluster are partitioned among multiple organizations that collectively fund the cluster based on computing needs. There is an added benefit that an organization can access any excess capacity not being used by the others users. This provides elasticity for the organizations in a cost-effective manner 12 .
 
-In tables, try to avoid the use of colored or shaded backgrounds, and avoid
-thick, doubled, or unnecessary framing lines. When reporting empirical data,
-do not use more decimal digits than warranted by their precision and
-reproducibility. Table caption must be placed before the table (see Table 1)
-and the font used must also be Helvetica, 10 point, boldface, with 6 points of
-space before and after each caption.
+The existence of these schedulers allows a flexible management of the framework. Despite that, the available schedulers neither detect nor react to the dynamicity and heterogeneity of the computing environment, a typical concern on pervasive grids.
 
-\begin{table}[ht]
-\centering
-\caption{Variables to be considered on the evaluation of interaction
-  techniques}
-\label{tab:exTable1}
-\includegraphics[width=.7\textwidth]{table.jpg}
-\end{table}
 
-\section{Images}
 
-All images and illustrations should be in black-and-white, or gray tones,
-excepting for the papers that will be electronically available (on CD-ROMs,
-internet, etc.). The image resolution on paper should be about 600 dpi for
-black-and-white images, and 150-300 dpi for grayscale images.  Do not include
-images with excessive resolution, as they may take hours to print, without any
-visible difference in the result. 
+\subsection{ZooKeeper}
+...
 
-\section{References}
+\subsection{Trabalhos relacionados}
+...
 
-Bibliographic references must be unambiguous and uniform.  We recommend giving
-the author names references in brackets, e.g. \cite{knuth:84},
-\cite{boulic:91}, and \cite{smith:99}.
+\section{Desenvolvimento}
+Através de um estudo aprofundado do escalonamento do Apache Hadoop, identificou-se uma estratégia para melhoria no processo sem a inserção de métodos intrusivos ou grande modificação nas políticas de escalonamento já implementadas no \textit{framework}. A implementação realizada pode ser separada em duas tarefas distintas, coleta de dados e transmissão de dados.
 
-The references must be listed using 12 point font size, with 6 points of space
-before each reference. The first line of each reference should not be
-indented, while the subsequent should be indented by 0.5 cm.
+\subsection{Coletor de contexto}
+O Apache Hadoop utiliza arquivos XML como método de configuração do \textit{cluster}, cada nó possui alguns arquivos de configuração e cada arquivo possui diversas propriedades que podem ser alteradas. As informações referentes aos recursos disponíveis em dado nó também estão dentro deste conjunto de propriedades, forçando o administrador a configurar um arquivo para cada nó do \textit{cluster}. Além disso, estas informações são transmitidas ao escalonador somente na inicialização do serviço, não ocorrendo qualquer tipo de atualização até que o serviço seja reiniciado. Estas limitações provam ser gravíssimas num ambiente pervasivo, que sofre alterações durante a execução de uma aplicação, portanto, precisa-se de um mecanismo que atualize as informações durante a execução.
+
+Para solucionar este problema optou-se pela integração de um módulo de coleta de dados no Hadoop, que permite a coleta das informações sobre os recursos em um dado momento. O coletor foi desenvolvido para o projeto PER-MARE \cite{PER-MARE} e seu diagrama de classe pode ser visualizado na Figura \ref{fig:collector}. O módulo de coleta é baseado na API padrão de monitoramento do Java \cite{java-api} que permite facilmente coletar de um nó sem a adição de bibliotecas externas. Esta API permite que informações como o número de processadores (cores) e a memória do sistema sejam identificadas, através da utilização de um conjunto de interfaces e classes abstratas que generalizam o processo de coleta. Devido à sua estrutura, pode-se facilmente integrar novos coletores para outras informações caso haja necessidade, como por exemplo a utilização de disco ou CPU.
+
+\subsection{Comunicação entre processos}
+Para que as informações adquiridas através do módulo de coleta possam ser utilizadas é necessário que estas cheguem até o processo do escalonador, que está sendo executado na máquina mestre do \textit{cluster}. A escolha para a implementação desta comunicação escravo-mestre foi feita visando a compatibilidade com o Hadoop e a não intrusão nos processos de comunicação já definidos, portanto, escolheu-se pela utilização da API ZooKeeper \cite{ZooKeeper}.
+
+O ZooKeeper é, também, um projeto da Apache e possui compatibilidade com o Hadoop. Inicialmente, o ZooKeeper foi implementado como um componente do Hadoop e virou um projeto próprio conforme cresciam suas funcionalidades e sua utilização em outras aplicações. Ainda, o ZooKeeper fornece ferramentas eficientes, confiáveis e tolerantes à falha para a coordenação de sistemas distribuídos. No caso deste trabalho, utiliza-se os serviços do ZooKeeper para monitorar e transmitir as informações de contexto coletadas nos nós escravos.
+
+Na Figura \cite{fig:zk-usage} todos os escravos possuem uma \textit{thread} chamada NodeStatusUpdater, esta \textit{thread} coleta dados sobre a disponibilidade de recursos do nó a cada 30 segundos e, se a quantidade de recursos disponíveis estiver diferente da última leitura, a DHT do ZooKeeper será atualizada. Concorrente a isto, o mestre possui uma \textit{thread} \textit{watcher} que observa a DHT do ZooKeeper e caso a DHT seja atualizada, esta thread será notificada e atualizará as informações no escalonador de acordo com a nova informação recebida pela DHT.
+
+Esta solução implementa a capacidade de observação e atualização da disponibilidade de recursos em tempo real, melhorando a capacidade de adaptação do \textit{framework}.
+
+\section{Resultados e experimentos parciais}
+A seguir, encontram-se descritos os experimentos realizados. A descrição foi dividida em duas subseções, uma para explicação do ambiente de testes e outra com resultados e análise.
+
+\subsection{Preparação do ambiente}
+Primeiramente, configurou-se o \textit{framework} Hadoop no cluster \textit{genepi} do Grid'5000 \cite{g5k}. O ambiente de execução foi configurado com quatro escravos, cada um possuindo a seguinte configuração: 2 CPUs Intel(R) Xeon(R) E5420 2.50 GHz  (totalizando 8 cores por nó) e 8 GB de memória RAM. Todos nós do experimento possuíam o sistema operacional Ubuntu-x64-12.04, com a JDK 1.8 instalada e a versão 2.6.0 do Hadoop configurada.
+
+O \textit{benchmark} foi feito com a aplicação TeraSort, aplicada a um conjunto de dados de 15GB. Os recursos considerados nos experimentos foram a memória e o número de cores, uma vez que estes são os parâmetros utilizados pelo Capacity Scheduler para a alocação de \textit{tasks} (\textit{containers}). Foram tomadas precauções para que nenhum outro serviço ou aplicação influenciasse os testes. As informações sobre a execução dos \textit{containers} foi extraída por meio de análise das logs do Hadoop.
+
+Após a implementação das melhorias no \textit{framework} os seguintes casos de teste foram criados e configurados para os experimentos:
+
+\textbf{Caso A:} representa a situação ideal, na forma de um cluster Hadoop dedicado, onde o usuário possui acesso à todos os recursos do cluster em qualquer momento. Isto implica que os recursos informados ao escalonador \textbf{sempre} corresponderão aos recursos disponíveis para o Hadoop. Consideram-se recursos informados como os dados que o escalonador utiliza para realizar suas políticas de escalonamento, enquanto, recursos disponíveis são aqueles estão livres e/ou sendo utilizados pelo próprio Hadoop. Utilizando uma notação percentual, os recursos informados são de 100\% e os recursos disponíveis são de 100\% durante toda execução.
+
+\textbf{Caso B:} representa a situação decorrente do compartilhamento dos nós do cluster com outros usuários. Como consequência do compartilhamento, é possível que em, algum momento, ocorra uma inconsistência entre a quantidade de recursos informada e disponível. Este caso aplica o comportamento padrão do Hadoop, no qual os recursos são informados por meio de arquivos XML \textbf{somente} na inicialização do serviço e nunca são atualizados. Em notação percentual, os recursos informados são de 100\%, porém os recursos disponíveis são de 50\%. Para simular este caso, optou-se por reduzir o número de recursos disponíveis (através da exclusão de nós) sem alterar a informação passada ao escalonador no Caso A.
+
+\textbf{Caso C:} repete as especificações do Caso B, porém possui a implementação da proposta na forma de coletores de contexto e comunicação nós-escalonador. Este caso simula quando uma outra aplicação é lançada \textbf{antes} da ocorrência da coleta e transmissão de dados, ou seja, quando um novo \textit{job} for submetido ao \textit{cluster}, este já estará com os dados atualizados. Em notação percentual, os recursos informados são de 50\% e os recursos disponíveis são de 50\%.
+
+\textbf{Caso D:} representa uma extensão do Caso C em que a inicialização de outra aplicação ocorre \textbf{após} a coleta e transmissão dos dados e \textbf{antes} da submissão de um \textit{job}, ou seja, o \textit{job} será lançado numa situação onde o cluster possui a informação errada (Caso B) e terá de se adaptar à nova configuração dos recursos (Caso C) durante a execução. Em notação percentual, os recursos informados no início do \textit{job} são de 100\%, enquanto os recursos disponíveis são de 50\%. Após a coleta e transmissão de dados os recursos informados também passam a ser 50\%.
+
+\subsection{Resultados e análise}
+...
+
+\subsection{Próximas atividades}
+O planejamento das próximas atividades inclui a execução de novos testes com características de carga de trabalho diferentes (CPU-Bound, IO-Bound, entre outras) nos quatro casos já apresentados, além da inclusão de dois novos casos referentes à agregação de recursos no decorrer da execução. O intuito de novos testes, é para confirmar se a solução adotada apresenta uma melhora no desempenho para apenas um tipo de carga de trabalho ou para a maioria delas.
+
+Para estes novos testes, utilizar-se-á da ferramenta HiBench \cite{sla,...} que fornece diversos \textit{jobs} com características de carga de trabalho distintas. O Hibench é definido como .......
+
+%
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[width=.5\textwidth]{fig1.jpg}
+%\caption{A typical figure}
+%\label{fig:exampleFig1}
+%\end{figure}
+%
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[width=.3\textwidth]{fig2.jpg}
+%\caption{This figure is an example of a figure caption taking more than one
+%  line and justified considering margins mentioned in Section~\ref{sec:figs}.}
+%\label{fig:exampleFig2}
+%\end{figure}
+
+%\begin{table}[ht]
+%\centering
+%\caption{Variables to be considered on the evaluation of interaction
+%  techniques}
+%\label{tab:exTable1}
+%\includegraphics[width=.7\textwidth]{table.jpg}
+%\end{table}
+
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}
