@@ -1,20 +1,127 @@
 \begin{thebibliography}{}
 
-\bibitem[Boulic and Renault 1991]{boulic:91}
-Boulic, R. and Renault, O. (1991).
-\newblock 3d hierarchies for animation.
-\newblock In Magnenat-Thalmann, N. and Thalmann, D., editors, {\em New Trends
-  in Animation and Visualization}. John Wiley {\&} Sons ltd.
+\bibitem[Baldauf et~al. 2007]{Baldauf}
+Baldauf, M., Dustdar, S., and Rosenberg, F. (2007).
+\newblock A survey on context-aware systems.
+\newblock {\em Int. J. Ad Hoc Ubiquitous Comput.}, 2(4):263--277.
 
-\bibitem[Knuth 1984]{knuth:84}
-Knuth, D.~E. (1984).
-\newblock {\em The {\TeX} Book}.
-\newblock Addison-Wesley, 15th edition.
+\bibitem[Chen et~al. 2010]{Chen}
+Chen, Q., Zhang, D., Guo, M., Deng, Q., and Guo, S. (2010).
+\newblock Samr: A self-adaptive mapreduce scheduling algorithm in heterogeneous
+  environment.
+\newblock In {\em Proceedings of the 2010 10th IEEE International Conference on
+  Computer and Information Technology}, CIT '10, pages 2736--2743, Washington,
+  DC, USA. IEEE Computer Society.
 
-\bibitem[Smith and Jones 1999]{smith:99}
-Smith, A. and Jones, B. (1999).
-\newblock On the complexity of computing.
-\newblock In Smith-Jones, A.~B., editor, {\em Advances in Computer Science},
-  pages 555--566. Publishing Press.
+\bibitem[Dean and Ghemawat 2008]{Dean2008}
+Dean, J. and Ghemawat, S. (2008).
+\newblock Mapreduce: Simplified data processing on large clusters.
+\newblock {\em Commun. ACM}, 51(1):107--113.
+
+\bibitem[{Grid 5000} 2013]{g5k}
+{Grid 5000} (2013).
+\newblock Grid 5000.
+\newblock \url{https://www.grid5000.fr/}, Last access: July 2014.
+
+\bibitem[Hadoop 2013a]{CapacityScheduler}
+Hadoop (2013a).
+\newblock Capacity scheduler.
+\newblock \url{http://hadoop.apache.org/docs/r1.2.1/capacity_scheduler.html},
+  Last access: July 2014.
+
+\bibitem[Hadoop 2013b]{FairScheduler}
+Hadoop (2013b).
+\newblock Fair scheduler.
+\newblock \url{http://hadoop.apache.org/docs/r1.2.1/fair_scheduler.html}, Last
+  access: July 2014.
+
+\bibitem[Isard et~al. 2009]{Isard2009}
+Isard, M., Prabhakaran, V., Currey, J., Wieder, U., Talwar, K., and Goldberg,
+  A. (2009).
+\newblock Quincy: fair scheduling for distributed computing clusters.
+\newblock In {\em Proceedings of the ACM SIGOPS 22nd symposium on Operating
+  systems principles}, SOSP '09, pages 261--276, New York, NY, USA. ACM.
+
+\bibitem[Kumar et~al. 2012]{Kumar2012}
+Kumar, K.~A., Konishetty, V.~K., Voruganti, K., and Rao, G. V.~P. (2012).
+\newblock Cash: context aware scheduler for hadoop.
+\newblock In {\em Proceedings of the International Conference on Advances in
+  Computing, Communications and Informatics}, ICACCI '12, pages 52--61, New
+  York, NY, USA.
+
+\bibitem[Maamar et~al. 2006]{Maamar}
+Maamar, Z., Benslimane, D., and Narendra, N.~C. (2006).
+\newblock What can context do for web services?
+\newblock {\em Commun. ACM}, 49(12):98--103.
+
+\bibitem[Marozzo et~al. 2012]{Marozzo2012}
+Marozzo, F., Talia, D., and Trunfio, P. (2012).
+\newblock P2p-mapreduce: Parallel data processing in dynamic cloud
+  environments.
+\newblock {\em J. Comput. Syst. Sci.}, 78(5):1382--1402.
+
+\bibitem[Nascimento et~al. 2008]{Nascimento}
+Nascimento, A.~P., Boeres, C., and Rebello, V. E.~F. (2008).
+\newblock Dynamic self-scheduling for parallel applications with task
+  dependencies.
+\newblock In {\em Proceedings of the 6th International Workshop on MGC}, MGC
+  '08, pages 1:1--1:6, New York, NY, USA.
+
+\bibitem[Parashar and Pierson 2010]{Parashar2010}
+Parashar, M. and Pierson, J.-M. (2010).
+\newblock Pervasive grids: Challenges and opportunities.
+\newblock In Li, K., Hsu, C., Yang, L., Dongarra, J., and Zima, H., editors,
+  {\em Handbook of Research on Scalable Computing Technologies}, pages 14--30.
+  IGI Global.
+
+\bibitem[Rasooli and Down 2012]{Rasooli2012}
+Rasooli, A. and Down, D.~G. (2012).
+\newblock Coshh: A classification and optimization based scheduler for
+  heterogeneous hadoop systems.
+\newblock In {\em Proceedings of the 2012 SC Companion: High Performance
+  Computing, Networking Storage and Analysis}, SCC '12, pages 1284--1291,
+  Washington, DC, USA. IEEE Computer Society.
+
+\bibitem[Sandholm and Lai 2010]{Sandholm2010}
+Sandholm, T. and Lai, K. (2010).
+\newblock Dynamic proportional share scheduling in hadoop.
+\newblock In {\em Proceedings of the 15th International Conference on Job
+  Scheduling Strategies for Parallel Processing}, JSSPP'10, pages 110--131,
+  Berlin, Heidelberg.
+
+\bibitem[Steffenel et~al. 2013]{3PGCIC}
+Steffenel, L.~A., Flauzac, O., Char\~ao, A.~S., Barcelos, P.~P., Stein, B.,
+  Nesmachnow, S., Pinheiro, M.~K., and Diaz, D. (2013).
+\newblock Per-mare: Adaptive deployment of mapreduce over pervasive grids.
+\newblock In {\em Proceedings of the 2013 Eighth International Conference on
+  P2P, Parallel, Grid, Cloud and Internet Computing}, 3PGCIC '13, pages 17--24,
+  Washington, DC, USA. IEEE Computer Society.
+
+\bibitem[{STIC-AmSud} 2014]{PER-MARE}
+{STIC-AmSud} (2014).
+\newblock {PER-MARE} project.
+\newblock \url{http://cosy.univ-reims.fr/PER-MARE}, Last access: July 2014.
+
+\bibitem[Tian et~al. 2009]{Tian2009}
+Tian, C., Zhou, H., He, Y., and Zha, L. (2009).
+\newblock A dynamic mapreduce scheduler for heterogeneous workloads.
+\newblock In {\em Proceedings of the 2009 Eighth International Conference on
+  Grid and Cooperative Computing}, GCC '09, pages 218--224, Washington, DC,
+  USA. IEEE Computer Society.
+
+\bibitem[Xie et~al. 2010]{Xie2010}
+Xie, J., Ruan, X., Ding, Z., Tian, Y., Majors, J., Manzanares, A., Yin, S., and
+  Qin, X. (2010).
+\newblock Improving mapreduce performance through data placement in
+  heterogeneous hadoop clusters.
+\newblock In {\em Parallel and Distributed Processing, Workshops and Phd Forum
+  (IPDPSW)}.
+
+\bibitem[Zaharia et~al. 2008]{Zaharia2008}
+Zaharia, M., Konwinski, A., Joseph, A.~D., Katz, R., and Stoica, I. (2008).
+\newblock Improving mapreduce performance in heterogeneous environments.
+\newblock In {\em Proceedings of the 8th USENIX conference on Operating systems
+  design and implementation}, OSDI'08, pages 29--42, Berkeley, CA, USA. USENIX
+  Association.
 
 \end{thebibliography}
