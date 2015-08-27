@@ -21,19 +21,25 @@ Dean, J. and Ghemawat, S. (2008).
 \bibitem[{Grid 5000} 2013]{g5k}
 {Grid 5000} (2013).
 \newblock Grid 5000.
-\newblock \url{https://www.grid5000.fr/}, Last access: July 2014.
+\newblock \url{https://www.grid5000.fr/}. Ultimo acesso: Agosto 2015.
 
 \bibitem[Hadoop 2013a]{CapacityScheduler}
 Hadoop (2013a).
 \newblock Capacity scheduler.
-\newblock \url{http://hadoop.apache.org/docs/r1.2.1/capacity_scheduler.html},
-  Last access: July 2014.
+\newblock \url{http://hadoop.apache.org/docs/r1.2.1/capacity_scheduler.html}.
+  Ultimo acesso: Agosto 2015.
 
 \bibitem[Hadoop 2013b]{FairScheduler}
 Hadoop (2013b).
 \newblock Fair scheduler.
-\newblock \url{http://hadoop.apache.org/docs/r1.2.1/fair_scheduler.html}, Last
-  access: July 2014.
+\newblock \url{http://hadoop.apache.org/docs/r1.2.1/fair_scheduler.html}.
+  Ultimo acesso: Agosto 2015.
+
+\bibitem[Hunt et~al. 2010]{Hunt2010}
+Hunt, P., Konar, M., Junqueira, F.~P., and Reed, B. (2010).
+\newblock Zookeeper: Wait-free coordination for internet-scale systems.
+\newblock In {\em Proceedings of the USENIX Annual Technical Conference}, pages
+  11--11, Boston, MA. USENIX Association.
 
 \bibitem[Isard et~al. 2009]{Isard2009}
 Isard, M., Prabhakaran, V., Currey, J., Wieder, U., Talwar, K., and Goldberg,
@@ -66,6 +72,13 @@ Nascimento, A.~P., Boeres, C., and Rebello, V. E.~F. (2008).
   dependencies.
 \newblock In {\em Proceedings of the 6th International Workshop on MGC}, MGC
   '08, pages 1:1--1:6, New York, NY, USA.
+
+\bibitem[Oracle 2014]{Oracle}
+Oracle (2014).
+\newblock Overview of java se monitoring and management.
+\newblock
+  \url{http://docs.oracle.com/javase/7/docs/technotes/guides/management/overview.html},
+  . Ultimo acesso: Agosto 2015.
 
 \bibitem[Parashar and Pierson 2010]{Parashar2010}
 Parashar, M. and Pierson, J.-M. (2010).
@@ -100,7 +113,7 @@ Steffenel, L.~A., Flauzac, O., Char\~ao, A.~S., Barcelos, P.~P., Stein, B.,
 \bibitem[{STIC-AmSud} 2014]{PER-MARE}
 {STIC-AmSud} (2014).
 \newblock {PER-MARE} project.
-\newblock \url{http://cosy.univ-reims.fr/PER-MARE}, Last access: July 2014.
+\newblock \url{http://cosy.univ-reims.fr/PER-MARE}. Ultimo acesso: Agosto 2015.
 
 \bibitem[Tian et~al. 2009]{Tian2009}
 Tian, C., Zhou, H., He, Y., and Zha, L. (2009).
