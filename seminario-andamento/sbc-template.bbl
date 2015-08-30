@@ -35,6 +35,13 @@ Hadoop (2013b).
 \newblock \url{http://hadoop.apache.org/docs/r1.2.1/fair_scheduler.html}.
   Ultimo acesso: Agosto 2015.
 
+\bibitem[Huang et~al. 2010]{hibench}
+Huang, S., Huang, J., Dai, J., Xie, T., and Huang, B. (2010).
+\newblock The hibench benchmark suite: Characterization of the mapreduce-based
+  data analysis.
+\newblock In {\em Data Engineering Workshops (ICDEW), 2010 IEEE 26th
+  International Conference on}, pages 41--51.
+
 \bibitem[Hunt et~al. 2010]{Hunt2010}
 Hunt, P., Konar, M., Junqueira, F.~P., and Reed, B. (2010).
 \newblock Zookeeper: Wait-free coordination for internet-scale systems.

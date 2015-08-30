@@ -66,7 +66,7 @@ Apesar de existirem dois tipos de escalonamento no Hadoop, o escalonamento com m
 
 O escalonador mais simples é o Hadoop Internal Scheduler, é um escalonador de fila que utiliza o algoritmo FIFO e tem boa performance em \textit{clusters} onde não existe competição por recursos. Outro escalonador disponível é o Fair Scheduler, utilizado principalmente para o processamento de lotes de aplicações pequenas e rápidas. Este escalonador utiliza um escalonamento de dois níveis, buscando a divisão justa dos recursos \cite{FairScheduler}. A terceira opção, e também o padrão do Hadoop nas últimas versões, é o CapacityScheduler. O CapacityScheduler foi projetado para a utilização compartilhada do Hadoop e busca a maximização do \textit{throughput} e da utilização do cluster. Seu funcionamento se baseia em garantias mínimas de capacidade para os usuários, deslocando as capacidades dos usuários inativos para aqueles que estão utilizando o \textit{cluster} provendo elasticidade com um bom custo benefício \cite{CapacityScheduler}.
 
-A existência destes escalonadores permite um gerenciamento flexível do \textit{framework}. Apesar disso, os escalonadores disponíveis não detectam nem reagem à dinamicidade e heterogeneidade do ambiente, uma preocupação presente em ambientes pervasivos.
+A existência destes escalonadores adiciona flexibilidade no gerenciamento do \textit{framework}. Apesar disso, os escalonadores disponíveis não detectam nem reagem à dinamicidade e heterogeneidade do ambiente, um requisito presente em ambientes pervasivos.
 
 \subsection{ZooKeeper}
 O ZooKeeper é um projeto da Apache e possui compatibilidade com o Hadoop. Inicialmente, o ZooKeeper foi implementado como um componente do Hadoop e virou um projeto próprio conforme cresciam suas funcionalidades e sua utilização em outras aplicações. Ainda, o ZooKeeper fornece ferramentas eficientes, confiáveis e tolerantes à falha para a coordenação de sistemas distribuídos \cite{Hunt2010}. No caso deste trabalho, utiliza-se os serviços do ZooKeeper para monitorar e transmitir as informações de contexto coletadas nos nós escravos.
@@ -163,7 +163,8 @@ Os casos C e D mostram que atualizações de contexto regulares contribuem para a 
 \section{Próximas atividades}
 O planejamento das próximas atividades inclui a execução de novos testes com características de carga de trabalho diferentes (CPU-Bound, IO-Bound, entre outras) nos quatro casos já apresentados, além da inclusão de dois novos casos referentes à agregação de recursos no decorrer da execução. O intuito de novos testes, é para confirmar se a solução adotada apresenta uma melhora no desempenho para apenas um tipo de carga de trabalho ou para a maioria delas.
 
-Para estes novos testes, utilizar-se-á da ferramenta HiBench \cite{sla,...} que fornece diversas aplicações com características de carga de trabalho distintas. O Hibench é definido como .......
+Para estes novos testes, utilizar-se-á da ferramenta HiBench \cite{hibench} que se constitui de um pacote de \textit{benchmarks} para \textit{clusters} Hadoop, incluindo tanto micro-benchmarks quanto aplicações reais. O Hibench possui \textit{benchmarks} das categorias: pesquisa de páginas (Page Rank e Nutch Indexing), aprendizagem de máquina (classificação bayesiana e K-means), pesquisa analítica (Hive Join e Hive Aggregation). Esta diversidade de aplicações apresenta testes com cargas de trabalho variadas, fornecendo um instrumento de teste adequado para a confirmação da utilidade das melhorias implementadas.
+
 
 %
 %\begin{figure}[ht]
