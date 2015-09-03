@@ -5,45 +5,45 @@ The style file: sbc.bst
 Database file #1: sbc-template.bib
 Warning--I'm ignoring Hunt2010's extra "address" field
 --line 291 of file sbc-template.bib
-You've used 22 entries,
+You've used 21 entries,
             1935 wiz_defined-function locations,
-            627 strings with 8545 characters,
-and the built_in function-call counts, 10483 in all, are:
-= -- 1054
-> -- 448
+            617 strings with 8328 characters,
+and the built_in function-call counts, 10036 in all, are:
+= -- 1009
+> -- 430
 < -- 21
-+ -- 160
-- -- 153
-* -- 829
-:= -- 1727
-add.period$ -- 74
-call.type$ -- 22
-change.case$ -- 184
-chr.to.int$ -- 21
-cite$ -- 22
-duplicate$ -- 440
-empty$ -- 721
-format.name$ -- 183
-if$ -- 2185
++ -- 154
+- -- 147
+* -- 786
+:= -- 1651
+add.period$ -- 71
+call.type$ -- 21
+change.case$ -- 176
+chr.to.int$ -- 20
+cite$ -- 21
+duplicate$ -- 426
+empty$ -- 689
+format.name$ -- 176
+if$ -- 2099
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 17
-newline$ -- 113
-num.names$ -- 68
-pop$ -- 174
+missing$ -- 16
+newline$ -- 108
+num.names$ -- 65
+pop$ -- 168
 preamble$ -- 1
-purify$ -- 184
+purify$ -- 176
 quote$ -- 0
-skip$ -- 346
+skip$ -- 336
 stack$ -- 0
-substring$ -- 685
-swap$ -- 117
+substring$ -- 642
+swap$ -- 116
 text.length$ -- 12
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 132
+type$ -- 126
 warning$ -- 0
-while$ -- 79
+while$ -- 75
 width$ -- 0
-write$ -- 309
+write$ -- 296
 (There was 1 warning)

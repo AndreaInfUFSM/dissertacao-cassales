@@ -67,12 +67,6 @@ Maamar, Z., Benslimane, D., and Narendra, N.~C. (2006).
 \newblock What can context do for web services?
 \newblock {\em Commun. ACM}, 49(12):98--103.
 
-\bibitem[Marozzo et~al. 2012]{Marozzo2012}
-Marozzo, F., Talia, D., and Trunfio, P. (2012).
-\newblock P2p-mapreduce: Parallel data processing in dynamic cloud
-  environments.
-\newblock {\em J. Comput. Syst. Sci.}, 78(5):1382--1402.
-
 \bibitem[Nascimento et~al. 2008]{Nascimento}
 Nascimento, A.~P., Boeres, C., and Rebello, V. E.~F. (2008).
 \newblock Dynamic self-scheduling for parallel applications with task
