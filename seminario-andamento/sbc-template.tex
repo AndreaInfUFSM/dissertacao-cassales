@@ -31,9 +31,10 @@ Este trabalho propõe uma melhoria no escalonamento do Apache Hadoop através da u
 
 
 \section{Introdução}
+%TODO - Incluir uma frase que justifique a importância do Apache Hadoop / MapReduce.
 Apache Hadoop é um \textit{framework} de computação paralela e distribuída para processamento de grandes conjuntos de dados e implementa o paradigma de programação \mbox{MapReduce} \cite{Dean2008}. O Apache Hadoop é projetado para ser escalável de um único servidor a milhares de máquinas, cada uma oferecendo processamento e armazenamento local.
 
-Sem uma configuração específica pelo administrador, o Apache Hadoop assume que está sendo utilizado em um \textit{cluster} homogêneo para execução de aplicações \mbox{MapReduce}. Uma vez que a performance geral do \textit{cluster} está ligada ao escalonamento de tarefas, o Hadoop pode ser seriamente afetado quando executado em ambientes que não satisfaçam a suposição feita no projeto do \textit{framework}, ou seja, em ambientes dinâmicos ou heterogêneos.
+Sem uma configuração específica pelo administrador, o Apache Hadoop assume que está sendo utilizado em um \textit{cluster} homogêneo para execução de aplicações \mbox{MapReduce}. Uma vez que o desempenho geral do \textit{cluster} está ligado ao escalonamento de tarefas, o desempenho do Hadoop pode diminuir significativamente quando executado em ambientes que não satisfaçam a suposição feita no projeto do \textit{framework}, ou seja, em ambientes dinâmicos ou heterogêneos \cite{Kumar2012}.
 
 Esta é uma preocupação especial quando tenta-se utilizar o Hadoop em grids pervasivos. Grids pervasivos são uma alternativa aos custosos \textit{clusters} dedicados, dado que a aquisição e manutenção de um \textit{cluster} dedicado continua alta e dissuasiva para muitas organizações. De acordo com \cite{Parashar2010}, grids pervasivos representam a generalização  extrema do conceito de grid por possuírem recursos pervasivos, ou seja, recursos computacionais ociosos incorporados em ambientes pervasivos são requisitados com objetivo de processar tarefas de maneira distribuída. 
 
@@ -48,14 +49,14 @@ Este trabalho propõe-se a introduzir sensibilidade ao contexto nos mecanismos de
 %The rest of the paper is organized as follows: Section \ref{sec:refteo} presents Apache Hadoop architecture and scheduling mechanisms. Section \ref{sec:related} discusses related work, focusing on
 %context-awareness and on other works that try to improve Hadoop schedulers. Section \ref{sec:desenv} presents our proposal of context-aware scheduling, while Section \ref{sec:exper} presents the experiments conducted and the achieved results. We finally conclude this paper in Section \ref{sec:concl}.
 
-\section{Revisão de literatura}
+\section{Revisão de Literatura}
 É necessário definir alguns termos, técnicas e/ou ferramentas para o entendimento do trabalho. Por exemplo, a conceituação formal de sensibilidade ao contexto é muito importante, uma vez que constitue-se da técnica de obtenção dos dados. Como complemento à sensibilidade ao contexto define-se o que é o ZooKeeper, a ferramenta utilizada para transmissão dos dados coletados. Além disso, a compreensão de como o Apache Hadoop e seu escalonamento funcionam, bem como quais trabalhos já foram feitos neste âmbito, são relevantes.
 
-\subsection{Sensibilidade ao contexto}
+\subsection{Sensibilidade ao Contexto}
 Sensibilidade ao contexto é a capacidade de uma aplicação ou \textit{software} de detectar e responder às mudanças do ambiente \cite{Maamar}. Um sistema sensível ao contexto é capaz de adaptar suas operações ao estado corrente sem intervenção humana, consequentemente melhorando a usabilidade e eficiência deste sistema \cite{Baldauf}. Em grids pervasivos, o escalonamento é uma tarefa que pode ser beneficiada com a inclusão de sensibilidade ao contexto através da coleta de dados sobre os recursos do grid e tomada de decisões baseadas nestes dados.
 
 
-\subsection{Apache Hadoop e escalonamento}
+\subsection{Apache Hadoop e Escalonamento}
 O \textit{framework} Apache Hadoop é organizado numa arquitetura de mestre-escravo e possui dois serviços principais, o serviço de armazenamento (HDFS) e o de processamento (YARN). Cada serviço possui mestre e escravos independentes como apresentado na Figura \ref{fig:ArquiteturaHadoop}, onde é possível notar que os serviços NameNode e ResourceManager, mestres do HDFS e YARN respectivamente, e os seus respectivos escravos DataNode e NodeManager. Outro componente que aparece na figura é o ApplicationMaster, este componente é responsável pelo gerenciamento interno de cada \textit{job}, também chamado de escalonamento de \textit{tasks} ou tarefas. Entende-se \textit{task} como uma fração do processamento das aplicações, ou seja, cada tarefa de Map ou Reduce corresponde a uma \textit{task}. Enquanto o ApplicationMaster gerencia as tarefas, é função do ResourceManager gerenciar os \textit{jobs} ou aplicações. Finalmente, o último componente a aparecer na figura é o Container, o qual representa uma alocação de recursos em um nó qualquer do \textit{cluster}. A importância do container vem do fato de que todas as tarefas são executadas em uma instância de container.
 
 \begin{figure}[!ht]
@@ -77,7 +78,7 @@ O ZooKeeper é um projeto da Apache e possui compatibilidade com o Hadoop. Inicia
 No caso deste trabalho, utiliza-se os serviços do ZooKeeper para monitorar e transmitir as informações de contexto coletadas nos nós escravos. No ZooKeeper existe um componente chamado \textit{znode} onde é possível inserir qualquer tipo de dado e todos as instâncias de clientes e servidores (no caso de um servidor replicado) possuem acesso à este \textit{znode}. A comunicação é feita através de processos que atualizam e processos que lêem o conteúdo destes componentes.
 
 
-\subsection{Trabalhos relacionados}
+\subsection{Trabalhos Relacionados}
 Ao longo dos anos diversos trabalhos propuseram melhorias para os mecanismos de escalonamento do Hadoop visando uma melhor performance de acordo com suas necessidades. Estas contribuições, na maior parte, podem ser divididas entre dois tipos: propostas de novos métodos de escalonamento ou propostas de melhoria na distribuição de recursos.
 
 Os trabalhos \cite{Kumar2012, Tian2009, Rasooli2012} assumem que a maior parte das aplicações executadas num cluser é periódica e possui cargas de CPU, memória, disco e rede similares. Estas suposições permitem que as aplicações e os nós sejam analizados e classificados de acordo com suas necessidades e suas capacidades nestas características. Uma vez classificados, o escalonamento torna-se um problema de combinar nós e applicações de mesma classificação. Seguindo nesta linha, o trabalho \cite{Isard2009} propõe a utilização de um gráfo de capacidade-demanda que auxilia o cálculo do escalonamento ótimo com base em uma função de custo.
@@ -97,14 +98,14 @@ Há também o trabalho \cite{Xie2010}, que tenta fornecer uma melhora na performan
 \section{Desenvolvimento}
 Através de um estudo aprofundado do escalonamento do Apache Hadoop, identificou-se uma estratégia para melhoria no processo sem a inserção de métodos intrusivos ou grande modificação nas políticas de escalonamento já implementadas no \textit{framework}. A implementação realizada pode ser separada em duas tarefas distintas, coleta de dados e transmissão de dados.
 
-\subsection{Coletor de contexto}
+\subsection{Coletor de Contexto}
 O Apache Hadoop utiliza arquivos XML como método de configuração do \textit{cluster}, cada nó possui alguns arquivos de configuração e cada arquivo possui diversas propriedades que podem ser alteradas. As informações referentes aos recursos disponíveis em dado nó também estão dentro deste conjunto de propriedades, forçando o administrador a configurar um arquivo para cada nó do \textit{cluster}. Ainda, estas informações são transmitidas ao escalonador somente na inicialização do serviço, não ocorrendo qualquer tipo de atualização até que o serviço seja reinicializado. Estas limitações são gravíssimas num ambiente pervasivo, o qual sofre alterações durante a execução de uma aplicação, e portanto, necessita de um mecanismo que atualize as informações durante a execução.
 
 Para solucionar este problema optou-se pela integração de um módulo de coleta de dados no Hadoop, o qual permite a coleta das informações sobre os recursos em um dado momento. O coletor foi desenvolvido para o projeto PER-MARE \cite{PER-MARE}
 % e seu diagrama de classe pode ser visualizado na Figura \ref{fig:collector}. O módulo de coleta 
 e é baseado na API padrão de monitoramento do Java \cite{Oracle} permitindo coletar facilmente as informações de um nó sem a adição de bibliotecas externas. Esta API permite que informações como o número de processadores (cores) e a memória do sistema sejam identificadas, através da utilização de um conjunto de interfaces e classes abstratas que generalizam o processo de coleta. Devido à sua estrutura, pode-se facilmente integrar novos coletores para outras informações caso haja necessidade, como por exemplo a utilização de disco ou CPU.
 
-\subsection{Comunicação entre processos}
+\subsection{Comunicação Entre Processos}
 Para que as informações adquiridas através do módulo de coleta possam ser utilizadas é necessário que estas cheguem até o processo do escalonador, em execução na máquina que possui o serviço Resource Manager. A escolha para a implementação desta comunicação no sentido escravo-mestre foi feita visando a compatibilidade com o Hadoop e a não intrusão nos processos de comunicação já definidos. Para isso optou-se por utilizar uma estrutura de HashTable distribuída (DHT) no \textit{znode}, na qual os escravos atualizam e o mestre pode ler as informações atualizadas.
 
 %Na Figura \cite{fig:zk-usage} 
@@ -112,10 +113,10 @@ O funcionamento se dá da seguinte forma: todos os escravos possuem uma \textit{t
 
 Esta solução implementa a capacidade de observação e atualização da disponibilidade de recursos em tempo real, melhorando a capacidade de adaptação do \textit{framework}.
 
-\section{Resultados e experimentos parciais}
+\section{Experimentos e Resultados Parciais}
 A seguir, encontram-se descritos os experimentos realizados. A descrição foi dividida em duas subseções, uma para explicação do ambiente de testes e outra com resultados e análise.
 
-\subsection{Preparação do ambiente}
+\subsection{Preparação do Ambiente}
 Primeiramente, configurou-se o \textit{framework} Hadoop no \textit{cluster} \textit{genepi} do Grid'5000 \cite{g5k}. O ambiente de execução foi configurado com quatro escravos, cada um possuindo a seguinte configuração: 2 CPUs Intel(R) Xeon(R) E5420 2.50 GHz  (totalizando 8 cores por nó) e 8 GB de memória RAM. Todos nós do experimento possuíam o sistema operacional Ubuntu-x64-12.04, com a JDK 1.8 instalada e a versão 2.6.0 do Hadoop configurada.
 
 O \textit{benchmark} foi feito com a aplicação TeraSort, aplicada a um conjunto de dados de 15GB. Os recursos considerados nos experimentos foram a memória e o número de cores, uma vez que estes são os parâmetros utilizados pelo Capacity Scheduler para a alocação de tarefas (\textit{containers}). Foram tomadas precauções para que nenhum outro serviço ou aplicação influenciasse os testes. As informações sobre a execução dos \textit{containers} foi extraída por meio de análise das logs do Hadoop.
