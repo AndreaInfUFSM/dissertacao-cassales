@@ -116,6 +116,12 @@ Steffenel, L.~A., Flauzac, O., Char\~ao, A.~S., Barcelos, P.~P., Stein, B.,
 \newblock {PER-MARE} project.
 \newblock \url{http://cosy.univ-reims.fr/PER-MARE}. Ultimo acesso: Agosto 2015.
 
+\bibitem[Su and Swart 2012]{Su}
+Su, X. and Swart, G. (2012).
+\newblock Oracle in-database hadoop: When mapreduce meets rdbms.
+\newblock In {\em Proceedings of the 2012 ACM SIGMOD International Conference
+  on Management of Data}, SIGMOD '12, pages 779--790, New York, NY, USA. ACM.
+
 \bibitem[Tian et~al. 2009]{Tian2009}
 Tian, C., Zhou, H., He, Y., and Zha, L. (2009).
 \newblock A dynamic mapreduce scheduler for heterogeneous workloads.
