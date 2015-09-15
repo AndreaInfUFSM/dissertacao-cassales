@@ -1,0 +1,265 @@
+\documentclass{beamer}
+
+\mode<presentation>{
+\usetheme{Dresden}
+\setbeamercovered{transparent}
+\usecolortheme{lsc}
+}
+
+\mode<handout>{
+  % tema simples para ser impresso
+  \usepackage[bar]{beamerthemetree}
+  % Colocando um fundo cinza quando for gerar transparências para serem impressas
+  % mais de uma transparência por página
+  \beamertemplatesolidbackgroundcolor{black!5}
+}
+
+\usepackage{amsmath,amssymb}
+\usepackage[brazil]{varioref}
+\usepackage[english,brazil]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+\usepackage{listings}
+\usepackage{url}
+\usepackage{colortbl}
+\usepackage{ragged2e}
+
+%\apptocmd{\frame}{\justifying}{}{}
+
+\beamertemplatetransparentcovereddynamic
+
+\title[Fórum de Pós-Graduação ERAD-RS 2015]{Escalonamento Adaptativo para o Apache Hadoop}
+\author[Guilherme Weigert Cassales ]{%
+  Guilherme Weigert Cassales\inst{1}\\Andrea Schwertner Charão\inst{1}\\\tiny \{cassales,andrea\}@inf.ufsm.br}
+  \institute[UFSM]{
+  \inst{1}%
+     Departamento de Linguagens e Sistemas de Computação\\
+     Centro de Tecnologia\\
+     Universidade Federal de Santa Maria}
+
+% Se comentar a linha abaixo, irá aparecer a data quando foi compilada a apresentação  
+\date{18 de setembro de 2015}
+
+\pgfdeclareimage[height=1cm]{inf}{figs/CienciaDaComputacao.png}
+
+% pode-se colocar o LOGO assim
+\logo{\pgfuseimage{inf}}
+
+\AtBeginSection[]{
+  \begin{frame}<beamer>
+    \frametitle{Roteiro}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Roteiro}
+\tableofcontents
+\end{frame}
+
+
+\section{Introdução}
+\frame{
+    \frametitle{Introdução}
+    \begin{itemize}
+		\justifying
+		\item \textit{MapReduce}.
+		\item \textit{Framework} mais conhecido: Hadop [1].
+		\item Arquitetura utilizada: \textit{cluster}.
+		\item Principal objetivo: processar grandes volumes de dados, em geral textuais.
+    \end{itemize}
+
+	\footnotetext[1]{\tiny Apache, Apache hadoop. http://hadoop.apache.org/docs/r2.6.0/index.html.}
+}
+
+\frame{
+    \frametitle{Características}
+    \justifying
+    Características do Hadoop decorrentes do projeto:
+    
+	\begin{itemize}
+		\justifying
+		\item projetado para \textit{clusters} \textbf{homogêneos};
+		\item configuração feita por arquivos de texto com valores \textit{default};
+		\item arquitetura mestre e escravo;
+		\item separa as atribuições em dois grandes módulos, HDFS (armazenamento) e YARN (processamento);
+		\item \textbf{não possui capacidade de adaptação a ambientes levemente dinâmicos.}
+	\end{itemize}
+	
+	
+}
+
+\frame{
+	\frametitle{Objetivo}
+	Objetivo Principal
+	\begin{itemize}
+		\item Introduzir sensibilidade ao contexto nos mecanismos de
+escalonamento do Apache Hadoop através da coleta e transmissão de dados.
+	\end{itemize}
+	
+}
+
+\section{Revisão de Literatura}
+\logo{}
+\frame{
+    \frametitle{MapReduce}
+	\pgfdeclareimage[width=\textwidth]{MR}{figs/Mapreduce.png}
+    \begin{figure}
+	\pgfuseimage{MR}
+	\end{figure}
+	
+	\begin{tiny}
+	http://blog.matthewrathbone.com
+	\end{tiny}
+    %http://blog.matthewrathbone.com/2013/02/09/real-world-hadoop-implementing-a-left-outer-join-in-hadoop-map-reduce.html
+}
+
+\frame{
+	\frametitle{Arquitetura do Hadoop}
+	\centering
+	\pgfdeclareimage[width=8cm]{HA}{figs/HadoopArch.png}
+	\pgfuseimage{HA}
+
+}
+
+\logo{\pgfuseimage{inf}}
+
+\frame{
+	\frametitle{Sensibilidade ao contexto}
+	\begin{itemize}
+    		\item Contexto
+      	\begin{itemize}
+      		\item "qualquer \textbf{informação} que pode ser utilizada para \textbf{caracterizar} a \textbf{situação} de uma entidade (pessoa, lugar ou objeto) considerada \textbf{relevante} para a \textbf{interação} entre usuário e aplicação" (DEY, 2001).
+		\end{itemize}
+		\item Sensibilidade ao Contexto
+	    \begin{itemize}
+    			\item "se refere a habilidade de uma aplicação de \textbf{detectar e responder as mudanças no ambiente} de execução" (Maamar; Benslimane; Narendra, 2006).
+		\end{itemize}
+		\item Como um \textit{software} utiliza?
+		\item Por que utilizar?
+    \end{itemize}
+}
+
+\frame{
+	\frametitle{Trabalhos Relacionados}
+	\begin{columns}
+		\column{6cm}
+		Novos métodos de escalonamento
+		\begin{enumerate}
+			\item (Kumar et al., 2012).
+			\item (Tian et al., 2009).			
+			\item (Rasooli and Down, 2012).
+			\item (Isard et al., 2009).
+			\item (Zaharia et al., 2008).
+			\item (Chen et al., 2010).
+		\end{enumerate}
+		Classificação E/S ou CPU [1-3].
+		
+		Grafo capacidade-demanda [4].
+
+		Heurística progresso da tarefa [5].
+		
+		Dados históricos, escala própria [6].
+		
+		\column{6cm}
+		Melhoria na distribuição de recursos.
+		\begin{enumerate}
+			\item (Sandholm and Lai, 2010).
+			\item (Xie et al., 2010).
+		\end{enumerate}
+		Taxa de gasto [1].
+		
+		\textit{Data locality} [2].
+	\end{columns}
+}
+
+\section{Desenvolvimento}
+\frame{
+	\frametitle{Etapas propostas}
+	\begin{enumerate}
+		\justifying
+		\item Inserção de um coletor de contexto.
+		\item Criação de uma comunicação entre os nós para melhor gestão dos recursos disponíveis.
+	\end{enumerate}
+}
+
+\frame{
+	\frametitle{Coletor de contexto}
+	\begin{itemize}
+		\item Desenvolvido para o projeto PER-MARE [4]
+		\item Baseado na API padrão de monitoramento do Java [5]
+		\item Novos coletores podem ser integrados para mais recursos.
+	\end{itemize}
+
+	\footnotetext[4]{\tiny STIC-AmSud, PER-MARE project. http://cosy.univ-reims.fr/PER-MARE}
+	\footnotetext[5]{\tiny Oracle, Overview of java se monitoring and management.  http://docs.oracle.com/javase/7/docs/technotes/guides/management/overview.html}
+}
+
+\frame{
+	\frametitle{Comunicação entre nós}
+	\begin{itemize}
+		\item Recursos de cada nó nunca são atualizados no escalonador.
+		\item Problemas inerentes da comunicação distribuída.
+		\item Solução: ZooKeeper.
+	\end{itemize}	
+}
+
+\logo{}
+\frame{
+	\frametitle{Comunicação entre nós}
+	\pgfdeclareimage[width=\textwidth]{ZK}{figs/Zookeeper.pdf}
+	\pgfuseimage{ZK}
+}
+
+\logo{\pgfuseimage{inf}}
+\section{Experimentos e Resultados Parciais}
+\frame{
+	\frametitle{Configuração do ambiente}
+	\begin{itemize}
+		\justifying
+			\item Cluster genepi, Grid'5000.
+			\item 1 mestre, 4 escravos;
+			\item Cada nó possuindo: 2 CPUs Intel(R) Xeon(R) E5420 2.50 GHz (totalizando 8 cores por nó) e 8 GB de memória RAM;
+			\item Sistema operacional Ubuntu-x64-12.04, JDK 1.8 e a versão 2.6.0 do Hadoop.
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Configuração dos experimentos}
+	Quatro casos:
+	\begin{enumerate}[A)]
+		\justifying
+		\item Caso perfeito, recursos informados 100\% e recursos disponíveis 100\%.
+		\item Comportamento \textit{default} num ambiente dinâmico, recursos informados 100\% e recursos disponíveis 50\%.
+		\item Atualização ocorre antes do início do \textit{job}. Recursos disponíveis 50\% e recursos informados 50\%.
+		\item Atualização ocorre após o início do \textit{job}. \textbf{Inicialização do \textit{job}:} recursos disponíveis 50\% e recursos informados 100\%. \textbf{Durante o \textit{job}:} recursos disponíveis 50\% e recursos informados 50\%. 
+	\end{enumerate}
+}
+
+
+\frame{
+	\frametitle{Resultados parciais}
+	\pgfdeclareimage[width=\textwidth]{GC}{figs/todos.png}
+	\pgfuseimage{GC}
+}
+
+\section{Próximas Atividades}
+\frame{
+	\frametitle{Próximas Atividades}
+	\begin{itemize}
+		\item Executar testes com aplicações de diferentes requisitos (CPU-bound, I/O-bound, etc) e diferentes domínios (\textit{web search}, aprendizagem de máquina, etc) para confirmação da adaptabilidade da solução adotada.
+	\end{itemize}
+}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\end{document}
