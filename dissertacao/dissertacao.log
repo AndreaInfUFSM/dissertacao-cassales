@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.19)  18 AUG 2015 17:17
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.19)  22 SEP 2015 22:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -689,8 +689,11 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 )))
-(./macros/bugcaption.tex)
-No file dissertacao.aux.
+(./macros/bugcaption.tex) (./dissertacao.aux (./capitulos/introducao.aux)
+(./capitulos/fundamentacao.aux) (./capitulos/desenvolvimento.aux)
+(./capitulos/resultados.aux) (./capitulos/conclusao.aux)
+(./capitulos/grafosRM.aux) (./capitulos/confg5k.aux) (./capitulos/confcomp.aux)
+(./capitulos/logexample.aux) (./capitulos/codechanges.aux))
 \openout1 = `dissertacao.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
@@ -710,6 +713,7 @@ LaTeX Font Info:    ... okay on input line 81.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 81.
 LaTeX Font Info:    ... okay on input line 81.
 LaTeX Font Info:    Try loading font information for T1+ptm on input line 81.
+
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
@@ -749,6 +753,8 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 81.
 LaTeX Info: Redefining \pageref on input line 81.
 LaTeX Info: Redefining \nameref on input line 81.
+
+(./dissertacao.out) (./dissertacao.out)
 \@outlinefile=\write3
 \openout3 = `dissertacao.out'.
 
@@ -795,10 +801,6 @@ Underfull \vbox (badness 10000) detected at line 87
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <18> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 87.
-
-Overfull \vbox (6.19643pt too high) detected at line 87
- []
-
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <16> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 87.
 Package babel Info: Redefining portuges shorthand "|
@@ -824,10 +826,57 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9.79996> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 87.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 103.
+(babel)             in language  on input line 94.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 103.
+(babel)             in language  on input line 94.
  [2
+
+]
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(56.9055pt, 455.24411pt, 85.35826pt)
+* v-part:(T,H,B)=(85.35826pt, 702.78308pt, 56.9055pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=455.24411pt
+* \textheight=702.78308pt
+* \oddsidemargin=-15.36449pt
+* \evensidemargin=-15.36449pt
+* \topmargin=-27.11436pt
+* \headheight=11.74988pt
+* \headsep=28.45276pt
+* \topskip=12.0pt
+* \footskip=56.9055pt
+* \marginparwidth=71.13188pt
+* \marginparsep=7.11319pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 95.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 95.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 96.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 96.
+ [3
+
 
 ]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
@@ -835,28 +884,18 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <8> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 103.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 109.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 109.
- [3
-
-]
-Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 124.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 124.
  [4
 
+
 ]
-
-Package natbib Warning: Citation `Hadoop' on page 5 undefined on input line 125
-.
-
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 140.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 140.
-[5
+ [5
 
 ]
 Package babel Info: Redefining portuges shorthand "|
@@ -867,6 +906,7 @@ Package babel Info: Redefining portuges shorthand "|
 
 
 ]
+(./dissertacao.lof)
 \tf@lof=\write4
 \openout4 = `dissertacao.lof'.
 
@@ -876,7 +916,7 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 165.
  [7
 
-]
+] (./dissertacao.loap)
 \tf@loap=\write5
 \openout5 = `dissertacao.loap'.
 
@@ -886,7 +926,42 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 198.
  [8
 
-]
+] (./dissertacao.toc
+Underfull \hbox (badness 10000) in paragraph at lines 4--4
+ []  
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--5
+ []  
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--19
+ []  
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 30--30
+ []  
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--43
+ []  
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
+ []  
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--45
+ []  
+ []
+
+)
 \tf@toc=\write6
 \openout6 = `dissertacao.toc'.
 
@@ -904,46 +979,52 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 1.
 
 
-Package natbib Warning: Citation `Google' on page 10 undefined on input line 3.
+Package natbib Warning: Citation `Dean2008' on page 10 undefined on input line 
+3.
 
 
-
-Package natbib Warning: Citation `Yahoo' on page 10 undefined on input line 3.
-
-
-Package natbib Warning: Citation `Hadoop' on page 10 undefined on input line 3.
+Package natbib Warning: Citation `Su' on page 10 undefined on input line 3.
 
 
+Package natbib Warning: Citation `Kumar2012' on page 10 undefined on input line
+ 5.
 
-Package natbib Warning: Citation `CASH' on page 10 undefined on input line 7.
+
+Package natbib Warning: Citation `Parashar2010' on page 10 undefined on input l
+ine 7.
 
 
-Package natbib Warning: Citation `Manuele' on page 10 undefined on input line 9
+Package natbib Warning: Citation `Nascimento' on page 10 undefined on input lin
+e 9.
+
+
+Package natbib Warning: Citation `Kumar2012' on page 10 undefined on input line
+ 12.
+
+
+Package natbib Warning: Citation `Zaharia2008' on page 10 undefined on input li
+ne 12.
+
+
+Package natbib Warning: Citation `Rasooli2012' on page 10 undefined on input li
+ne 12.
+
+
+Package natbib Warning: Citation `Sandholm2010' on page 10 undefined on input l
+ine 12.
+
+
+Package natbib Warning: Citation `3PGCIC' on page 10 undefined on input line 12
 .
-
-
-Overfull \hbox (1.0372pt too wide) in paragraph at lines 9--10
-[]\T1/ptm/m/n/12 A key cha-rac-te-ris-tic in Ha-doop's tran-si-tion to he-te-ro
--ge-ne-ous en-vi-ron-ments is the context-
- []
-
-
-Package natbib Warning: Citation `PER-MARE' on page 10 undefined on input line 
-11.
 
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 15.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 20.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 20.
+(babel)             in language  on input line 15.
 [10
 
 
-]
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 20.
-)
+])
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 206.
 Package babel Info: Redefining portuges shorthand "|
@@ -958,173 +1039,121 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 7.
 
 
-Package natbib Warning: Citation `Apache' on page 12 undefined on input line 8.
-
-
-
-Package natbib Warning: Citation `Nutch' on page 12 undefined on input line 8.
+Package natbib Warning: Citation `Maamar' on page 12 undefined on input line 11
+.
 
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 12.
-
-LaTeX Warning: Reference `fig:ArqGeral' on page 12 undefined on input line 13.
-
-<figuras/Figura08-HadoooArchGeral.png, id=62, 840.13875pt x 616.55344pt>
-File: figuras/Figura08-HadoooArchGeral.png Graphic file (type png)
-
-<use figuras/Figura08-HadoooArchGeral.png>
-Package pdftex.def Info: figuras/Figura08-HadoooArchGeral.png used on input lin
-e 18.
-(pdftex.def)             Requested size: 256.0748pt x 187.92151pt.
+(babel)             in language  on input line 16.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 27.
+(babel)             in language  on input line 18.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 29.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 29.
- [12
+(babel)             in language  on input line 18.
+[12
 
 
 
 ]
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 19.
+ <figuras/Figura08-HadoooArchGeral.png, id=259, 840.13875pt x 616.55344pt>
+File: figuras/Figura08-HadoooArchGeral.png Graphic file (type png)
 
-LaTeX Warning: Reference `fig:ArqHDFS' on page 13 undefined on input line 30.
+<use figuras/Figura08-HadoooArchGeral.png>
+Package pdftex.def Info: figuras/Figura08-HadoooArchGeral.png used on input lin
+e 24.
+(pdftex.def)             Requested size: 318.66948pt x 233.85997pt.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 30.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 30.
+ [13 <./figuras/Figura08-HadoooArchGeral.png>]
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 31.
 
-<figuras/Figura07-HDFS.png, id=71, 187.45032pt x 152.06813pt>
+
+Package natbib Warning: Citation `BookHadoop' on page 14 undefined on input lin
+e 32.
+
+<figuras/Figura07-HDFS.png, id=270, 187.45032pt x 152.06813pt>
 File: figuras/Figura07-HDFS.png Graphic file (type png)
 
 <use figuras/Figura07-HDFS.png>
-Package pdftex.def Info: figuras/Figura07-HDFS.png used on input line 35.
+Package pdftex.def Info: figuras/Figura07-HDFS.png used on input line 36.
 (pdftex.def)             Requested size: 227.62204pt x 184.66893pt.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 41.
 
 
-Package natbib Warning: Citation `HDFS' on page 13 undefined on input line 36.
+Package natbib Warning: Citation `Vavilapalli' on page 14 undefined on input li
+ne 42.
 
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 40.
-
-LaTeX Warning: Reference `fig:ArqYARN' on page 13 undefined on input line 41.
-
+(babel)             in language  on input line 43.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 42.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 42.
-[13 <./figuras/Figura08-HadoooArchGeral.png> <./figuras/Figura07-HDFS.png>]
-<figuras/Figura06-YarnArch.png, id=82, 468.24937pt x 289.83281pt>
+(babel)             in language  on input line 43.
+[14 <./figuras/Figura07-HDFS.png>]
+<figuras/Figura06-YarnArch.png, id=280, 468.24937pt x 289.83281pt>
 File: figuras/Figura06-YarnArch.png Graphic file (type png)
 
 <use figuras/Figura06-YarnArch.png>
-Package pdftex.def Info: figuras/Figura06-YarnArch.png used on input line 48.
+Package pdftex.def Info: figuras/Figura06-YarnArch.png used on input line 46.
 (pdftex.def)             Requested size: 341.43306pt x 211.3462pt.
-
-
-Package natbib Warning: Citation `YARN' on page 14 undefined on input line 49.
-
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 53.
+(babel)             in language  on input line 54.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 58.
+(babel)             in language  on input line 54.
+ [15 <./figuras/Figura06-YarnArch.png>]
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 58.
-[14 <./figuras/Figura06-YarnArch.png>]
+(babel)             in language  on input line 55.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 59.
+(babel)             in language  on input line 60.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 66.
-
-
-Package natbib Warning: Citation `Manuele' on page 15 undefined on input line 7
-2.
-
-
-Package natbib Warning: Citation `Dey' on page 15 undefined on input line 72.
-
+(babel)             in language  on input line 64.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 73.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 73.
-[15]
+(babel)             in language  on input line 64.
 
-Package natbib Warning: Citation `Zakaria' on page 16 undefined on input line 7
-4.
-
-
-Package natbib Warning: Citation `Baldauf' on page 16 undefined on input line 7
-4.
-
-
-Package natbib Warning: Citation `Manuele' on page 16 undefined on input line 7
-6.
-
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 80.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 84.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 87.
-
-Package natbib Warning: Citation `FairScheduler' on page 16 undefined on input 
-line 88.
-
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 89.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 89.
 [16]
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 90.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 95.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 99.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
-File: omsptm.fd 
-)
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 99.
+(babel)             in language  on input line 68.
 
 
-Package natbib Warning: Citation `CASH' on page 17 undefined on input line 99.
-
-
-Package natbib Warning: Citation `LATE' on page 17 undefined on input line 101.
-
+Package natbib Warning: Citation `Hunt2010' on page 17 undefined on input line 
+69.
 
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 102.
+(babel)             in language  on input line 76.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 102.
+(babel)             in language  on input line 83.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 83.
 [17]
 
-Package natbib Warning: Citation `DMRSHW' on page 18 undefined on input line 10
-3.
+Package natbib Warning: Citation `CapacityScheduler' on page 18 undefined on in
+put line 84.
 
 
-Package natbib Warning: Citation `SAMR' on page 18 undefined on input line 105.
-
-
-
-Package natbib Warning: Citation `COSHH' on page 18 undefined on input line 107
-.
-
-
-Package natbib Warning: Citation `Quincy' on page 18 undefined on input line 10
-9.
+Overfull \hbox (3.701pt too wide) in paragraph at lines 86--87
+[]\T1/ptm/m/n/12 A exis-tên-cia des-tes es-ca-lo-na-do-res adi-ci-ona fle-xi-bi
+-li-dade no ge-ren-ci-a-mento do \T1/ptm/m/it/12 fra-mework\T1/ptm/m/n/12 .
+ []
 
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 110.
+(babel)             in language  on input line 91.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 110.
+(babel)             in language  on input line 98.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 98.
 [18]
-
-Package natbib Warning: Citation `IMRPDPHHC' on page 19 undefined on input line
- 111.
-
-)
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 108.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 108.
+ [19])
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 207.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 207.
- [19]
+ [20]
 \openout2 = `capitulos/desenvolvimento.aux'.
 
  (./capitulos/desenvolvimento.tex
@@ -1134,70 +1163,43 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 6.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 14.
-
-
-Package natbib Warning: Citation `IDEA' on page 20 undefined on input line 16.
-
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 17.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 17.
-[20
+ [21
 
 
 
 ]
-
-LaTeX Warning: Reference `fig:RMHorton' on page 21 undefined on input line 20.
-
-<figuras/Figura14-RMHorton.png, id=126, 793.46437pt x 588.69937pt>
+<figuras/Figura14-RMHorton.png, id=346, 793.46437pt x 588.69937pt>
 File: figuras/Figura14-RMHorton.png Graphic file (type png)
 
 <use figuras/Figura14-RMHorton.png>
 Package pdftex.def Info: figuras/Figura14-RMHorton.png used on input line 25.
 (pdftex.def)             Requested size: 426.79134pt x 316.65329pt.
-
-
-Package natbib Warning: Citation `HortonRM' on page 21 undefined on input line 
-26.
-
-
-Package natbib Warning: Citation `HortonRM' on page 21 undefined on input line 
-30.
-
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 31.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 31.
-[21 <./figuras/Figura14-RMHorton.png>]
+ [22 <./figuras/Figura14-RMHorton.png>]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 43.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 43.
- [22]
 
-LaTeX Warning: Reference `fig:NMHorton' on page 23 undefined on input line 44.
-
-<figuras/Figura15-NMHorton.png, id=138, 542.025pt x 406.51875pt>
+[23] <figuras/Figura15-NMHorton.png, id=363, 542.025pt x 406.51875pt>
 File: figuras/Figura15-NMHorton.png Graphic file (type png)
 
 <use figuras/Figura15-NMHorton.png>
 Package pdftex.def Info: figuras/Figura15-NMHorton.png used on input line 49.
 (pdftex.def)             Requested size: 426.79134pt x 320.10419pt.
-
-
-Package natbib Warning: Citation `HortonNM' on page 23 undefined on input line 
-50.
-
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 58.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 58.
-[23 <./figuras/Figura15-NMHorton.png>]
-
-LaTeX Warning: Reference `fig:SchedCD' on page 24 undefined on input line 60.
-
-<figuras/Figura01-ClassDiagram.png, id=146, 920.68968pt x 395.22656pt>
+ [24 <./figuras/Figura15-NMHorton.png>]
+<figuras/Figura01-ClassDiagram.png, id=373, 920.68968pt x 395.22656pt>
 File: figuras/Figura01-ClassDiagram.png Graphic file (type png)
 
 <use figuras/Figura01-ClassDiagram.png>
@@ -1208,12 +1210,8 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 76.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 76.
- [24 <./figuras/Figura01-ClassDiagram.png>]
-
-LaTeX Warning: Reference `fig:RMComponents' on page 25 undefined on input line 
-79.
-
-<figuras/Figura13-RMComponents.png, id=152, 1030.60031pt x 446.41782pt>
+ [25 <./figuras/Figura01-ClassDiagram.png>] <figuras/Figura13-RMComponents.png,
+ id=381, 1030.60031pt x 446.41782pt>
 File: figuras/Figura13-RMComponents.png Graphic file (type png)
 
 <use figuras/Figura13-RMComponents.png>
@@ -1222,22 +1220,18 @@ Package pdftex.def Info: figuras/Figura13-RMComponents.png used on input line 8
 (pdftex.def)             Requested size: 426.79134pt x 184.86485pt.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 89.
-
-
-LaTeX Warning: Reference `chap:ApendA' on page 25 undefined on input line 93.
-
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 94.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 94.
-[25 <./figuras/Figura13-RMComponents.png>]
+ [26 <./figuras/Figura13-RMComponents.png>]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 97.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 108.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 108.
- [26]
+ [27]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 111.
 Package babel Info: Redefining portuges shorthand "|
@@ -1246,19 +1240,10 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 118.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 118.
- [27]
+ [28]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 128.
-
-
-LaTeX Warning: Reference `tab:memory allocation' on page 28 undefined on input 
-line 130.
-
-
-LaTeX Warning: Reference `fig:fluxoAllocation' on page 28 undefined on input li
-ne 164.
-
-<figuras/Figura18-allocflow.png, id=171, 710.655pt x 451.6875pt>
+ <figuras/Figura18-allocflow.png, id=399, 710.655pt x 451.6875pt>
 File: figuras/Figura18-allocflow.png Graphic file (type png)
 
 <use figuras/Figura18-allocflow.png>
@@ -1269,12 +1254,8 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 177.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 177.
- [28]
-
-LaTeX Warning: Reference `fig:fluxoAllocation2' on page 29 undefined on input l
-ine 182.
-
-<figuras/Figura19-allocflow2.png, id=178, 666.99188pt x 553.31718pt>
+ [29]
+<figuras/Figura19-allocflow2.png, id=407, 666.99188pt x 553.31718pt>
 File: figuras/Figura19-allocflow2.png Graphic file (type png)
 
 <use figuras/Figura19-allocflow2.png>
@@ -1285,66 +1266,47 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 194.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 194.
- [29 <./figuras/Figura18-allocflow.png>]
+ [30 <./figuras/Figura18-allocflow.png>]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 204.
 
 
-LaTeX Warning: Reference `sec:Hadoop Schedulers' on page 30 undefined on input 
+LaTeX Warning: Reference `sec:Hadoop Schedulers' on page 31 undefined on input 
 line 205.
 
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 206.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 206.
-[30 <./figuras/Figura19-allocflow2.png>]
-
-LaTeX Warning: Reference `sec:ctx' on page 31 undefined on input line 211.
-
+[31 <./figuras/Figura19-allocflow2.png>]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 217.
-
-Package natbib Warning: Citation `Collector' on page 31 undefined on input line
- 218.
-
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 219.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 219.
-[31]
-
-Package natbib Warning: Citation `MXBean' on page 32 undefined on input line 22
-4.
-
+ [32]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 229.
 
-LaTeX Warning: Reference `fig:collectorflow' on page 32 undefined on input line
- 230.
-
-<figuras/Figura20-collectorfig.png, id=197, 818.30719pt x 558.58687pt>
+<figuras/Figura20-collectorfig.png, id=430, 818.30719pt x 558.58687pt>
 File: figuras/Figura20-collectorfig.png Graphic file (type png)
 
 <use figuras/Figura20-collectorfig.png>
 Package pdftex.def Info: figuras/Figura20-collectorfig.png used on input line 2
 35.
 (pdftex.def)             Requested size: 426.79134pt x 291.33623pt.
-
-
-LaTeX Warning: Reference `chap:Experiments and Results' on page 32 undefined on
- input line 240.
-
 )
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 208.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 208.
- [32]
+ [33]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 208.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 208.
- [33 <./figuras/Figura20-collectorfig.png>]
+ [34 <./figuras/Figura20-collectorfig.png>]
 \openout2 = `capitulos/resultados.aux'.
 
  (./capitulos/resultados.tex
@@ -1365,28 +1327,15 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 14.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 17.
-
-LaTeX Warning: Reference `tab:experiments' on page 34 undefined on input line 1
-8.
-
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 34.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 34.
-[34
+[35
 
 
 
-]
-
-LaTeX Warning: Reference `fig:experiment2' on page 35 undefined on input line 3
-6.
-
-
-LaTeX Warning: Reference `fig:experiment3' on page 35 undefined on input line 3
-6.
-
-<figuras/Figura10-totalMemory.png, id=218, 436.63126pt x 254.45062pt>
+] <figuras/Figura10-totalMemory.png, id=452, 436.63126pt x 254.45062pt>
 File: figuras/Figura10-totalMemory.png Graphic file (type png)
 
 <use figuras/Figura10-totalMemory.png>
@@ -1394,50 +1343,37 @@ Package pdftex.def Info: figuras/Figura10-totalMemory.png used on input line 41
 .
 (pdftex.def)             Requested size: 426.79134pt x 248.7154pt.
 
-<figuras/Figura12-totalCores.png, id=219, 432.11438pt x 244.66406pt>
+<figuras/Figura12-totalCores.png, id=453, 432.11438pt x 244.66406pt>
 File: figuras/Figura12-totalCores.png Graphic file (type png)
 
 <use figuras/Figura12-totalCores.png>
 Package pdftex.def Info: figuras/Figura12-totalCores.png used on input line 49.
 
 (pdftex.def)             Requested size: 426.79134pt x 241.65816pt.
-
-
-Package natbib Warning: Citation `HadoopWizard' on page 35 undefined on input l
-ine 56.
-
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 58.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 60.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 60.
-[35 <./figuras/Figura10-totalMemory.png>]
+ [36 <./figuras/Figura10-totalMemory.png>]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 61.
-
-
-LaTeX Warning: Reference `sec:alloc' on page 36 undefined on input line 62.
-
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 64.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 67.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 67.
-[36 <./figuras/Figura12-totalCores.png>]
+[37 <./figuras/Figura12-totalCores.png>]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 70.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 95.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 95.
- [37]
-
-LaTeX Warning: Reference `fig:ganttDefault' on page 38 undefined on input line 
-96.
-
-<figuras/Figura16-GanttDefault.png, id=243, 934.99312pt x 200.24812pt>
+ [38]
+<figuras/Figura16-GanttDefault.png, id=477, 934.99312pt x 200.24812pt>
 File: figuras/Figura16-GanttDefault.png Graphic file (type png)
 
 <use figuras/Figura16-GanttDefault.png>
@@ -1445,15 +1381,7 @@ Package pdftex.def Info: figuras/Figura16-GanttDefault.png used on input line 1
 01.
 (pdftex.def)             Requested size: 455.24408pt x 97.50217pt.
 
-
-LaTeX Warning: Reference `fig:ganttDefault' on page 38 undefined on input line 
-106.
-
-
-LaTeX Warning: Reference `fig:ganttImproved' on page 38 undefined on input line
- 108.
-
-<figuras/Figura17-GanttImproved.png, id=244, 953.81343pt x 204.765pt>
+<figuras/Figura17-GanttImproved.png, id=480, 953.81343pt x 204.765pt>
 File: figuras/Figura17-GanttImproved.png Graphic file (type png)
 
 <use figuras/Figura17-GanttImproved.png>
@@ -1464,7 +1392,7 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 119.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 119.
- [38 <./figuras/Figura16-GanttDefault.png>]
+ [39 <./figuras/Figura16-GanttDefault.png>]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 122.
 Package babel Info: Redefining portuges shorthand "|
@@ -1473,17 +1401,13 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 128.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 128.
- [39 <./figuras/Figura17-GanttImproved.png>]
+ [40 <./figuras/Figura17-GanttImproved.png>]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 128.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 133.
 
-
-LaTeX Warning: Reference `fig:ganttSimulation' on page 40 undefined on input li
-ne 147.
-
-<figuras/Figura21-GanttSimulation.png, id=259, 934.99312pt x 206.27063pt>
+<figuras/Figura21-GanttSimulation.png, id=494, 934.99312pt x 206.27063pt>
 File: figuras/Figura21-GanttSimulation.png Graphic file (type png)
 
 <use figuras/Figura21-GanttSimulation.png>
@@ -1494,12 +1418,12 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 158.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 158.
- [40])
+ [41])
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 209.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 209.
- [41 <./figuras/Figura21-GanttSimulation.png>]
+ [42 <./figuras/Figura21-GanttSimulation.png>]
 \openout2 = `capitulos/conclusao.aux'.
 
  (./capitulos/conclusao.tex
@@ -1510,12 +1434,119 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 210.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 210.
- [42
+ [43
 
+
+
+] (./dissertacao.bbl
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 1.
+
+
+LaTeX Font Warning: Font shape `OMS/ptm/bx/n' undefined
+(Font)              using `OMS/ptm/m/n' instead on input line 4.
+
+LaTeX Font Info:    Font shape `OMS/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 4.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 4.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+Underfull \hbox (badness 4595) in paragraph at lines 31--35
+[]\T1/ptm/m/n/12 Fair Sche-du-ler. \T1/ptm/b/n/12 Ha-doop Ma-pRe-duce Next Ge-n
+e-ra-tion - Fair Sche-du-ler\T1/ptm/m/n/12 . [][]$\T1/pcr/m/n/12 http :
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--35
+\T1/pcr/m/n/12 / / hadoop . apache . org / docs / current / hadoop-[]yarn / had
+oop-[]yarn-[]site /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 36--39
+[]\T1/ptm/m/n/12 HADOOP, A. \T1/ptm/b/n/12 Ar-qui-te-tura do HDFS\T1/ptm/m/n/12
+ . [][]$\T1/pcr/m/n/12 http : / / hadoop . apache . org / docs /
+ []
+
+
+Underfull \hbox (badness 2334) in paragraph at lines 36--39
+\T1/pcr/m/n/12 current / hadoop-[]project-[]dist / hadoop-[]hdfs / Federation .
+ html$[][]\T1/ptm/m/n/12 , Ac-ces-sed
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 40--43
+[]\T1/ptm/m/n/12 HADOOP, A. \T1/ptm/b/n/12 Ar-qui-te-tura do YARN\T1/ptm/m/n/12
+ . [][]$\T1/pcr/m/n/12 http : / / hadoop . apache . org / docs /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 40--43
+\T1/pcr/m/n/12 current / hadoop-[]yarn / hadoop-[]yarn-[]site / YARN . html$[][
+]\T1/ptm/m/n/12 , Ac-ces-sed No-vem-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--48
+[]\T1/ptm/m/n/12 HadoopWizard. \T1/ptm/b/n/12 Which Big Data Com-pany has the W
+orld's Big-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--48
+\T1/ptm/b/n/12 gest Ha-doop Clus-ter? [][]$\T1/pcr/m/n/12 http : / / www . hado
+opwizard . com /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--48
+\T1/pcr/m/n/12 which-[]big-[]data-[]company-[]has-[]the-[]worlds-[]biggest-[]ha
+doop-[]cluster/$[][]\T1/ptm/m/n/12 ,
+ []
+
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 48.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 48.
+[44
 
 
 ]
-No file dissertacao.bbl.
+Underfull \hbox (badness 10000) in paragraph at lines 49--53
+[]\T1/ptm/m/n/12 HortonWorks. \T1/ptm/b/n/12 Hor-tonWorks Ha-doop YARN - Re-sou
+r-ce-Ma-na-ger\T1/ptm/m/n/12 . [][]$\T1/pcr/m/n/12 http : / /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--53
+\T1/pcr/m/n/12 hortonworks . com / blog / apache-[]hadoop-[]yarn-[]resourcemana
+ger/$[][]\T1/ptm/m/n/12 , Ac-
+ []
+
+
+Underfull \hbox (badness 1910) in paragraph at lines 65--67
+[]\T1/ptm/m/n/12 jetBrains. \T1/ptm/b/n/12 In-tel-liJ IDEA\T1/ptm/m/n/12 . [][]
+$\T1/pcr/m/n/12 http : / / www . jetbrains . com / idea/$[][]\T1/ptm/m/n/12 , A
+c-ces-sed Au-gust
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--83
+\T1/pcr/m/n/12 7 / docs / api / java / lang / management / OperatingSystemMXBea
+n . html$[][]\T1/ptm/m/n/12 , Ac-
+ []
+
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 103.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 103.
+[45])
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 230.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 230.
+ [46]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 230.
 Package babel Info: Redefining portuges shorthand "|
@@ -1524,24 +1555,20 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 230.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 230.
-[43
-
+ [47
 
 ]
 \openout2 = `capitulos/grafosRM.aux'.
 
  (./capitulos/grafosRM.tex
-
-LaTeX Warning: Reference `sec:grafo' on page 44 undefined on input line 5.
-
-<figuras/Figura05-RMNode.png, id=283, 533.74406pt x 478.03593pt>
+<figuras/Figura05-RMNode.png, id=552, 533.74406pt x 478.03593pt>
 File: figuras/Figura05-RMNode.png Graphic file (type png)
 
 <use figuras/Figura05-RMNode.png>
 Package pdftex.def Info: figuras/Figura05-RMNode.png used on input line 14.
 (pdftex.def)             Requested size: 341.43306pt x 305.80336pt.
 
-<figuras/Figura03-RMContainer.png, id=284, 675.27281pt x 705.38531pt>
+<figuras/Figura03-RMContainer.png, id=553, 675.27281pt x 705.38531pt>
 File: figuras/Figura03-RMContainer.png Graphic file (type png)
 
 <use figuras/Figura03-RMContainer.png>
@@ -1549,7 +1576,7 @@ Package pdftex.def Info: figuras/Figura03-RMContainer.png used on input line 22
 .
 (pdftex.def)             Requested size: 426.79134pt x 445.82661pt.
 
-<figuras/Figura02-RMAppAttempt.png, id=285, 827.34094pt x 1108.14pt>
+<figuras/Figura02-RMAppAttempt.png, id=554, 827.34094pt x 1108.14pt>
 File: figuras/Figura02-RMAppAttempt.png Graphic file (type png)
 
 <use figuras/Figura02-RMAppAttempt.png>
@@ -1557,7 +1584,7 @@ Package pdftex.def Info: figuras/Figura02-RMAppAttempt.png used on input line 3
 0.
 (pdftex.def)             Requested size: 426.79134pt x 571.65382pt.
 
-<figuras/Figura04-RMApp.png, id=286, 721.94719pt x 708.39656pt>
+<figuras/Figura04-RMApp.png, id=555, 721.94719pt x 708.39656pt>
 File: figuras/Figura04-RMApp.png Graphic file (type png)
 
 <use figuras/Figura04-RMApp.png>
@@ -1568,7 +1595,7 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 230.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 230.
- [44
+ [48
 
 
  <./figuras/Figura05-RMNode.png>]
@@ -1576,34 +1603,30 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 230.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 230.
- [45 <./figuras/Figura03-RMContainer.png>]
+ [49 <./figuras/Figura03-RMContainer.png>]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 230.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 230.
- [46 <./figuras/Figura02-RMAppAttempt.png>]
+ [50 <./figuras/Figura02-RMAppAttempt.png>]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 230.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 230.
 
-[47 <./figuras/Figura04-RMApp.png>]
+[51 <./figuras/Figura04-RMApp.png>]
 \openout2 = `capitulos/confg5k.aux'.
 
  (./capitulos/confg5k.tex
 
-LaTeX Warning: Reference `chap:fundamentacao' on page 48 undefined on input lin
-e 18.
-
-
-LaTeX Warning: Reference `sec:envconfig' on page 48 undefined on input line 18.
+LaTeX Warning: Reference `sec:envconfig' on page 52 undefined on input line 18.
 
 
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 19.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 19.
-[48
+[52
 
 
 
@@ -1612,7 +1635,7 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 231.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 231.
- [49]
+ [53]
 \openout2 = `capitulos/confcomp.aux'.
 
  (./capitulos/confcomp.tex)
@@ -1620,7 +1643,7 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 232.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 232.
- [50
+ [54
 
 
 
@@ -1637,31 +1660,27 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 29.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 29.
- [51
+ [55
 
 
 
-]
-
-LaTeX Warning: Reference `chap:Experiments and Results' on page 52 undefined on
- input line 31.
-
-)
+])
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 233.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 233.
- [52]
+ [56]
 \openout2 = `capitulos/codechanges.aux'.
 
- (./capitulos/codechanges.tex
+
+(./capitulos/codechanges.tex
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 27.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 58.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 58.
- [53
+ [57
 
 
 
@@ -1670,16 +1689,12 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 104.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 104.
- [54])
+ [58])
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 234.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 234.
- [55]
-
-Package lastpage Warning: Rerun to get the references right on input line 243.
-
-
+ [59] 
 AED: lastpage setting LastPage
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 243.
@@ -1702,33 +1717,42 @@ Package rerunfilecheck Warning: File `dissertacao.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `dissertacao.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  0DB6F08C63D1C9468F9F7946F49E9800;2994.
+(rerunfilecheck)             Before: C3C8FBEFF75BC677435D523D48394C33;3027
+(rerunfilecheck)             After:  244B5D2DE89F247BAEA8B407B09B93C5;2811.
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 
 LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 243.
  ) 
 Here is how much of TeX's memory you used:
- 10829 strings out of 494963
- 154598 string characters out of 6179647
- 463677 words of memory out of 5000000
- 13561 multiletter control sequences out of 15000+600000
- 68516 words of font info for 99 fonts, out of 8000000 for 9000
+ 11031 strings out of 494963
+ 157888 string characters out of 6179647
+ 474010 words of memory out of 5000000
+ 13700 multiletter control sequences out of 15000+600000
+ 69137 words of font info for 101 fonts, out of 8000000 for 9000
  38 hyphenation exceptions out of 8191
  37i,8n,42p,1144b,1084s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
-tmri8a.pfb>
-Output written on dissertacao.pdf (55 pages, 1831027 bytes).
+pdfTeX warning (dest): name{subsection.2.5.3} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.2.5.2} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.2.5.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
+tmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on dissertacao.pdf (59 pages, 1863872 bytes).
 PDF statistics:
- 518 PDF objects out of 1000 (max. 8388607)
- 416 compressed objects within 5 object streams
- 228 named destinations out of 1000 (max. 500000)
- 96 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 794 PDF objects out of 1000 (max. 8388607)
+ 685 compressed objects within 7 object streams
+ 252 named destinations out of 1000 (max. 500000)
+ 432 words of extra memory for PDF output out of 10000 (max. 10000000)
 

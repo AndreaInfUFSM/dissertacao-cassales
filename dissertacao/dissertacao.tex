@@ -1,5 +1,5 @@
 %\listfiles
-\documentclass[tg]{mdtufsm}
+\documentclass[diss]{mdtufsm}
 % um tipo específico de monografia pode ser informado como parâmetro opcional:
 %\documentclass[tese]{mdtufsm}
 % a opção `openright' pode ser usada para forçar inícios de capítulos
@@ -42,7 +42,7 @@
 %==============================================================================
 % Identificação do trabalho
 %==============================================================================
-\title{Desenvolvimento de um escalonador sensível ao contexto para o Apache Hadoop}
+\title{Escalonamento Adaptativo para o Apache Hadoop}
 
 \author{Cassales}{Guilherme Weigert}
 
@@ -50,11 +50,11 @@
 \altcourse{Curso de Ciência da Computação}
 
 \institute{Centro de Tecnologia}
-\degree{Bacharel em Ciência da Computação}
+\degree{Mestre em Ciência da Computação}
 
 % Número do TG (verificar na secretaria do curso)
 % Para mestrado deixar sem opção dentro do {}
-\trabalhoNumero{365}
+\trabalhoNumero{}
 
 %Orientador
 \advisor[]{Profª. Drª.}{Charão}{Andrea Schwertner}
@@ -68,7 +68,7 @@
 
 % a data deve ser a da defesa; se nao especificada, são gerados
 % mes e ano correntes
-\date{20}{Janeiro}{2014}
+\date{20}{Janeiro}{2016}
 
 %Palavras chave
 \keyword{Apache Hadoop} 
@@ -91,9 +91,9 @@
 %Somente obrigatório para dissertação, para TG, remover as linhas	77	%
 %Como a CIP vai ser impressa atrás da página de rosto, as margens inner e outer	
 %devem ser invertidas.
-%\newgeometry{inner=20mm,outer=30mm,top=30mm,bottom=20mm}	
-%\makeCIP{nomedoautor@gmail.com} %email do autor		
-%\restoregeometry
+\newgeometry{inner=20mm,outer=30mm,top=30mm,bottom=20mm}	
+\makeCIP{cassales@inf.ufsm.br} %email do autor		
+\restoregeometry
 
 %Se for usar a catalogação gerada pelo gerador do site da biblioteca comentar as linhas
 %acima e utilizar o comando abaixo
@@ -106,16 +106,16 @@
 %%=============================================================================
 %% Agradecimentos (opcional)
 %%=============================================================================
-\chapter*{Agradecimentos}
-Agradeço à minha família por todo apoio, não só durante os longos anos de graduação, mas em todas as etapas de minha vida.
-
-À minha namorada Raíssa, não só pelo apoio em mais um TG e mais uma graduação, mas por todo crescimento conjunto que tivemos durante um ano e quase noventa meses.
-
-Aos amigos mais próximos, que mesmo estando fisicamente distantes ou que a rotina tenha impedido um convívio diário, por sempre estarem dispostos a compartilhar experiências.
-
-À professora Andrea Charão, por todo suporte prestado tanto no papel de orientadora como de coordenadora do curso.
-
-Agradeço também, a todos que tornaram possível e/ou participaram na realização deste trabalho.
+%\chapter*{Agradecimentos}
+%Agradeço à minha família por todo apoio, não só durante os longos anos de graduação, mas em todas as etapas de minha vida.
+%
+%À minha namorada Raíssa, não só pelo apoio em mais um TG e mais uma graduação, mas por todo crescimento conjunto que tivemos durante um ano e quase noventa meses.
+%
+%Aos amigos mais próximos, que mesmo estando fisicamente distantes ou que a rotina tenha impedido um convívio diário, por sempre estarem dispostos a compartilhar experiências.
+%
+%À professora Andrea Charão, por todo suporte prestado tanto no papel de orientadora como de coordenadora do curso.
+%
+%Agradeço também, a todos que tornaram possível e/ou participaram na realização deste trabalho.
 
 
 %%=============================================================================
@@ -149,7 +149,7 @@ One problem on this framework is the scheduler, which is designed for homogeneou
 %%=============================================================================
 %% Lista de figuras (comentar se não houver)
 %%=============================================================================
-\renewcommand{\listfigurename}{Figure List}
+%\renewcommand{\listfigurename}{Figure List}
 \listoffigures
 
 
@@ -161,7 +161,7 @@ One problem on this framework is the scheduler, which is designed for homogeneou
 %%=============================================================================
 %% Lista de Apêndices (comentar se não houver)
 %%=============================================================================
-\renewcommand{\listappendixname}{Appendix List}
+%\renewcommand{\listappendixname}{Appendix List}
 \listofappendix
 
 %%=============================================================================
@@ -193,8 +193,8 @@ One problem on this framework is the scheduler, which is designed for homogeneou
 %%=============================================================================
 %% Sumário
 %%=============================================================================
-\renewcommand{\contentsname}{Index}
-\renewcommand{\appendixsname}{Appendix}
+%\renewcommand{\contentsname}{Index}
+%\renewcommand{\appendixsname}{Appendix}
 \tableofcontents
 
 %%=============================================================================
@@ -214,7 +214,7 @@ One problem on this framework is the scheduler, which is designed for homogeneou
 %%=============================================================================
 %% Referências
 %%=============================================================================
-\renewcommand{\bibname}{References}
+%\renewcommand{\bibname}{References}
 \bibliographystyle{abnt}
 \bibliography{referencias/referencias}
 
@@ -225,7 +225,7 @@ One problem on this framework is the scheduler, which is designed for homogeneou
 %%=============================================================================
 %% Apêndices
 %%=============================================================================
-\renewcommand{\appendixname}{Appendix}
+%\renewcommand{\appendixname}{Appendix}
 \appendix
 \include{capitulos/grafosRM}
 \include{capitulos/confg5k}
