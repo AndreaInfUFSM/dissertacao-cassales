@@ -134,7 +134,7 @@ Constata-se também que há uma diversidade de contextos levados em consideraç�
 		\hline
 		Nó termina compartilhamento (+ recurso) &\textbf{não reage}, como não alterou nada na quando perdeu recursos ele ficará agora com a info correta & \textbf{aumenta o recurso do nó. Inicia nova rodada de escalonamento, é como se um novo nó entrasse}\\
 		\hline
-		Cluster heterogêneo & tem que alterar as propriedades dos recursos no XML de todos escravos refletindo as configurações dos nós. & já inicializa o nó com a config certa\\
+		Cluster heterogêneo & tem que alterar as propriedades dos recursos no XML de todos escravos refletindo as configurações dos nós. Caso contrário existirão nós sobrecarregados ou subutilizados. & Cada nó tera a informação correta. Ganho de desempenho por não sobrecarregar nem subutilizar.\\
 		\hline
 		
 	\end{tabular}
@@ -153,9 +153,6 @@ Constata-se também que há uma diversidade de contextos levados em consideraç�
 		\hline
 		Nó com compartilhamento (2 testes, - depois +) & possível, só organizar para sincronizar estas mudanças & possível, mas envolve muita gambiarra. & \\
 		\hline
-		Cluster heterogêneo & tem que alterar as propriedades dos recursos no XML de todos escravos refletindo as configurações dos nós. & já inicializa o nó com a config certa & \\
-		\hline
-		
 	\end{tabular}
 	\caption{tabela de testes}
 	\label{tab:memory allocation}
