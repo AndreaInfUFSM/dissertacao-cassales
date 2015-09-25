@@ -12,26 +12,26 @@
 \contentsline {figure}{\numberline {Figura\nobreakspace 2.2~-- }{\ignorespaces Arquitetura geral do HDFS \citep {HDFS}}}{14}{figure.2.2}
 \contentsline {figure}{\numberline {Figura\nobreakspace 2.3~-- }{\ignorespaces Arquitetura geral do YARN \citep {YARN}}}{15}{figure.2.3}
 \addvspace {0\p@ }
-\contentsline {figure}{\numberline {Figure\nobreakspace 3.1~-- }{\ignorespaces ResourceManager Component Diagram \citep {HortonRM}}}{22}{figure.3.1}
-\contentsline {figure}{\numberline {Figure\nobreakspace 3.2~-- }{\ignorespaces NodeManager Component Diagram \citep {HortonNM}}}{24}{figure.3.2}
-\contentsline {figure}{\numberline {Figure\nobreakspace 3.3~-- }{\ignorespaces Class Diagram with the main CapacityScheduler classes}}{25}{figure.3.3}
-\contentsline {figure}{\numberline {Figure\nobreakspace 3.4~-- }{\ignorespaces Class Diagram with the main RM components}}{26}{figure.3.4}
-\contentsline {figure}{\numberline {Figure\nobreakspace 3.5~-- }{\ignorespaces Flow of operations for resource granting}}{30}{figure.3.5}
-\contentsline {figure}{\numberline {Figure\nobreakspace 3.6~-- }{\ignorespaces Flow of operations for resource granting}}{31}{figure.3.6}
-\contentsline {figure}{\numberline {Figure\nobreakspace 3.7~-- }{\ignorespaces Flow of operations for resource granting}}{34}{figure.3.7}
+\contentsline {figure}{\numberline {Figure\nobreakspace 3.1~-- }{\ignorespaces ResourceManager Component Diagram \citep {HortonRM}}}{23}{figure.3.1}
+\contentsline {figure}{\numberline {Figure\nobreakspace 3.2~-- }{\ignorespaces NodeManager Component Diagram \citep {HortonNM}}}{25}{figure.3.2}
+\contentsline {figure}{\numberline {Figure\nobreakspace 3.3~-- }{\ignorespaces Class Diagram with the main CapacityScheduler classes}}{26}{figure.3.3}
+\contentsline {figure}{\numberline {Figure\nobreakspace 3.4~-- }{\ignorespaces Class Diagram with the main RM components}}{27}{figure.3.4}
+\contentsline {figure}{\numberline {Figure\nobreakspace 3.5~-- }{\ignorespaces Flow of operations for resource granting}}{31}{figure.3.5}
+\contentsline {figure}{\numberline {Figure\nobreakspace 3.6~-- }{\ignorespaces Flow of operations for resource granting}}{32}{figure.3.6}
+\contentsline {figure}{\numberline {Figure\nobreakspace 3.7~-- }{\ignorespaces Flow of operations for resource granting}}{35}{figure.3.7}
 \addvspace {0\p@ }
-\contentsline {figure}{\numberline {Figure\nobreakspace 4.1~-- }{\ignorespaces Cluster memory available on default and collector implementation}}{36}{figure.4.1}
-\contentsline {figure}{\numberline {Figure\nobreakspace 4.2~-- }{\ignorespaces Cluster cores available on default and collector implementation}}{37}{figure.4.2}
-\contentsline {figure}{\numberline {Figure\nobreakspace 4.3~-- }{\ignorespaces Container assignment with default configuration}}{39}{figure.4.3}
-\contentsline {figure}{\numberline {Figure\nobreakspace 4.4~-- }{\ignorespaces Container assignment with the improved configuration}}{40}{figure.4.4}
-\contentsline {figure}{\numberline {Figure\nobreakspace 4.5~-- }{\ignorespaces Container assignment with the simulated heterogeneous environment}}{42}{figure.4.5}
+\contentsline {figure}{\numberline {Figure\nobreakspace 4.1~-- }{\ignorespaces Cluster memory available on default and collector implementation}}{37}{figure.4.1}
+\contentsline {figure}{\numberline {Figure\nobreakspace 4.2~-- }{\ignorespaces Cluster cores available on default and collector implementation}}{38}{figure.4.2}
+\contentsline {figure}{\numberline {Figure\nobreakspace 4.3~-- }{\ignorespaces Container assignment with default configuration}}{40}{figure.4.3}
+\contentsline {figure}{\numberline {Figure\nobreakspace 4.4~-- }{\ignorespaces Container assignment with the improved configuration}}{41}{figure.4.4}
+\contentsline {figure}{\numberline {Figure\nobreakspace 4.5~-- }{\ignorespaces Container assignment with the simulated heterogeneous environment}}{43}{figure.4.5}
 \addvspace {0\p@ }
 \addvspace {0\p@ }
 \addvspace {0\p@ }
-\contentsline {figure}{\numberline {Figure\nobreakspace A.1~-- }{\ignorespaces RMNode's state machine}}{48}{figure.A.1}
-\contentsline {figure}{\numberline {Figure\nobreakspace A.2~-- }{\ignorespaces RMContainer's state machine}}{49}{figure.A.2}
-\contentsline {figure}{\numberline {Figure\nobreakspace A.3~-- }{\ignorespaces RMAppAttempt's state machine}}{50}{figure.A.3}
-\contentsline {figure}{\numberline {Figure\nobreakspace A.4~-- }{\ignorespaces RMApp's state machine}}{51}{figure.A.4}
+\contentsline {figure}{\numberline {Figure\nobreakspace A.1~-- }{\ignorespaces RMNode's state machine}}{49}{figure.A.1}
+\contentsline {figure}{\numberline {Figure\nobreakspace A.2~-- }{\ignorespaces RMContainer's state machine}}{50}{figure.A.2}
+\contentsline {figure}{\numberline {Figure\nobreakspace A.3~-- }{\ignorespaces RMAppAttempt's state machine}}{51}{figure.A.3}
+\contentsline {figure}{\numberline {Figure\nobreakspace A.4~-- }{\ignorespaces RMApp's state machine}}{52}{figure.A.4}
 \addvspace {0\p@ }
 \addvspace {0\p@ }
 \addvspace {0\p@ }

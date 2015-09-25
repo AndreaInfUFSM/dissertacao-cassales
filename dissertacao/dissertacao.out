@@ -8,32 +8,33 @@
 \BOOKMARK [2][]{subsection.2.2.2}{Configura\347\343o do ambiente de execu\347\343o do Hadoops}{section.2.2}% 8
 \BOOKMARK [1][]{section.2.3}{MapReduce}{chapter.2}% 9
 \BOOKMARK [1][]{section.2.4}{ZooKeeper}{chapter.2}% 10
-\BOOKMARK [1][]{section.2.5}{Hadoop Schedulers}{chapter.2}% 11
-\BOOKMARK [1][]{section.2.6}{Related work}{chapter.2}% 12
-\BOOKMARK [0][]{chapter.3}{Development}{}% 13
-\BOOKMARK [1][]{section.3.1}{Understanding Apache Hadoop internals}{chapter.3}% 14
-\BOOKMARK [2][]{subsection.3.1.1}{Code structure and class diagrams}{section.3.1}% 15
-\BOOKMARK [2][]{subsection.3.1.2}{State machines}{section.3.1}% 16
-\BOOKMARK [1][]{section.3.2}{Understanding Hadoop allocation pattern}{chapter.3}% 17
-\BOOKMARK [2][]{subsection.3.2.1}{Experiment}{section.3.2}% 18
-\BOOKMARK [3][]{subsubsection.3.2.1.1}{Employed methods, procedures and scenarios}{subsection.3.2.1}% 19
-\BOOKMARK [3][]{subsubsection.3.2.1.2}{Results and interpretation}{subsection.3.2.1}% 20
-\BOOKMARK [1][]{section.3.3}{Context-aware scheduling}{chapter.3}% 21
-\BOOKMARK [2][]{subsection.3.3.1}{Collector description}{section.3.3}% 22
-\BOOKMARK [2][]{subsection.3.3.2}{Collector integration with Hadoop}{section.3.3}% 23
-\BOOKMARK [0][]{chapter.4}{Experiments and Results}{}% 24
-\BOOKMARK [1][]{section.4.1}{Collector integration test}{chapter.4}% 25
-\BOOKMARK [2][]{subsection.4.1.1}{Hardware and Software configuration}{section.4.1}% 26
-\BOOKMARK [2][]{subsection.4.1.2}{Procedures}{section.4.1}% 27
-\BOOKMARK [2][]{subsection.4.1.3}{Results and interpretation}{section.4.1}% 28
-\BOOKMARK [1][]{section.4.2}{Original CapacityScheduler X Context-aware CapacityScheduler}{chapter.4}% 29
-\BOOKMARK [2][]{subsection.4.2.1}{Hardware and Software configuration}{section.4.2}% 30
-\BOOKMARK [2][]{subsection.4.2.2}{Procedures}{section.4.2}% 31
-\BOOKMARK [2][]{subsection.4.2.3}{Results and interpretation}{section.4.2}% 32
-\BOOKMARK [1][]{section.4.3}{Heterogeneity simulation}{chapter.4}% 33
-\BOOKMARK [2][]{subsection.4.3.1}{Hardware and Software configuration}{section.4.3}% 34
-\BOOKMARK [2][]{subsection.4.3.2}{Procedures}{section.4.3}% 35
-\BOOKMARK [2][]{subsection.4.3.3}{Results and interpretation}{section.4.3}% 36
-\BOOKMARK [0][]{chapter.5}{Conclusion and future work}{}% 37
-\BOOKMARK [0][]{chapter*.6}{Refer\352ncias}{}% 38
-\BOOKMARK [0][]{section*.7}{Ap\352ndices}{}% 39
+\BOOKMARK [1][]{section.2.5}{Escalonadores para o Hadoop}{chapter.2}% 11
+\BOOKMARK [1][]{section.2.6}{Trabalhos Relacionados}{chapter.2}% 12
+\BOOKMARK [1][]{section.2.7}{TABELA}{chapter.2}% 13
+\BOOKMARK [0][]{chapter.3}{Development}{}% 14
+\BOOKMARK [1][]{section.3.1}{Understanding Apache Hadoop internals}{chapter.3}% 15
+\BOOKMARK [2][]{subsection.3.1.1}{Code structure and class diagrams}{section.3.1}% 16
+\BOOKMARK [2][]{subsection.3.1.2}{State machines}{section.3.1}% 17
+\BOOKMARK [1][]{section.3.2}{Understanding Hadoop allocation pattern}{chapter.3}% 18
+\BOOKMARK [2][]{subsection.3.2.1}{Experiment}{section.3.2}% 19
+\BOOKMARK [3][]{subsubsection.3.2.1.1}{Employed methods, procedures and scenarios}{subsection.3.2.1}% 20
+\BOOKMARK [3][]{subsubsection.3.2.1.2}{Results and interpretation}{subsection.3.2.1}% 21
+\BOOKMARK [1][]{section.3.3}{Context-aware scheduling}{chapter.3}% 22
+\BOOKMARK [2][]{subsection.3.3.1}{Collector description}{section.3.3}% 23
+\BOOKMARK [2][]{subsection.3.3.2}{Collector integration with Hadoop}{section.3.3}% 24
+\BOOKMARK [0][]{chapter.4}{Experiments and Results}{}% 25
+\BOOKMARK [1][]{section.4.1}{Collector integration test}{chapter.4}% 26
+\BOOKMARK [2][]{subsection.4.1.1}{Hardware and Software configuration}{section.4.1}% 27
+\BOOKMARK [2][]{subsection.4.1.2}{Procedures}{section.4.1}% 28
+\BOOKMARK [2][]{subsection.4.1.3}{Results and interpretation}{section.4.1}% 29
+\BOOKMARK [1][]{section.4.2}{Original CapacityScheduler X Context-aware CapacityScheduler}{chapter.4}% 30
+\BOOKMARK [2][]{subsection.4.2.1}{Hardware and Software configuration}{section.4.2}% 31
+\BOOKMARK [2][]{subsection.4.2.2}{Procedures}{section.4.2}% 32
+\BOOKMARK [2][]{subsection.4.2.3}{Results and interpretation}{section.4.2}% 33
+\BOOKMARK [1][]{section.4.3}{Heterogeneity simulation}{chapter.4}% 34
+\BOOKMARK [2][]{subsection.4.3.1}{Hardware and Software configuration}{section.4.3}% 35
+\BOOKMARK [2][]{subsection.4.3.2}{Procedures}{section.4.3}% 36
+\BOOKMARK [2][]{subsection.4.3.3}{Results and interpretation}{section.4.3}% 37
+\BOOKMARK [0][]{chapter.5}{Conclusion and future work}{}% 38
+\BOOKMARK [0][]{chapter*.6}{Refer\352ncias}{}% 39
+\BOOKMARK [0][]{section*.7}{Ap\352ndices}{}% 40
