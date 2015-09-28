@@ -17,7 +17,7 @@ Sendo assim, se uma aplicação é capaz de coletar informações sobre a situa�
 O \textit{framework} Apache Hadoop origina-se de outro projeto da Apache, o Apache Nutch \cite{Nutch}. O Apache Nutch iniciou em 2002 como um motor de buscas de código livre, porém o projeto encontrou problemas devido a sua arquitetura. Quando a Google publicou um artigo em 2003 descrevendo a arquitetura utilizada no seu sistema de arquivos distribuídos, chamado GFS (\textit{Google File System}), os desenvolvedores do Nutch notaram que uma arquitetura semelhante resolveria seus problemas de escalabilidade. A implementação da ideia foi iniciada em 2004 e o resultado foi nomeado \textit{Nutch Distributed Filesystem} (NDFS). Contudo, a medida em que o projeto se desenvolvia o propósito original do Nutch era deixado em segundo plano, o que culminou na criação de um novo projeto em 2006. Este novo projeto foi nomeado Apache Hadoop e possui o propósito de facilitar o processamento distribuído através do paradigma MapReduce.
 
 \subsection{Arquitetura geral do \emph{Apache Hadoop}}
-O \textit{framework} Apache Hadoop é organizado numa arquitetura de mestre-escravo e possui dois serviços principais, o serviço de armazenamento (HDFS - Hadoop Distributed File System) e o de processamento (YARN - Yet Another Resource Negotiator), os quais podem ser vistos na Figura \ref{fig:ArquiteturaHadoop}.
+O \textit{framework} Apache Hadoop é organizado em uma arquitetura de mestre-escravo e possui dois serviços principais, o serviço de armazenamento (HDFS - Hadoop Distributed File System) e o de processamento (YARN - Yet Another Resource Negotiator), os quais podem ser vistos na Figura \ref{fig:ArquiteturaHadoop}.
 
 \begin{figure}[!ht]
 \centering
@@ -63,7 +63,7 @@ O paradigma de programação MapReduce é, geralmente, associado com implementa�
 O \textit{work-flow} padrão de uma aplicação MapReduce inicia com a entrada de dados, que será dividida em \textit{n} partes e cada parte será processada individualmente por uma tarefa Map. O resultado das tarefas Map já será na forma de pares chave e valor, que serão passados como entrada para as tarefas de Reduce. Por sua vez, as tarefas de Reduce irão receber todos os pares com determinada chave e aplicar um algoritmo sobre os pares, fornecendo uma saída inteligível \cite{BookHadoop}.
 
 %TODO citação
-A naturalidade do paralelismo deste paradigma, torna a programação da aplicação mais simples. Ao utilizar o paradigma do MapReduce o programador deve apenas pensar numa solução que siga o \textit{work-flow} do paradigma, e o parelelismo será inerente.
+A naturalidade do paralelismo deste paradigma, torna a programação da aplicação mais simples. Ao utilizar o paradigma do MapReduce o programador deve apenas pensar em uma solução que siga o \textit{work-flow} do paradigma, e o parelelismo será inerente.
 
 \section{ZooKeeper}
 O ZooKeeper é um projeto da Apache e fornece ferramentas eficientes, confiáveis e tolerantes à falha para a coordenação de sistemas distribuídos \cite{Hunt2010}. Inicialmente, o ZooKeeper foi implementado como um componente do Hadoop e virou um projeto próprio conforme cresciam suas funcionalidades e sua utilização em outras aplicações. 
@@ -86,6 +86,8 @@ A terceira opção, e também o padrão do Hadoop nas últimas versões, é o Ca
 A existência destes escalonadores adiciona flexibilidade no gerenciamento do \textit{framework}. Apesar disso, os escalonadores disponíveis não detectam nem reagem à dinamicidade e heterogeneidade do ambiente. Para a utilização do Hadoop em ambientes pervasivos é necessário que exista uma capacidade de adaptação neste componente.
 
 
+
+
 %-------------------------------------------------------------------
 
 \section{Trabalhos Relacionados}
@@ -100,7 +102,7 @@ No trabalho \textit{A Dynamic MapReduce Scheduler for Heterogeneous Workloads} (
 Semelhante às propostas anteriores, a proposta COSHH (\textit{A Classification and Optimization based Scheduler for Heterogeneous Hadoop Systems} - Um Escalonador Baseado em Classificação e Otimização para Sistemas Heterogêneos do Hadoop) \cite{COSHH} utiliza a classificação das aplicações e máquinas em classes e busca por pares que possuam a mesma classe. Esta busca é feita por um algoritmo que reduz o tamanho do espaço de busca para melhorar o desempenho. O objetivo desta solução é a melhora do tempo médio em que as aplicações são completadas, além de oferecer um bom desempenho quando utilizando somente a fatia mínima de recursos e, ainda, proporcionar uma distribuição justa.
 %O artigo não informa quais informações são utilizadas para a classificação. 
 
-O escalonador LATE (\textit{Longest Approximation Time to End} - Aproximação do Tempo de Término mais Longo) \cite{LATE}, utiliza como informação de contexto o tempo estimado de término da tarefa baseado numa heurística que faz a relação de tempo decorrido e do \textit{score} -- um valor que indica quanto do processamento já foi feito. Essa informação também é utilizada para gerar um limiar que indique quando a lentidão de uma tarefa indica sintomas de erros e a partir desta informação iniciar uma tarefa especulativa em outra máquina possívelmente mais rápida. Este trabalho possui o objetivo de reduzir o tempo de resposta em \textit{clusters} grandes que executam muitas aplicações de pequena duração.
+O escalonador LATE (\textit{Longest Approximation Time to End} - Aproximação do Tempo de Término mais Longo) \cite{LATE}, utiliza como informação de contexto o tempo estimado de término da tarefa com base em uma heurística que faz a relação de tempo decorrido e do \textit{score} -- um valor que indica quanto do processamento já foi feito. Essa informação também é utilizada para gerar um limiar que indique quando a lentidão de uma tarefa indica sintomas de erros e a partir desta informação iniciar uma tarefa especulativa em outra máquina possívelmente mais rápida. Este trabalho possui o objetivo de reduzir o tempo de resposta em \textit{clusters} grandes que executam muitas aplicações de pequena duração.
 
 Outro trabalho que utiliza a ideia de mensuração do progresso de uma tarefa é o SAMR (\textit{A Self-adaptative MapReduce} - MapReduce Auto Adaptativo) \cite{SAMR}, nesta implementação a informação de contexto é referente ao cálculo do progresso de uma tarefa com objetivo de identificar se é o lançamento de uma tarefa especulativa é necessário ou não. Uma diferença desta solução é com relação ao cálculo do progresso, o qual varia de acordo com informações do ambiente em que a tarefa está executando. O principal objetivo do trabalho é a redução do tempo de execução das tarefas. As informações do ambiente utilizadas para a tomada de decisão consistem de informações históricas contidas em cada nó, e a decisão é tomada após um ajuste do peso de cada estágio do processamento.
 
@@ -109,18 +111,25 @@ A proposta dos autores do \textit{Quincy} \cite{Quincy} difere-se de todos os ou
 
 A proposta \textit{Improving MapReduce Performance through Data Placement in heterogeneous Hadoop Clusters} (Melhorando o Desempenho do MapReduce em Clusters Heterogêneos com Hadoop Através da Localização dos Dados) \cite{IMRPDPHHC}, busca melhorar o desempenho de aplicações CPU-bound através da melhor distribuição destes dados. Esta solução utiliza principalmente a localidade dos dados como informação para tomada de decisões. O ganho de desempenho é dado pelo rebalanceamento dos dados nos nós, deixando nós mais rápidos com mais dados. Isso diminui o custo de tarefas especulativas e de transferência de dados pela rede.
 
+Outra proposta que busca um rebalanceamento de carga é \cite{Sandholm}, porém esta utiliza-se de uma abordagem diferente. Neste trabalho o rebalanceamento de carga é alcançado através de um sistema baseado na lei de oferta e demanda, o qual permite a cada usuário influenciar diretamente o escalonamento por meio de um parâmetro chamado taxa de gastos. Este parâmetro indica qual a prioridade da aplicação, sendo que, em horários de maior concorrência a taxa de gasto será maior. O principal objetivo deste trabalho é permitir um compartilhamento de recursos dinâmico baseado em preferências configuradas pelos próprios usuários .
+
 %TODO rever o resumo final, agora será sobre os métodos e objetivos de adaptação.
 
-Após estudo dos trabalhos, nota-se que muitos deles tem por objetivo a diminuição do tempo de resposta ou a melhoria do rendimento de maneira geral, os quais diferem dos objetivos do presente trabalho, que na verdade busca proporcionar uma melhor adaptação do \emph{Hadoop} a um ambiente heterogêneo. 
+Nota-se que no geral as propostas de melhora da adaptabilidade apresentadas pelos trabalhos utilizam principalmente a técnica de rebalanceamento de carga entre nós de diferentes capacidades. Ainda, é possível notar que os trabalhos, em sua maioria, seguem três opções:
 
-Constata-se também que há uma diversidade de contextos levados em consideração, contudo é possível identificar temas recorrentes como : a classificação dos \emph{jobs} e dos nós quanto ao potencial de E/S ou de CPU, a avaliação do progresso da \emph{task} na decisão de lançar ou não uma nova \emph{task} especulativa.
+\begin{enumerate}
+	\item Classificação dos nós e das aplicações de acordo com sua capacidade (CPU ou E/S) seguido de um algoritmo que delega aplicações para nós do mesmo tipo;
+	\item Modificação da tomada de decisão sobre o lançamento ou não de uma tarefa especulativa através de novas heurísticas;
+	\item Redistribuição dos dados para que eles fiquem em nós mais rápidos.
+\end{enumerate}
 
-%After studying the related works, it is possible to note that many of them have the reduction of response time or improvement of overall performance as objective, which are slightly different from the present work that aims firstly for a better Hadoop adaptation in a heterogeneous environment, which will consequently provide a better performance.
-%Regarding the context, there were many contexts used although, it is possible to identify recurrent contexts such as: job classification according I/O and CPU potential, job progress evaluation in order to launch or not speculative tasks.
+Ainda que a opção 3 assemelhe-se com a opção 1, é importante diferenciar a natureza delas. Enquanto a opção 1 classifica os nós em diversas categorias, a opção 3 apenas delega mais dados, e consequentemente mais tarefas, aos nós mais rápidos. Embora pareça uma solução mais simples, ela justifica-se devido à maneira como o escalonamento é feito no Hadoop. ao evitar a transferência de dados pela rede caso a divisão fosse igualitária.
+
+\newpage
 
 \section{TABELA}
 %Tabela dos casos
-\begin{table}
+\begin{table}[!h]
 	\centering
 	\begin{tabular}{|p{3.0cm}|p{6.0cm}|p{6.0cm}|}
 		\hline
@@ -132,7 +141,7 @@ Constata-se também que há uma diversidade de contextos levados em consideraç�
 		\hline
 		Nó inicia compartilhamento (- recurso) & \textbf{não reage}, continua alocando containers como se estivesse tudo disponível & \textbf{diminui o recurso do nó. Não afeta containers já alocados, mas só irá alocar quando possuir recurso disponível}\\
 		\hline
-		Nó termina compartilhamento (+ recurso) &\textbf{não reage}, como não alterou nada na quando perdeu recursos ele ficará agora com a info correta & \textbf{aumenta o recurso do nó. Inicia nova rodada de escalonamento, é como se um novo nó entrasse}\\
+		Nó termina compartilhamento (+ recurso) &\textbf{não reage}, se o nó já estava configurado para utilizar apenas uma parte ele não irá passar a ocupar todos recursos & \textbf{aumenta o recurso do nó. Inicia nova rodada de escalonamento, é como se um novo nó entrasse}\\
 		\hline
 		Cluster heterogêneo & tem que alterar as propriedades dos recursos no XML de todos escravos refletindo as configurações dos nós. Caso contrário existirão nós sobrecarregados ou subutilizados. & Cada nó tera a informação correta. Ganho de desempenho por não sobrecarregar nem subutilizar.\\
 		\hline
@@ -143,17 +152,23 @@ Constata-se também que há uma diversidade de contextos levados em consideraç�
 \end{table}
 
 %Tabela dos testes
-\begin{table}
+\begin{table}[!h]
 	\centering
-	\begin{tabular}{|p{2.5cm}|p{4.0cm}|p{6.0cm}|p{2.5cm}|}
+	\begin{tabular}{|p{2.5cm}|p{3.5cm}|p{4.5cm}|p{4.0cm}|}
 		\hline
-		Situação & Teste "Real" & Teste Controlado & Opção extra\\
+		Teste & Representa.. & Metodologia & Ponto fraco\\
 		\hline
-		Nó com compartilhamento (1 teste por vez) & retirar/devolver \textbf{de verdade} os recursos, mais fácil com \textbf{CPU} & "simula" a diminuição de recursos em todos nós tirando metade dos nós e dobrando a capacidade informada dos restantes. A "volta" é mais difícil, inicia job com todos nós e informação de 50\% e depois volta ao normal & Importante é sobrecarregar os nós. Sem "tirar" recursos como teste real, daria para utilizar máquina virtual \\
+		Enganar escalonador para achar que tem mais recursos & cluster compartilhado no momento do início da utilização por outro usuário & inicia x nós com recursos informados dobrados, atualiza durante a primeira leva de containers para valor correto & desta forma é necessário utilizar apenas x/2 nós em relação ao caso A. Pode confundir com um caso de falha de nós\\
 		\hline
-		Nó com compartilhamento (2 testes, - depois +) & possível, só organizar para sincronizar estas mudanças & possível, mas envolve muita gambiarra. & \\
+		Nó compartilhado de verdade com informação errada (overload)& cluster compartilhado no momento do início da utilização por outro usuário & reduzir algum recurso de forma que fique indisponível durante a execução. Opções: baloon(MV) - memória, thread - cpu & como garantir que a memória/cpu estará realmente indisponível? quantidade de trabalho extra para realizar o teste\\
+		\hline
+		Enganar escalonador para achar que tem menos recursos & cluster compartilhado no momento do fim da utilização por outro usuário & inicia x nós com recursos informados de x/2, atualiza durante a primeira leva de containers para valor correto & Caso muito improvável, administrador configura o cluster para o Hadoop utilizar apenas uma parte dos recursos dos nós.\\
+		\hline
+		Nó compartilhado de verdade com informação errada (underload)& cluster compartilhado no momento do fim da utilização por outro usuário & reduzir algum recurso de forma que fique indisponível antes do início e torná-lo disponível durante execução. Opções: baloon(MV) - memória, thread - cpu & como garantir que a memória/cpu estará realmente indisponível? quantidade de trabalho extra para realizar o teste\\
+		\hline
+		Teste completo inicia e termina compartilhamento em momentos diferentes durante execução & cluster compartilhado & \textbf Inicia com 75\% disponível, reduz recurso durante execução de forma que fique sobrecarregado e aumenta recurso durante execução de forma que fique sub utilizado. Opções: {várias combinações} possíveis de \% & Só é possível fazer sem enganar o cluster. Precisa dos outros testes com controle de recursos funcionando\\
 		\hline
 	\end{tabular}
 	\caption{tabela de testes}
-	\label{tab:memory allocation}
+	\label{tab:memory allocation2}
 \end{table}

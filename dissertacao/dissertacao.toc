@@ -13,31 +13,30 @@
 \contentsline {section}{\numberline {2.4}ZooKeeper}{17}{section.2.4}
 \contentsline {section}{\numberline {2.5}Escalonadores para o Hadoop}{17}{section.2.5}
 \contentsline {section}{\numberline {2.6}Trabalhos Relacionados}{18}{section.2.6}
-\contentsline {section}{\numberline {2.7}TABELA}{20}{section.2.7}
-\contentsline {chapter}{\numberline {3}Development}{22}{chapter.3}
-\contentsline {section}{\numberline {3.1}Understanding Apache Hadoop internals}{22}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Code structure and class diagrams}{23}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}State machines}{27}{subsection.3.1.2}
-\contentsline {section}{\numberline {3.2}Understanding Hadoop allocation pattern}{28}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Experiment}{29}{subsection.3.2.1}
-\contentsline {subsubsection}{\numberline {3.2.1.1}Employed methods, procedures and scenarios}{29}{subsubsection.3.2.1.1}
-\contentsline {subsubsection}{\numberline {3.2.1.2}Results and interpretation}{30}{subsubsection.3.2.1.2}
-\contentsline {section}{\numberline {3.3}Context-aware scheduling}{32}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Collector description}{34}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Collector integration with Hadoop}{34}{subsection.3.3.2}
-\contentsline {chapter}{\numberline {4}Experiments and Results}{36}{chapter.4}
-\contentsline {section}{\numberline {4.1}Collector integration test}{36}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Hardware and Software configuration}{36}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Procedures}{36}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Results and interpretation}{37}{subsection.4.1.3}
-\contentsline {section}{\numberline {4.2}Original CapacityScheduler X Context-aware CapacityScheduler}{38}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Hardware and Software configuration}{38}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Procedures}{38}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Results and interpretation}{39}{subsection.4.2.3}
-\contentsline {section}{\numberline {4.3}Heterogeneity simulation}{41}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Hardware and Software configuration}{41}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Procedures}{42}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Results and interpretation}{42}{subsection.4.3.3}
-\contentsline {chapter}{\numberline {5}Conclusion and future work}{44}{chapter.5}
-\contentsline {chapter}{Refer{\^e}ncias}{45}{chapter*.6}
-\contentsline {chapter}{Ap{\^e}ndices}{48}{section*.7}
+\contentsline {section}{\numberline {2.7}TABELA}{22}{section.2.7}
+\contentsline {chapter}{\numberline {3}M\IeC {\'e}todos e Desenvolvimento}{24}{chapter.3}
+\contentsline {section}{\numberline {3.1}Understanding Apache Hadoop internals}{24}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Code structure and class diagrams}{24}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}State machines}{29}{subsection.3.1.2}
+\contentsline {section}{\numberline {3.2}Understanding Hadoop allocation pattern}{30}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Experiment}{31}{subsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.1.1}Employed methods, procedures and scenarios}{31}{subsubsection.3.2.1.1}
+\contentsline {subsubsection}{\numberline {3.2.1.2}Results and interpretation}{32}{subsubsection.3.2.1.2}
+\contentsline {section}{\numberline {3.3}Context-aware scheduling}{34}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Collector description}{35}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Collector integration with Hadoop}{36}{subsection.3.3.2}
+\contentsline {chapter}{\numberline {4}Experiments and Results}{38}{chapter.4}
+\contentsline {section}{\numberline {4.1}Collector integration test}{38}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Hardware and Software configuration}{38}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Procedures}{38}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Results and interpretation}{39}{subsection.4.1.3}
+\contentsline {section}{\numberline {4.2}Original CapacityScheduler X Context-aware CapacityScheduler}{40}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Hardware and Software configuration}{40}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Procedures}{40}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Results and interpretation}{41}{subsection.4.2.3}
+\contentsline {section}{\numberline {4.3}Heterogeneity simulation}{43}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Hardware and Software configuration}{43}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Procedures}{44}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Results and interpretation}{44}{subsection.4.3.3}
+\contentsline {chapter}{\numberline {5}Conclusion and future work}{46}{chapter.5}
+\contentsline {chapter}{Refer{\^e}ncias}{47}{chapter*.6}
