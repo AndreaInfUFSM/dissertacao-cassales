@@ -123,7 +123,7 @@ Nota-se que no geral as propostas de melhora da adaptabilidade apresentadas pelo
 	\item Redistribuição dos dados para que eles fiquem em nós mais rápidos.
 \end{enumerate}
 
-Ainda que a opção 3 assemelhe-se com a opção 1, é importante diferenciar a natureza delas. Enquanto a opção 1 classifica os nós em diversas categorias, a opção 3 apenas delega mais dados, e consequentemente mais tarefas, aos nós mais rápidos. Embora pareça uma solução mais simples, ela justifica-se devido à maneira como o escalonamento é feito no Hadoop. ao evitar a transferência de dados pela rede caso a divisão fosse igualitária.
+Ainda que a opção 3 assemelhe-se com a opção 1, é importante diferenciar a natureza delas. Enquanto a opção 1 classifica os nós em diversas categorias, a opção 3 apenas delega mais dados, e consequentemente mais tarefas, aos nós mais rápidos. Embora pareça uma solução mais simples ela evita transferência de dados pela rede, o que aconteceria caso a divisão dos dados para os nós fosse igualitária.
 
 \newpage
 
@@ -166,7 +166,7 @@ Ainda que a opção 3 assemelhe-se com a opção 1, é importante diferenciar a 
 		\hline
 		Nó compartilhado de verdade com informação errada (underload)& cluster compartilhado no momento do fim da utilização por outro usuário & reduzir algum recurso de forma que fique indisponível antes do início e torná-lo disponível durante execução. Opções: baloon(MV) - memória, thread - cpu & como garantir que a memória/cpu estará realmente indisponível? quantidade de trabalho extra para realizar o teste\\
 		\hline
-		Teste completo inicia e termina compartilhamento em momentos diferentes durante execução & cluster compartilhado & \textbf Inicia com 75\% disponível, reduz recurso durante execução de forma que fique sobrecarregado e aumenta recurso durante execução de forma que fique sub utilizado. Opções: {várias combinações} possíveis de \% & Só é possível fazer sem enganar o cluster. Precisa dos outros testes com controle de recursos funcionando\\
+		Teste completo inicia e termina compartilhamento em momentos diferentes durante execução & cluster compartilhado & Inicia com 75\% disponível, reduz recurso durante execução de forma que fique sobrecarregado e aumenta recurso durante execução de forma que fique sub utilizado. Opções: {várias combinações} possíveis de \% & Só é possível fazer sem enganar o cluster. Precisa dos outros testes com controle de recursos funcionando\\
 		\hline
 	\end{tabular}
 	\caption{tabela de testes}
