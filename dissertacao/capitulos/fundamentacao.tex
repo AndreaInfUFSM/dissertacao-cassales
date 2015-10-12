@@ -68,14 +68,20 @@ A naturalidade do paralelismo deste paradigma, torna a programação da aplicaç
 \section{ZooKeeper}
 O ZooKeeper é um projeto da Apache e fornece ferramentas eficientes, confiáveis e tolerantes à falha para a coordenação de sistemas distribuídos \cite{Hunt2010}. Inicialmente, o ZooKeeper foi implementado como um componente do Hadoop e virou um projeto próprio conforme cresciam suas funcionalidades e sua utilização em outras aplicações. 
 
-No caso deste trabalho, os serviços do ZooKeeper são utilizados para monitorar e transmitir as informações de contexto coletadas nos nós escravos. No ZooKeeper existe um componente chamado \textit{znode} onde é possível inserir qualquer tipo de dado e todos as instâncias de clientes e servidores (no caso de um servidor replicado) possuem acesso à este \textit{znode}. A comunicação é feita através de processos que atualizam e processos que lêem o conteúdo destes componentes.
+A arquitetura utilizada no ZooKeeper é a de cliente-servidor, sendo o servidor o próprio ZooKeeper (chamado de \textit{ensamble}), enquanto a aplicação que o está utilizando assume o papel de cliente. A maneira como os clientes interagem depende da aplicação.
+
+Os dados do ZooKeeper ficam armazenados em \textit{zNodes}, abstrações que podem ser tanto um \textit{container} de dados quanto de outros \textit{zNodes}, e formam um sistema de arquivos hierárquico que pode ser comparado à estrutura de uma árvore. Para garantir a consistência deste sistema de arquivos o ZooKeeper utiliza operações de escrita linearizáveis, as quais são obrigatoriamente processadas pelo servidor líder que é, então, encarregado de propagar as mudanças para os demais participantes do \textit{ensamble} \cite{Pham}.
+
+Um dos principais recursos do ZooKeeper são os \textit{Watchers}, interfaces providas pelo \textit{framework} que permitem aos clientes monitorarem certos \textit{zNodes}. Quando um \textit{Watcher} é registrado como monitor de um \textit{zNode}, ele pode ser configurado para monitorar a alteração dos dados do \textit{zNode}, a criação/remoção de \textit{zNodes} filhos, ou ainda para qualquer tipo alteração no \textit{zNode} e seus filhos. Quando um \textit{zNode} sofre uma alteração que o \textit{Watcher} está monitorando uma \textit{callback} é disparada para que o cliente faça o processamento desejado \cite{HadoopBook}.
+
+No âmbito deste trabalho, os serviços do ZooKeeper são utilizados para monitorar as informações de contexto coletadas nos nós escravos e transmiti-las para o escalonador. Sendo que a comunicação é feita através de processos que atualizam e monitoram o conteúdo de \textit{zNodes}.
 
 
 %-------------------------------------------------------------------
 
 \section{Escalonadores para o Hadoop}
 \label{sec:HadSched}
-Apesar de existirem dois níveis de escalonamento no Hadoop, escalonamento de aplicações e de tarefas, este trabalho influencia apenas o escalonamento de aplicações. O escalonador de aplicações gerencia qual será a primeira aplicação a receber um container para seu escalonador de tarefas e quais serão os escalonadores de tarefa que receberão recursos para execução \cite{BookHadoop}. O Hadoop já inclui alguns escalonadores que oferecem maneiras diferentes para a realização do escalonamento de aplicações. Para alterar o escalonador utilizado é necessário alterar uma propriedade no arquivo \textit{yarn-site.XML} e reiniciar o Resource Manager.
+Apesar de existirem dois níveis de escalonamento no Hadoop, escalonamento de aplicações e de tarefas, este trabalho influencia apenas o escalonamento de aplicações. O escalonador de aplicações gerencia qual será a primeira aplicação a receber um \textit{container} para seu escalonador de tarefas e quais serão os escalonadores de tarefa que receberão recursos para execução \cite{BookHadoop}. O Hadoop já inclui alguns escalonadores que oferecem maneiras diferentes para a realização do escalonamento de aplicações. Para alterar o escalonador utilizado é necessário alterar uma propriedade no arquivo \textit{yarn-site.XML} e reiniciar o Resource Manager.
 
 Dentre os escalonadores incluídos no Hadoop, o mais simples é o Hadoop Internal Scheduler que utiliza o algoritmo FIFO e tem boa performance em \textit{clusters} onde não existe competição por recursos. Este escalonador suporta até 5 níveis de prioridade, porém a decisão da próxima aplicação a ser executada sempre levará em consideração a hora de submissão.
 
@@ -111,9 +117,8 @@ A proposta dos autores do \textit{Quincy} \cite{Quincy} difere-se de todos os ou
 
 A proposta \textit{Improving MapReduce Performance through Data Placement in heterogeneous Hadoop Clusters} (Melhorando o Desempenho do MapReduce em Clusters Heterogêneos com Hadoop Através da Localização dos Dados) \cite{IMRPDPHHC}, busca melhorar o desempenho de aplicações CPU-bound através da melhor distribuição destes dados. Esta solução utiliza principalmente a localidade dos dados como informação para tomada de decisões. O ganho de desempenho é dado pelo rebalanceamento dos dados nos nós, deixando nós mais rápidos com mais dados. Isso diminui o custo de tarefas especulativas e de transferência de dados pela rede.
 
-Outra proposta que busca um rebalanceamento de carga é \cite{Sandholm}, porém esta utiliza-se de uma abordagem diferente. Neste trabalho o rebalanceamento de carga é alcançado através de um sistema baseado na lei de oferta e demanda, o qual permite a cada usuário influenciar diretamente o escalonamento por meio de um parâmetro chamado taxa de gastos. Este parâmetro indica qual a prioridade da aplicação, sendo que, em horários de maior concorrência a taxa de gasto será maior. O principal objetivo deste trabalho é permitir um compartilhamento de recursos dinâmico baseado em preferências configuradas pelos próprios usuários .
+Outra proposta que busca um rebalanceamento de carga é \cite{Sandholm}, porém esta utiliza-se de uma abordagem diferente. Neste trabalho o rebalanceamento de carga é alcançado através de um sistema baseado na lei de oferta e demanda, o qual permite a cada usuário influenciar diretamente o escalonamento por meio de um parâmetro chamado taxa de gastos. Este parâmetro indica qual a prioridade da aplicação, sendo que, em horários de maior concorrência a taxa de gasto será maior. O principal objetivo deste trabalho é permitir um compartilhamento de recursos dinâmico baseado em preferências configuradas pelos próprios usuários.
 
-%TODO rever o resumo final, agora será sobre os métodos e objetivos de adaptação.
 
 Nota-se que no geral as propostas de melhora da adaptabilidade apresentadas pelos trabalhos utilizam principalmente a técnica de rebalanceamento de carga entre nós de diferentes capacidades. Ainda, é possível notar que os trabalhos, em sua maioria, seguem três opções:
 
@@ -125,6 +130,8 @@ Nota-se que no geral as propostas de melhora da adaptabilidade apresentadas pelo
 
 Ainda que a opção 3 assemelhe-se com a opção 1, é importante diferenciar a natureza delas. Enquanto a opção 1 classifica os nós em diversas categorias, a opção 3 apenas delega mais dados, e consequentemente mais tarefas, aos nós mais rápidos. Embora pareça uma solução mais simples ela evita transferência de dados pela rede, o que aconteceria caso a divisão dos dados para os nós fosse igualitária.
 
+%TODO Changlong Li \cite{Li}
+Embora não relacionado com escalonamento, o trabalho \cite{Li} propõe uma ferramenta de auto configuração que em partes assemelha-se com a proposta deste trabalho. Entretanto, a proposta de Li é baseada em aprendizagem de máquina para a auto configuração de alguns parâmetros chave do Hadoop e apresenta execuções até 10 vezes mais rápidas após a otimização dos parâmetros; enquanto a proposta deste trabalho busca melhorar a informação disponível para o escalonador.
 \newpage
 
 \section{TABELA}
