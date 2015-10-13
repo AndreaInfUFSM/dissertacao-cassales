@@ -1,7 +1,37 @@
 \chapter{Experimentos e Resultados}
 \label{chap:ExpRes}
 %-------------------------------------------------------------------
-Esta capítulo contém informações detalhadas sobre os experimentos realizados e os resultados obtidos. Embora o principal caso estudado foi o de degradação dos recursos em virtude de um compartilhamento dos nós, foram realizadas três categorias de experimentos. Um experimento em ambiente manipulado para obtenção de indícios preliminares, um experimento utilizando a implementação real e outro experimento em escala.
+Esta capítulo contém informações detalhadas sobre os experimentos realizados e os resultados obtidos. Embora o principal caso estudado foi o de degradação dos recursos em virtude de um compartilhamento dos nós, os experimentos realizados podem ser divididos em três categorias de acordo com seu objetivo. As três categorias são: (1) experimentos realizados em ambiente manipulado para obtenção de indícios preliminares da usabilidade da solução; (2) experimentos realizados utilizando a implementação real para otenção de comprovação da eficácia da solução; (3) experimentos em escala para obtenção de informações com relação à escalabilidade da solução.
+
+\section{Considerações Iniciais Sobre os Experimentos}
+\label{sec:casosteste}
+Em virtude de algumas informações sobre os experimentos serem comuns à todos eles, como os casos de teste e as aplicações utilizadas, esta Seção é destinada à apresentação destas informações. Além disso, a apresentação dos resultados utiliza diagramas de Gantt com uma estrutura modificada em relação à usualmente encontrada na literatura e será, também, explicada detalhadamente nesta Seção.
+
+A primeira informação relevante que refere-se à todos experimentos são os casos de teste. Todos os experimentos utilizam os mesmos casos de teste, possuindo apenas objetivos diferentes. Os casos de teste representam situações de compartilhamento, sendo que 2 casos utilizam a implementação padrão e 2 casos utilizam a solução proposta por este trabalho. Além disso, com a criação dos casos de teste buscou-se facilitar a comparação entre os resultados alcançados. A descrição dos casos de testes encontra-se a seguir.
+
+\textbf{Caso A:} representa uma situação sem compartilhamento, onde o usuário possui acesso à todos os recursos do \textit{cluster} em qualquer momento. Isto implica que os recursos informados ao escalonador \textbf{sempre} corresponderão aos recursos disponíveis para o Hadoop. Consideram-se recursos informados como os dados que o escalonador utiliza para realizar suas políticas de escalonamento, enquanto, recursos disponíveis são aqueles estão livres e/ou sendo utilizados pelo próprio Hadoop. Utilizando uma notação percentual, os recursos informados são de 100\% e os recursos disponíveis são de 100\% durante toda execução.
+
+\textbf{Caso B:} representa a situação decorrente do compartilhamento dos nós do \textit{cluster} com outros usuários. Como consequência do compartilhamento, é possível que em, algum momento, ocorra uma inconsistência entre a quantidade de recursos informada e disponível. Este caso aplica o comportamento padrão do Hadoop, no qual os recursos são informados por meio de arquivos XML \textbf{somente} na inicialização do serviço e nunca são atualizados. Em notação percentual, os recursos informados são de 100\%, porém os recursos disponíveis são de 50\%.
+
+\textbf{Caso C:} repete as especificações do Caso B, porém possui a implementação descrita no Capítulo \ref{cap:desen}. Este caso representa a situação de quando outra aplicação é lançada \textbf{antes} da ocorrência da coleta e transmissão de dados, ou seja, quando uma nova aplicação for submetida ao \textit{cluster}, este já estará com os dados atualizados. Em notação percentual, os recursos informados são de 50\% e os recursos disponíveis são de 50\%.
+
+\textbf{Caso D:} representa uma extensão do Caso C em que a inicialização de outra aplicação ocorre \textbf{após} a coleta e transmissão dos dados e \textbf{antes} da submissão de uma aplicação, ou seja, a aplicação será lançada numa situação onde o \textit{cluster} possui a informação errada (Caso B) e terá de se adaptar à nova configuração dos recursos (Caso C) durante a execução. Em notação percentual, os recursos informados no início da aplicação são de 100\%, enquanto os recursos disponíveis são de 50\%. Após a coleta e transmissão de dados os recursos informados também passam a ser 50\%.
+
+Além dos casos de teste, outra característica importante e comum à todos experimentos são as aplicações. Embora aplicações de \textit{Big Data} geralmente possuem dependência de memória, outros fatores como a utilização de CPU e E/S podem influenciar no desempenho. Na busca de comprovações de que a solução apresenta ganhos quando utilizada com aplicações de diferentes características, decidiu-se pela utilização de 3 aplicações de \textit{benchmark}, cada uma com diferentes requisições de memória, CPU e E/S. As aplicações são as seguintes:
+
+\begin{itemize}
+	\item TeraSort: o objetivo do TeraSort \citep{TeraSort2008} é ordenar um conjunto de dados o mais rápido possível. Este \textit{benchmark} de ordenação estressa tanto a memória como o CPU em virtude das comparações e armazenamento temporário;
+	\item WordCount: o \textit{benchmark} WordCount é um exemplo básico de \textit{MapReduce}. Seu objetivo é contar o número de ocorrências de cada palavra de um texto. Como a utilização de memória e E/S é limitada nesta aplicação (tanto na etapa de processamento como a saída da aplicação possuem estruturas pequenas em comparação ao arquivo de entrada), o desempenho desta aplicação é determinado pelo CPU;
+	\item TestDFSIO: o \textit{benchmark} TestDFSIO é um teste de leitura e escrita para o HDFS. Este \textit{benchmark} é útil para estressas o HDFS, descobrir \textit{bottlenecks} na rede, SO e configuração do Hadoop. O objetivo é prover uma mensuração de quão rápido o \textit{cluster} é em termos de E/S. Tanto a memória quanto o CPU são pouco utilizados.
+\end{itemize}
+
+Optou-se pela utilização das aplicações implementadas no \textit{HiBench} \cite{HiBench}, um conjunto de \textit{benchmarks} para \textit{clusters} Hadoop que foi utilizado nos trabalhos \cite{HBA} \cite{HBB} \cite{HBC}. O tamanho de entrada utilizado para cada aplicação foi: um conjunto de dados de 15 GB para o Terasort, 90 arquivos de 250 MB para o TestDFSIO e um arquivo de 10 GB para o WordCount. 
+
+Ainda ligado aos experimentos porém com relação aos resultados, os diagramas de Gantt apresentados neste trabalho são modificados para inclusão de mais informações. A apresentação dos diagramas está agrupada por aplicação, sendo que e cada aplicação possui 4 diagramas. Cada um dos diagramas de uma aplicação corresponde a um caso de teste e todos os diagramas utilizam a mesma escala de tempo.
+
+Cada diagrama possui 2 ou mais linhas, sendo que cada linha representa  um recurso (nó do \textit{cluster}). Estas linhas de recurso possuem diversos "separadores" verticais (formando diversos segmentos), os quais indicam que um \textit{container} iniciou/terminou sua execução. Cada segmento apresenta diferentes alturas e tons de cores, os quais são utilizados para representar a carga de \textit{containers} do nó. Quanto mais escuro for o tom de um segmento, mais \textit{containers} ele possui em execução; o mesmo aplica-se para a altura do segmento, quanto mais alto mais \textit{containers} em execução.
+
+Embora as análises foram feitas principalmente com os \textit{containers} Map, os \textit{containers} de Reduce e do Application Master consomem recursos do \textit{cluster} e devem ser apresentados para uma representação fiel da situação real. Por este motivo, o \textit{container} Application Master é representado na cor verde, os \textit{containers} de Reduce são representados pela cor azul e os \textit{containers} Map são representados em escalas de cinza, sendo branco indicando 0 \textit{containers} e preto indicando 16 \textit{containers}.
 
 \section{Experimento controlado}
 Este experimento foi realizado com objetivo de obter indícios de que a solução poderia apresentar melhoria no processo de escalonamento quando o Hadoop é utilizado num ambiente que existe a degradação dos recursos em virtude de compartilhamento. O experimento simplifica a solução para facilitar a obtenção dos indícios em menor tempo. A situação desejada de expressar com o experimento é de quando os nós do \textit{cluster} começam a ser utilizados por outros usuários antes/durante a aplicação \textit{MapReduce}.
@@ -12,33 +42,11 @@ O experimento foi realizado no \textit{cluster} genepi do Grid'5000. A configura
 \subsection{Procedimentos}
 Para que o experimento fosse totalmente controlado, decidiu-se utilizar a manipulação de informações e exclusão de nós para representar o compartilhamento. Na situação real (ver Seção \ref{sec:expReal}) o \textit{cluster} teria 4 escravos e todos os escravos teriam seus recursos disponíveis reduzidos pela metade, ou seja, outra aplicação utilizaria 4 cores e 4 GB de memória em cada nó. Para representar esta situação de maneira simples e rápida, o experimento foi realizado com apenas 2 nós, com a informação sobre a quantidade de recursos dobrada, ou seja, 16 cores e 16 GB de memória. 
 
-Embora aplicações de \textit{Big Data} geralmente possuem dependência de memória, outros fatores como a utilização de CPU e E/S podem influenciar no desempenho. Na busca de comprovações de que a solução apresenta ganhos quando utilizada com aplicações de diferentes características, decidiu-se pela utilização de 3 aplicações de \textit{benchmark}, cada uma com diferentes requisições de memória, CPU e E/S.
-
-As aplicações são as seguintes:
-\begin{itemize}
-	\item TeraSort: o objetivo do TeraSort \citep{TeraSort2008} é ordenar um conjunto de dados o mais rápido possível. Este \textit{benchmark} de ordenação estressa tanto a memória como o CPU em virtude das comparações e armazenamento temporário;
-	\item WordCount: o \textit{benchmark} WordCount é um exemplo básico de \textit{MapReduce}. Seu objetivo é contar o número de ocorrências de cada palavra de um texto. Como a utilização de memória e E/S é limitada nesta aplicação (tanto na etapa de processamento como a saída da aplicação possuem estruturas pequenas em comparação ao arquivo de entrada), o desempenho desta aplicação é determinado pelo CPU;
-	\item TestDFSIO: o \textit{benchmark} TestDFSIO é um teste de leitura e escrita para o HDFS. Este \textit{benchmark} é útil para estressas o HDFS, descobrir \textit{bottlenecks} na rede, SO e configuração do Hadoop. O objetivo é prover uma mensuração de quão rápido o \textit{cluster} é em termos de E/S. Tanto a memória quanto o CPU são pouco utilizados.
-\end{itemize}
-
-Utilizou-se das aplicações implementadas no \textit{HiBench}, um conjunto de \textit{benchmarks} para \textit{clusters} Hadoop \cite{HiBench}. O tamanho de entrada utilizado para cada aplicação foi: um conjunto de dados de 15 GB para o Terasort, 90 arquivos de 250 MB para o TestDFSIO e um arquivo de 10 GB para o WordCount. 
-
-\subsection{Casos de Teste}
-Os seguintes casos de teste foram criados e configurados para os experimentos:
-
-\textbf{Caso A:} representa uma situação sem compartilhamento, onde o usuário possui acesso à todos os recursos do \textit{cluster} em qualquer momento. Isto implica que os recursos informados ao escalonador \textbf{sempre} corresponderão aos recursos disponíveis para o Hadoop. Consideram-se recursos informados como os dados que o escalonador utiliza para realizar suas políticas de escalonamento, enquanto, recursos disponíveis são aqueles estão livres e/ou sendo utilizados pelo próprio Hadoop. Utilizando uma notação percentual, os recursos informados são de 100\% e os recursos disponíveis são de 100\% durante toda execução.
-
-\textbf{Caso B:} representa a situação decorrente do compartilhamento dos nós do \textit{cluster} com outros usuários. Como consequência do compartilhamento, é possível que em, algum momento, ocorra uma inconsistência entre a quantidade de recursos informada e disponível. Este caso aplica o comportamento padrão do Hadoop, no qual os recursos são informados por meio de arquivos XML \textbf{somente} na inicialização do serviço e nunca são atualizados. Em notação percentual, os recursos informados são de 100\%, porém os recursos disponíveis são de 50\%.
-
-\textbf{Caso C:} repete as especificações do Caso B, porém possui a implementação descrita no Capítulo \ref{cap:desen}. Este caso representa a situação de quando outra aplicação é lançada \textbf{antes} da ocorrência da coleta e transmissão de dados, ou seja, quando uma nova aplicação for submetida ao \textit{cluster}, este já estará com os dados atualizados. Em notação percentual, os recursos informados são de 50\% e os recursos disponíveis são de 50\%.
-
-\textbf{Caso D:} representa uma extensão do Caso C em que a inicialização de outra aplicação ocorre \textbf{após} a coleta e transmissão dos dados e \textbf{antes} da submissão de uma aplicação, ou seja, a aplicação será lançada numa situação onde o \textit{cluster} possui a informação errada (Caso B) e terá de se adaptar à nova configuração dos recursos (Caso C) durante a execução. Em notação percentual, os recursos informados no início da aplicação são de 100\%, enquanto os recursos disponíveis são de 50\%. Após a coleta e transmissão de dados os recursos informados também passam a ser 50\%.
-
 \subsection{Resultados e Interpretações}
-Os resultados dos experimentos podem ser visualizados nas Tabelas \ref{tab:exp1TS}, \ref{tab:exp1IO} e \ref{tab:exp1WC} e nas Figuras \ref{fig:exp1TS}, \ref{fig:exp1IO} e \ref{fig:exp1WC}. Tanto as Figuras como as Tabelas estão ordenados na ordem TeraSort, TestDFSIO e WordCount. 
+Os resultados dos experimentos podem ser visualizados nas Tabelas \ref{tab:exp1TS}, \ref{tab:exp1IO} e \ref{tab:exp1WC} e nas Figuras \ref{fig:exp1TS}, \ref{fig:exp1IO} e \ref{fig:exp1WC}. Tanto as Tabelas como as Figuras estão ordenados na ordem TeraSort, TestDFSIO e WordCount. 
 
 \begin{table}[h!]
-	\caption{Resumo dos resultados do TeraSort em segundos.} \label{tab:exp1TS}
+	\caption{Resumo dos resultados do TeraSort controlado em segundos.} \label{tab:exp1TS}
 	\begin{tabular*}{\hsize}{lllll} %{\hsize}{@{\extracolsep{\fill}}lllll@{}}
 		%\toprule
 		\textbf{Caso} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D}\\
@@ -53,7 +61,7 @@ Os resultados dos experimentos podem ser visualizados nas Tabelas \ref{tab:exp1T
 \end{table}
 
 \begin{table}[h!]
-	\caption{Resumo dos resultados do TestDFSIO em segundos.} \label{tab:exp1IO}
+	\caption{Resumo dos resultados do TestDFSIO controlado em segundos.} \label{tab:exp1IO}
 	\begin{tabular*}{\hsize}{lllll} %{\hsize}{@{\extracolsep{\fill}}lllll@{}}
 		%\toprule
 		\textbf{Caso} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D}\\
@@ -69,7 +77,7 @@ Os resultados dos experimentos podem ser visualizados nas Tabelas \ref{tab:exp1T
 
 
 \begin{table}[h!]
-	\caption{Resumo dos resultados do WordCount em segundos.} \label{tab:exp1WC}
+	\caption{Resumo dos resultados do WordCount controlado em segundos.} \label{tab:exp1WC}
 	\begin{tabular*}{\hsize}{lllll} %{\hsize}{@{\extracolsep{\fill}}lllll@{}}
 		%\toprule
 		\textbf{Caso} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D}\\
@@ -83,29 +91,24 @@ Os resultados dos experimentos podem ser visualizados nas Tabelas \ref{tab:exp1T
 	\end{tabular*}
 \end{table}
 
-
-The Figures \ref{fig:gantts}, \ref{fig:DFSIO} and \ref{fig:WC} present the Gantt charts for each benchmark and scenario. For a given benchmark, each scenario is composed by either 2 or 4 lines, one for each node in the cluster during the experiment. As stated in the description of the scenarios, Scenarios B, C and D run on half of the nodes from Scenario A to simulate a reduced amount of resources. Each line portraits the resources consolidated by that node represented on a color scale, where the darker the tone, the more containers are executing simultaneously and thus, more overloaded the node. For instance, white means no container executing, and black means 16 containers. Additionally, the lines are segmented along the chart to indicate that a container has either finished or started at that moment. The charts are  scaled in seconds and all charts for a given benchmark have the same scale. Hence, TeraSort charts go from 0 to 790 seconds, TestDFSIO go from 0 to 450 seconds and WordCount from 0 to 1010 seconds.
-
-While the Gantt charts represent the tasks (containers) execution, some containers are not affected by scheduling, as the ApplicationMaster or the Reduce tasks. For this reason, we ignore these tasks and concentrate the analysis on the elements that can be affected by the context-aware scheduling.
-
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=1\textwidth]{figuras/todos.png}
-	\caption{Diagrama de Gantt para os experimentos com TeraSort}
+	\caption{Diagrama de Gantt para os experimentos controlados com TeraSort}
 	\label{fig:exp1TS}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=1\textwidth]{figuras/todos-DFSIO.png}
-	\caption{Diagrama de Gantt para os experimentos com TestDFSIO}
+	\caption{Diagrama de Gantt para os experimentos controlados com TestDFSIO}
 	\label{fig:exp1IO}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=1\textwidth]{figuras/todos-WC.png}
-	\caption{Diagrama de Gantt para os experimentos com WordCount}
+	\caption{Diagrama de Gantt para os experimentos controlados com WordCount}
 	\label{fig:exp1WC}
 \end{figure}
 
@@ -119,27 +122,6 @@ O experimento foi realizado no \textit{cluster} genepi do Grid'5000. A configura
 \subsection{Procedimentos}
 Diferentemente do experimento anterior, neste experimento buscou-se o comportamento da solução em um ambiente realmente compartilhado. O \textit{cluster} possui 4 escravos e todos os escravos terão, em algum momento, seus recursos disponíveis reduzidos pela metade devido ao compartilhamento, ou seja, outra aplicação irá utilizar 4 cores e 4 GB de memória em cada nó. Para alcançar esta situação foi implementada uma aplicação em C, na qual a quantidade desejada de \textit{threads} é inicializada e cada uma delas utiliza 1 core e 1 GB de memória.
 
-Embora aplicações de \textit{Big Data} geralmente possuem dependência de memória, outros fatores como a utilização de CPU e E/S podem influenciar no desempenho. Na busca de comprovações de que a solução apresenta ganhos quando utilizada com aplicações de diferentes características, decidiu-se pela utilização de 3 aplicações de \textit{benchmark}, cada uma com diferentes requisições de memória, CPU e E/S.
-
-As aplicações são as seguintes:
-\begin{itemize}
-	\item TeraSort: o objetivo do TeraSort \citep{TeraSort2008} é ordenar um conjunto de dados o mais rápido possível. Este \textit{benchmark} de ordenação estressa tanto a memória como o CPU em virtude das comparações e armazenamento temporário;
-	\item WordCount: o \textit{benchmark} WordCount é um exemplo básico de \textit{MapReduce}. Seu objetivo é contar o número de ocorrências de cada palavra de um texto. Como a utilização de memória e E/S é limitada nesta aplicação (tanto na etapa de processamento como a saída da aplicação possuem estruturas pequenas em comparação ao arquivo de entrada), o desempenho desta aplicação é determinado pelo CPU;
-	\item TestDFSIO: o \textit{benchmark} TestDFSIO é um teste de leitura e escrita para o HDFS. Este \textit{benchmark} é útil para estressas o HDFS, descobrir \textit{bottlenecks} na rede, SO e configuração do Hadoop. O objetivo é prover uma mensuração de quão rápido o \textit{cluster} é em termos de E/S. Tanto a memória quanto o CPU são pouco utilizados.
-\end{itemize}
-
-Utilizou-se das aplicações implementadas no \textit{HiBench}, um conjunto de \textit{benchmarks} para \textit{clusters} Hadoop \cite{HiBench}. O tamanho de entrada utilizado para cada aplicação foi: um conjunto de dados de 15 GB para o Terasort, 90 arquivos de 250 MB para o TestDFSIO e um arquivo de 10 GB para o WordCount. 
-
-\subsection{Casos de Teste}
-Os seguintes casos de teste foram criados e configurados para os experimentos:
-
-\textbf{Caso A:} representa uma situação sem compartilhamento, onde o usuário possui acesso à todos os recursos do \textit{cluster} em qualquer momento. Isto implica que os recursos informados ao escalonador \textbf{sempre} corresponderão aos recursos disponíveis para o Hadoop. Consideram-se recursos informados como os dados que o escalonador utiliza para realizar suas políticas de escalonamento, enquanto, recursos disponíveis são aqueles estão livres e/ou sendo utilizados pelo próprio Hadoop. Utilizando uma notação percentual, os recursos informados são de 100\% e os recursos disponíveis são de 100\% durante toda execução.
-
-\textbf{Caso B:} representa a situação decorrente do compartilhamento dos nós do \textit{cluster} com outros usuários. Como consequência do compartilhamento, é possível que em, algum momento, ocorra uma inconsistência entre a quantidade de recursos informada e disponível. Este caso aplica o comportamento padrão do Hadoop, no qual os recursos são informados por meio de arquivos XML \textbf{somente} na inicialização do serviço e nunca são atualizados. Em notação percentual, os recursos informados são de 100\%, porém os recursos disponíveis são de 50\%.
-
-\textbf{Caso C:} repete as especificações do Caso B, porém possui a implementação descrita no Capítulo \ref{cap:desen}. Este caso representa a situação de quando outra aplicação é lançada \textbf{antes} da ocorrência da coleta e transmissão de dados, ou seja, quando uma nova aplicação for submetida ao \textit{cluster}, este já estará com os dados atualizados. Em notação percentual, os recursos informados são de 50\% e os recursos disponíveis são de 50\%.
-
-\textbf{Caso D:} representa uma extensão do Caso C em que a inicialização de outra aplicação ocorre \textbf{após} a coleta e transmissão dos dados e \textbf{antes} da submissão de uma aplicação, ou seja, a aplicação será lançada numa situação onde o \textit{cluster} possui a informação errada (Caso B) e terá de se adaptar à nova configuração dos recursos (Caso C) durante a execução. Em notação percentual, os recursos informados no início da aplicação são de 100\%, enquanto os recursos disponíveis são de 50\%. Após a coleta e transmissão de dados os recursos informados também passam a ser 50\%.
 
 \subsection{Resultados e Interpretações}
 The comparison of node memory from default and collector implementation can be seen in the table \ref{tab:experiments}.
@@ -155,27 +137,6 @@ O experimento foi realizado no \textit{cluster} genepi do Grid'5000. A configura
 %TODO arrumar quantidade de escravos
 Neste experimento buscou-se o comportamento da solução em um ambiente realmente compartilhado e de grande escala. O \textit{cluster} possui X escravos e todos os escravos terão, em algum momento, seus recursos disponíveis reduzidos pela metade devido ao compartilhamento, ou seja, outra aplicação irá utilizar 4 cores e 4 GB de memória em cada nó. Para alcançar esta situação foi implementada uma aplicação em C, na qual a quantidade desejada de \textit{threads} é inicializada e cada uma delas utiliza 1 core e 1 GB de memória.
 
-Embora aplicações de \textit{Big Data} geralmente possuem dependência de memória, outros fatores como a utilização de CPU e E/S podem influenciar no desempenho. Na busca de comprovações de que a solução apresenta ganhos quando utilizada com aplicações de diferentes características, decidiu-se pela utilização de 3 aplicações de \textit{benchmark}, cada uma com diferentes requisições de memória, CPU e E/S.
-
-As aplicações são as seguintes:
-\begin{itemize}
-	\item TeraSort: o objetivo do TeraSort \citep{TeraSort2008} é ordenar um conjunto de dados o mais rápido possível. Este \textit{benchmark} de ordenação estressa tanto a memória como o CPU em virtude das comparações e armazenamento temporário;
-	\item WordCount: o \textit{benchmark} WordCount é um exemplo básico de \textit{MapReduce}. Seu objetivo é contar o número de ocorrências de cada palavra de um texto. Como a utilização de memória e E/S é limitada nesta aplicação (tanto na etapa de processamento como a saída da aplicação possuem estruturas pequenas em comparação ao arquivo de entrada), o desempenho desta aplicação é determinado pelo CPU;
-	\item TestDFSIO: o \textit{benchmark} TestDFSIO é um teste de leitura e escrita para o HDFS. Este \textit{benchmark} é útil para estressas o HDFS, descobrir \textit{bottlenecks} na rede, SO e configuração do Hadoop. O objetivo é prover uma mensuração de quão rápido o \textit{cluster} é em termos de E/S. Tanto a memória quanto o CPU são pouco utilizados.
-\end{itemize}
-
-Utilizou-se das aplicações implementadas no \textit{HiBench}, um conjunto de \textit{benchmarks} para \textit{clusters} Hadoop \cite{HiBench}. O tamanho de entrada utilizado para cada aplicação foi: um conjunto de dados de 15 GB para o Terasort, 90 arquivos de 250 MB para o TestDFSIO e um arquivo de 10 GB para o WordCount. 
-
-\subsection{Casos de Teste}
-Os seguintes casos de teste foram criados e configurados para os experimentos:
-
-\textbf{Caso A:} representa uma situação sem compartilhamento, onde o usuário possui acesso à todos os recursos do \textit{cluster} em qualquer momento. Isto implica que os recursos informados ao escalonador \textbf{sempre} corresponderão aos recursos disponíveis para o Hadoop. Consideram-se recursos informados como os dados que o escalonador utiliza para realizar suas políticas de escalonamento, enquanto, recursos disponíveis são aqueles estão livres e/ou sendo utilizados pelo próprio Hadoop. Utilizando uma notação percentual, os recursos informados são de 100\% e os recursos disponíveis são de 100\% durante toda execução.
-
-\textbf{Caso B:} representa a situação decorrente do compartilhamento dos nós do \textit{cluster} com outros usuários. Como consequência do compartilhamento, é possível que em, algum momento, ocorra uma inconsistência entre a quantidade de recursos informada e disponível. Este caso aplica o comportamento padrão do Hadoop, no qual os recursos são informados por meio de arquivos XML \textbf{somente} na inicialização do serviço e nunca são atualizados. Em notação percentual, os recursos informados são de 100\%, porém os recursos disponíveis são de 50\%.
-
-\textbf{Caso C:} repete as especificações do Caso B, porém possui a implementação descrita no Capítulo \ref{cap:desen}. Este caso representa a situação de quando outra aplicação é lançada \textbf{antes} da ocorrência da coleta e transmissão de dados, ou seja, quando uma nova aplicação for submetida ao \textit{cluster}, este já estará com os dados atualizados. Em notação percentual, os recursos informados são de 50\% e os recursos disponíveis são de 50\%.
-
-\textbf{Caso D:} representa uma extensão do Caso C em que a inicialização de outra aplicação ocorre \textbf{após} a coleta e transmissão dos dados e \textbf{antes} da submissão de uma aplicação, ou seja, a aplicação será lançada numa situação onde o \textit{cluster} possui a informação errada (Caso B) e terá de se adaptar à nova configuração dos recursos (Caso C) durante a execução. Em notação percentual, os recursos informados no início da aplicação são de 100\%, enquanto os recursos disponíveis são de 50\%. Após a coleta e transmissão de dados os recursos informados também passam a ser 50\%.
 
 \subsection{Resultados e Interpretações}
 The comparison of node memory from default and collector implementation can be seen in the table \ref{tab:experiments}.
