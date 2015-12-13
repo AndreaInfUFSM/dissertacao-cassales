@@ -241,7 +241,7 @@ Mais uma vez as execuções do caso MyDur apresentam uma melhora entre 36\% e 24
 Uma vez que os experimentos anteriores já responderam algumas questões importantes sobre a viabilidade da solução implementada, este experimento foi realizado com objetivo de analisar se as melhorias no escalonamento são mantidas quando o Hadoop é utilizado em um ambiente ou com uma entrada de dados maior. O experimento utiliza a solução descrita no Capítulo \ref{cap:desen}. A situação expressada com este experimento é de quando os nós do \textit{cluster} começam a ser utilizados por outros usuários antes/durante a aplicação \textit{MapReduce}.
 
 \subsection{Procedimentos}
-Neste experimento buscou-se analisar o comportamento da solução em um ambiente compartilhado de maior escala que nos experimentos anteriores. Foram feitos 2 experimentos distintos, um com escala de aplicação outro com escala de ambiente. Para a escala de aplicação a única diferença das configurações foi o tamanho da entrada, sendo utilizada uma entrada de 32 Gb para o TeraSort. Para a escala de ambiente, utilizou-se um \textit{cluster} com X escravos, sendo que a proporção de recursos reduzidos/livres continuou a mesma. 
+Neste experimento buscou-se analisar o comportamento da solução em um ambiente compartilhado de maior escala que nos experimentos anteriores. Foram feitos 2 experimentos distintos, um com escala de aplicação outro com escala de ambiente. Para a escala de aplicação a única diferença das configurações foi o tamanho da entrada, sendo utilizada uma entrada de 32 Gb para o TeraSort. Para a escala de ambiente, utilizou-se um \textit{cluster} com 10 escravos e entrada de 40 Gb, sendo que a proporção de recursos reduzidos/livres continuou a mesma. 
 
 \subsection{Resultados e Interpretações}
 Os resultados dos experimentos em escala (de entrada e de ambiente) com a aplicação TeraSort podem ser visualizados nas Tabelas \ref{tab:exp3TS} e \ref{tab:exp31TS} e nas Figuras \ref{fig:exp3TS} e \ref{fig:exp31TS}, respectivamente.
@@ -269,10 +269,10 @@ Os resultados dos experimentos em escala (de entrada e de ambiente) com a aplica
 		%\toprule
 		\textbf{Caso} & \textbf{DefDed} & \textbf{DefSha} & \textbf{MyBef} & \textbf{MyDur}\\
 		\hline
-		Tempo Total de Map ({\it{s}}) & 1357 & 4627 & 2060 & 2184 \\
+		Tempo Total de Map ({\it{s}}) & 256 & 1791 & 678 & 993 \\
 		Tempo Médio de Map ({\it{s}}) & 43.39 & 299.70 & 45.36 & 65.00 \\
-		\# Tarefas Map & 240 & 240 & 240 & 240 \\
-		\# Tarefas Especulativas & 1 & 27 & 0 & 5 \\
+		\# Tarefas Map & 298 & 298 & 298 & 298 \\
+		\# Tarefas Especulativas & 2 & 26 & 1 & 1 \\
 		%\botrule
 	\end{tabular*}
 \end{table}

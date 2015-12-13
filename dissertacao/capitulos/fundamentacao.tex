@@ -42,7 +42,7 @@ Sendo o componente do Apache Hadoop responsável pela execução do \emph{MapRed
 
 O primeiro é um componente do Node Manager, que possui o papel de um escalonador interno de cada aplicação (Application Master - apresentado na imagem como App Mstr), sendo também referenciado como escalonador de tarefas. Considera-se que tarefas sejam uma fração do processamento das aplicações, ou seja, cada tarefa de Map ou Reduce corresponde a uma das divisões que serão processadas em paralelo. É importante não confundir este componente com o escalonador de aplicações, o qual pertence ao Resource Manager e pode ser melhor compreendido com a leitura da Seção \ref{sec:HadSched}. O outro componente presente na figura é o Container, o qual representa a alocação de recursos em um nó qualquer do \textit{cluster}. A importância do container vem do fato de que todas as tarefas são executadas em uma de suas instâncias.
 
-É importante notar que existem 2 instâncias de Application Master na figura e que elas estão, assim como os clientes e os containers, coloridas de rosa ou roxo para indicar que pertencem à mesma aplicação, ou seja, o cliente rosa lançou uma aplicação que possui o Application Master e mais 3 containers de processamento. Nota-se também que o Resource Manager recebe informações tanto dos clientes quanto dos Node Managers e Application Masters, centralizando todas elas para um controle dos recursos disponíveis.
+É importante notar que existem 2 instâncias de Application Master na figura e que elas estão, assim como os clientes e os containers, coloridas de rosa ou roxo para indicar que pertencem à mesma aplicação, ou seja, o cliente rosa lançou uma aplicação que possui o Application Master e mais 3 \textit{containers} de processamento. Nota-se também que o Resource Manager recebe informações tanto dos clientes quanto dos Node Managers e Application Masters, centralizando todas elas para um controle dos recursos disponíveis.
 
 \subsubsection{Configuração do ambiente de execução do Hadoop}
 Uma característica importante do Hadoop tem relação com sua configuração. O Hadoop utiliza uma série de arquivos em cada um dos nós do \textit{cluster} para definir sua configuração. Estes arquivos de configuração são, na verdade, arquivos XML compostos por parâmetros de configuração e valores que influenciam o comportamento do \textit{framework} no \textit{cluster}. Para conhecimento, esses arquivos são: \textit{core-site.xml, yarn-site.xml, mapred-site.xml} e \textit{hdfs-site.xml}. Cada um destes arquivos possui propriedades de um serviço do Hadoop, como exemplo o arquivo \textit{hdfs-site.xml} é responsável pela configuração do HDFS na máquina e permite a configuração de parâmetros como o tamanho dos blocos e a replicação dos dados.
@@ -115,49 +115,50 @@ Nota-se que, no geral, as propostas de melhora da adaptabilidade apresentadas pe
 
 Ainda que a opção 3 assemelhe-se com a opção 1, é importante diferenciar a natureza delas. Enquanto a opção 1 classifica os nós em diversas categorias, a opção 3 apenas delega mais dados e, consequentemente, mais tarefas aos nós mais rápidos. Embora pareça uma solução mais simples ela evita transferência de dados pela rede, o que aconteceria caso a divisão dos dados para os nós fosse igualitária. No caso dos nós receberem uma quantidade igual de dados inicialmente, os nós mais rápidos terminariam o processamento primeiro e ficariam ociosos até que algum dado fosse transferido para eles.
 
-%
-%\section{TABELA}
-%%Tabela dos casos
-%\begin{table}[!h]
-%	\centering
-%	\begin{tabular}{|p{3.0cm}|p{6.0cm}|p{6.0cm}|}
-%		\hline
-%		Situação & Default & Trabalho \\
-%		\hline
-%		Falha nó (morto) & perde tasks (precisa reiniciar quando tiver recursos) e desregistra NM (diminui recursos) & Idem default\\
-%		\hline
-%		Novo nó (registro) & registar novo NM. Aumenta recursos e escalona tasks que estavam esperando & Idem default\\
-%		\hline
-%		Nó inicia compartilhamento (- recurso) & \textbf{não reage}, continua alocando containers como se estivesse tudo disponível & \textbf{diminui o recurso do nó. Não afeta containers já alocados, mas só irá alocar quando possuir recurso disponível}\\
-%		\hline
-%		Nó termina compartilhamento (+ recurso) &\textbf{não reage}, se o nó já estava configurado para utilizar apenas uma parte ele não irá passar a ocupar todos recursos & \textbf{aumenta o recurso do nó. Inicia nova rodada de escalonamento, é como se um novo nó entrasse}\\
-%		\hline
-%		Cluster heterogêneo & tem que alterar as propriedades dos recursos no XML de todos escravos refletindo as configurações dos nós. Caso contrário existirão nós sobrecarregados ou subutilizados. & Cada nó tera a informação correta. Ganho de desempenho por não sobrecarregar nem subutilizar.\\
-%		\hline
-%		
-%	\end{tabular}
-%	\caption{tabela de casos}
-%	\label{tab:memory allocation}
-%\end{table}
-%
-%%Tabela dos testes
-%\begin{table}[!h]
-%	\centering
-%	\begin{tabular}{|p{2.5cm}|p{3.5cm}|p{4.5cm}|p{4.0cm}|}
-%		\hline
-%		Teste & Representa.. & Metodologia & Ponto fraco\\
-%		\hline
-%		Enganar escalonador para achar que tem mais recursos & cluster compartilhado no momento do início da utilização por outro usuário & inicia x nós com recursos informados dobrados, atualiza durante a primeira leva de containers para valor correto & desta forma é necessário utilizar apenas x/2 nós em relação ao caso A. Pode confundir com um caso de falha de nós\\
-%		\hline
-%		Nó compartilhado de verdade com informação errada (overload)& cluster compartilhado no momento do início da utilização por outro usuário & reduzir algum recurso de forma que fique indisponível durante a execução. Opções: baloon(MV) - memória, thread - cpu & como garantir que a memória/cpu estará realmente indisponível? quantidade de trabalho extra para realizar o teste\\
-%		\hline
-%		Enganar escalonador para achar que tem menos recursos & cluster compartilhado no momento do fim da utilização por outro usuário & inicia x nós com recursos informados de x/2, atualiza durante a primeira leva de containers para valor correto & Caso muito improvável, administrador configura o cluster para o Hadoop utilizar apenas uma parte dos recursos dos nós.\\
-%		\hline
-%		Nó compartilhado de verdade com informação errada (underload)& cluster compartilhado no momento do fim da utilização por outro usuário & reduzir algum recurso de forma que fique indisponível antes do início e torná-lo disponível durante execução. Opções: baloon(MV) - memória, thread - cpu & como garantir que a memória/cpu estará realmente indisponível? quantidade de trabalho extra para realizar o teste\\
-%		\hline
-%		Teste completo inicia e termina compartilhamento em momentos diferentes durante execução & cluster compartilhado & Inicia com 75\% disponível, reduz recurso durante execução de forma que fique sobrecarregado e aumenta recurso durante execução de forma que fique sub utilizado. Opções: {várias combinações} possíveis de \% & Só é possível fazer sem enganar o cluster. Precisa dos outros testes com controle de recursos funcionando\\
-%		\hline
-%	\end{tabular}
-%	\caption{tabela de testes}
-%	\label{tab:memory allocation2}
-%\end{table}
+\newpage
+
+\section{TABELA}
+%Tabela dos casos
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{|p{3.0cm}|p{6.0cm}|p{6.0cm}|}
+		\hline
+		Situação & Default & Trabalho \\
+		\hline
+		Falha nó (morto) & perde tasks (precisa reiniciar quando tiver recursos) e desregistra NM (diminui recursos) & Idem default\\
+		\hline
+		Novo nó (registro) & registar novo NM. Aumenta recursos e escalona tasks que estavam esperando & Idem default\\
+		\hline
+		Nó inicia compartilhamento (- recurso) & \textbf{não reage}, continua alocando containers como se estivesse tudo disponível & \textbf{diminui o recurso do nó. Não afeta containers já alocados, mas só irá alocar quando possuir recurso disponível}\\
+		\hline
+		Nó termina compartilhamento (+ recurso) &\textbf{não reage}, se o nó já estava configurado para utilizar apenas uma parte ele não irá passar a ocupar todos recursos & \textbf{aumenta o recurso do nó. Inicia nova rodada de escalonamento, é como se um novo nó entrasse}\\
+		\hline
+		Cluster heterogêneo & tem que alterar as propriedades dos recursos no XML de todos escravos refletindo as configurações dos nós. Caso contrário existirão nós sobrecarregados ou subutilizados. & Cada nó tera a informação correta. Ganho de desempenho por não sobrecarregar nem subutilizar.\\
+		\hline
+		
+	\end{tabular}
+	\caption{tabela de casos}
+	\label{tab:memory allocation}
+\end{table}
+
+%Tabela dos testes
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{|p{2.5cm}|p{3.5cm}|p{4.5cm}|p{4.0cm}|}
+		\hline
+		Teste & Representa.. & Metodologia & Ponto fraco\\
+		\hline
+		Enganar escalonador para achar que tem mais recursos & cluster compartilhado no momento do início da utilização por outro usuário & inicia x nós com recursos informados dobrados, atualiza durante a primeira leva de containers para valor correto & desta forma é necessário utilizar apenas x/2 nós em relação ao caso A. Pode confundir com um caso de falha de nós\\
+		\hline
+		Nó compartilhado de verdade com informação errada (overload)& cluster compartilhado no momento do início da utilização por outro usuário & reduzir algum recurso de forma que fique indisponível durante a execução. Opções: baloon(MV) - memória, thread - cpu & como garantir que a memória/cpu estará realmente indisponível? quantidade de trabalho extra para realizar o teste\\
+		\hline
+		Enganar escalonador para achar que tem menos recursos & cluster compartilhado no momento do fim da utilização por outro usuário & inicia x nós com recursos informados de x/2, atualiza durante a primeira leva de containers para valor correto & Caso muito improvável, administrador configura o cluster para o Hadoop utilizar apenas uma parte dos recursos dos nós.\\
+		\hline
+		Nó compartilhado de verdade com informação errada (underload)& cluster compartilhado no momento do fim da utilização por outro usuário & reduzir algum recurso de forma que fique indisponível antes do início e torná-lo disponível durante execução. Opções: baloon(MV) - memória, thread - cpu & como garantir que a memória/cpu estará realmente indisponível? quantidade de trabalho extra para realizar o teste\\
+		\hline
+		Teste completo inicia e termina compartilhamento em momentos diferentes durante execução & cluster compartilhado & Inicia com 75\% disponível, reduz recurso durante execução de forma que fique sobrecarregado e aumenta recurso durante execução de forma que fique sub utilizado. Opções: {várias combinações} possíveis de \% & Só é possível fazer sem enganar o cluster. Precisa dos outros testes com controle de recursos funcionando\\
+		\hline
+	\end{tabular}
+	\caption{tabela de testes}
+	\label{tab:memory allocation2}
+\end{table}
