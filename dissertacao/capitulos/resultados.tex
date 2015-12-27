@@ -10,13 +10,13 @@ Em virtude de algumas informações sobre os experimentos serem comuns à todos 
 \label{sec:casosteste}
 A primeira informação relevante que refere-se à todos experimentos são os casos de teste. Todos os experimentos utilizam os mesmos casos de teste, possuindo apenas objetivos diferentes. Os casos de teste representam situações de compartilhamento, sendo que 2 casos utilizam a implementação padrão e 2 casos utilizam a solução proposta por este trabalho. Além disso, com a criação dos casos de teste buscou-se facilitar a comparação entre os resultados alcançados. A descrição dos casos de testes encontra-se a seguir.
 
+\textbf{Caso Adaptativo com atualização antes (AdaptBef):} repete as especificações do Caso DefSha, porém possui a implementação descrita no Capítulo \ref{cap:desen}. Este caso representa a situação de quando o início do compartilhamento ocorre \textbf{antes} da coleta e transmissão de dados, a qual ocorre também \textbf{antes} do lançamento de uma aplicação \textit{MapReduce}. Em ordem cronológica, primeiramente outro usuário inicia a utilização do \textit{cluster}, então a coleta e transmissão de dados ocorre, e finalmente uma aplicação Hadoop é lançada. O resultado desta sequência de eventos é que quando a nova aplicação \textit{MapReduce} for submetida ao \textit{cluster}, este já estará com os dados atualizados. Em notação percentual, os recursos informados são de 62,5\% e os recursos disponíveis são de 62,5\% durante toda aplicação.
+
+\textbf{Caso Adaptativo com atualização durante (AdaptDur):} representa uma extensão do Caso MyBef (também utilizando a implementação do Capítulo \ref{cap:desen}) na qual o início do compartilhamento ocorre \textbf{antes} da coleta e transmissão dos dados e \textbf{após} a submissão de uma aplicação \textit{MapReduce}. Em ordem cronológica, ocorre o lançamento de uma aplicação \textit{MapReduce}, então quando esta aplicação já está em execução o compartilhamento tem início e finalmente a coleta e transmissão de dados é feita. O resultado desta sequência de eventos é que a aplicação será lançada numa situação onde o \textit{cluster} possui a informação errada (Caso DefSha) e terá de se adaptar à nova configuração dos recursos (Caso MyBef) durante a execução. Em notação percentual, os recursos informados no início da aplicação são de 100\%, enquanto os recursos disponíveis são de 62,5\%. Após a coleta e transmissão de dados os recursos informados também passam a ser 62,5\%.
+
 \textbf{Caso \textit{Default} Dedicado (DefDed):} utiliza a versão sem alterações do Hadoop e representa uma situação sem compartilhamento, onde o usuário possui acesso à todos os recursos do \textit{cluster} em qualquer momento. Isto implica que os recursos informados ao escalonador \textbf{sempre} corresponderão aos recursos disponíveis para o Hadoop. Consideram-se recursos informados como os dados que o escalonador utiliza para realizar suas políticas de escalonamento, enquanto, recursos disponíveis são aqueles que estão livres e/ou sendo utilizados pelo próprio Hadoop. Utilizando uma notação percentual, os recursos informados são de 100\% e os recursos disponíveis são de 100\% durante toda execução.
 
 \textbf{Caso \textit{Default} Compartilhado (DefSha):} utiliza a versão sem alterações do Hadoop e representa a situação decorrente do compartilhamento dos nós do \textit{cluster} com outros usuários. Como consequência do compartilhamento, é possível que em, algum momento, ocorra uma inconsistência entre a quantidade de recursos informada e disponível. Este caso aplica o comportamento padrão do Hadoop, no qual os recursos são informados por meio de arquivos XML \textbf{somente} na inicialização do serviço e nunca são atualizados. Para representar a situação onde apenas alguns nós são utilizados, optou-se por deixar alguns nós inalterados e outros com redução de recursos. Nos experimentos de 4 escravos, 2 nós tiveram 6 \textit{cores} e 6 Gb de RAM reduzidos através de um código C, restando 2Gb e 2 \textit{cores} para o SO e Hadoop. No contexto do cluster, os recursos informados são de 100\% enquanto os disponíveis são de 62,5\%.
-
-\textbf{Caso Adaptativo com atualização antes (MyBef):} repete as especificações do Caso DefSha, porém possui a implementação descrita no Capítulo \ref{cap:desen}. Este caso representa a situação de quando o início do compartilhamento ocorre \textbf{antes} da coleta e transmissão de dados, a qual ocorre também \textbf{antes} do lançamento de uma aplicação \textit{MapReduce}. Em ordem cronológica, primeiramente outro usuário inicia a utilização do \textit{cluster}, então a coleta e transmissão de dados ocorre, e finalmente uma aplicação Hadoop é lançada. O resultado desta sequência de eventos é que quando a nova aplicação \textit{MapReduce} for submetida ao \textit{cluster}, este já estará com os dados atualizados. Em notação percentual, os recursos informados são de 62,5\% e os recursos disponíveis são de 62,5\% durante toda aplicação.
-
-\textbf{Caso Adaptativo com atualização durante (MyDur):} representa uma extensão do Caso MyBef (também utilizando a implementação do Capítulo \ref{cap:desen}) na qual o início do compartilhamento ocorre \textbf{antes} da coleta e transmissão dos dados e \textbf{após} a submissão de uma aplicação \textit{MapReduce}. Em ordem cronológica, ocorre o lançamento de uma aplicação \textit{MapReduce}, então quando esta aplicação já está em execução o compartilhamento tem início e finalmente a coleta e transmissão de dados é feita. O resultado desta sequência de eventos é que a aplicação será lançada numa situação onde o \textit{cluster} possui a informação errada (Caso DefSha) e terá de se adaptar à nova configuração dos recursos (Caso MyBef) durante a execução. Em notação percentual, os recursos informados no início da aplicação são de 100\%, enquanto os recursos disponíveis são de 62,5\%. Após a coleta e transmissão de dados os recursos informados também passam a ser 62,5\%.
 
 \subsection{Aplicações de teste}
 \label{sec:aplicacoes}
@@ -101,21 +101,21 @@ Os resultados dos experimentos com as aplicações TeraSort, TestDFSIO e WordCou
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[height=15cm]{figuras/TeraSort.png}
+	\includegraphics[height=15cm]{figuras/TS-simul.png}
 	\caption{Diagrama de Gantt para os experimentos controlados com TeraSort}
 	\label{fig:exp1TS}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[height=15cm]{figuras/DFSIO.png}%[width=1\textwidth]
+	\includegraphics[height=15cm]{figuras/DFS-simul.png} %[width=1\textwidth]
 	\caption{Diagrama de Gantt para os experimentos controlados com TestDFSIO}
 	\label{fig:exp1IO}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[height=15cm]{figuras/WC.png}
+	\includegraphics[height=15cm]{figuras/WC-simul.png}
 	\caption{Diagrama de Gantt para os experimentos controlados com WordCount}
 	\label{fig:exp1WC}
 \end{figure}
@@ -208,7 +208,7 @@ Os resultados dos experimentos com as aplicações TeraSort, TestDFSIO e WordCou
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[height=15cm]{figuras/DFSIO-real.png}
+	\includegraphics[height=15cm]{figuras/DFS-real.png}
 	\caption{Diagrama de Gantt para os experimentos reais com TestDFSIO}
 	\label{fig:exp2IO}
 \end{figure}
@@ -269,8 +269,8 @@ Os resultados dos experimentos em escala (de entrada e de ambiente) com a aplica
 		%\toprule
 		\textbf{Caso} & \textbf{DefDed} & \textbf{DefSha} & \textbf{MyBef} & \textbf{MyDur}\\
 		\hline
-		Tempo Total de Map ({\it{s}}) & 256 & 1791 & 678 & 993 \\
-		Tempo Médio de Map ({\it{s}}) & 43.39 & 299.70 & 45.36 & 65.00 \\
+		Tempo Total de Map ({\it{s}}) & 273 & 2138 & 743 & 1421 \\
+		Tempo Médio de Map ({\it{s}}) & 55.69 & 322.66 & 51.49 & 85.35 \\
 		\# Tarefas Map & 298 & 298 & 298 & 298 \\
 		\# Tarefas Especulativas & 2 & 26 & 1 & 1 \\
 		%\botrule
@@ -285,16 +285,23 @@ Os resultados dos experimentos em escala (de entrada e de ambiente) com a aplica
     \caption{Diagrama de Gantt para o experimento em escala (tamanho da entrada) com TeraSort}
 	\label{fig:exp3TS}
 
-	\includegraphics[width=1\textwidth]{figuras/TS-esc-ent.png}
+	\includegraphics[width=1\textwidth]{figuras/TS-esc-amb.png}
     \caption{Diagrama de Gantt para o experimento em escala (tamanho do ambiente) com TeraSort}
 	\label{fig:exp31TS}	
 \end{sidewaysfigure}
 
+No experimento realizado com o tamanho da entrada maior pode-se notar que o caso MyBef apresentou um tempo de execução mais rápido que o esperado. O tempo de execução atingido foi aproximadamente 50\% maior comparado com o caso DefDed, porém o esperado era de 100\%. Este valor era esperado pois no caso MyBef a configuração dos recursos alocáveis é de 2 escravos com 1Gb/core e 2 escravos com 7Gb/cores enquanto a configuração dos recursos alocáveis no caso DefDed é de 4 escravos com 8Gb/cores. Este resultado sugere que desconsiderar os recursos utilizados pelo sistema operacional e serviços do Hadoop já cria uma sobrecarga no nó, porém esta só é perceptível em aplicações que possuem um tempo de execução mais elevado. 
 
+Nota-se, mais uma vez, que os tempos de execução das aplicações apresenta a ordem DefDed, MyBef, MyDur e DefSha. Contudo, neste experimento a diferença de tempo entre os casos DefSha e MyBef, tanto do tempo total como do tempo médio dos \textit{containers} é maior, sugerindo que a solução deste trabalho possui uma efetividade diretamente proporcional ao tamanho da aplicação que é executada. Ainda, o número de tarefas especulativas nos casos DefSha foi muito maior se comparado com os casos onde a solução deste estudo foi implementada.
 
-No experimento realizado com o tamanho da entrada maior pode-se notar que o caso MyBef apresentou um tempo de execução mais rápido que o experado. O tempo de execução atingido foi aproximadamente 50\% maior comparado com o caso DefDed, porém o esperado era de 100\%. Este valor era esperado pois no caso MyBef a configuração dos recursos alocáveis é de 2 escravos com 1Gb/core e 2 escravos com 7Gb/cores enquanto a configuração dos recursos alocáveis no caso DefDed é de 4 escravos com 8Gb/cores. Este resultado sugere que desconsiderar os recursos utilizados pelo sistema operacional e serviços do Hadoop já cria uma sobrecarga no nó, porém esta só é facilmente perceptível em aplicações que possuem um tempo de execução mais elevado. Este mesmo motivo pode ser a causa do caso MyBef não apresentar tarefas especulativas, enquanto o caso DefDed apresenta 1.
+Os diagramas de Gantt dos experimentos em escala possibilitaram a identificação de outra característica relacionada ao escalonamento, porém esta é uma falha na solução deste estudo. No caso AdaptDur, tanto na escala de entrada como de tamanho do ambiente, é possível identificar zonas onde os nós não sobrecarregados possuem poucos (0-4) \textit{containers}. Este comportamento é causado por uma peculiaridade do Capacity Scheduler, o qual relega o lançamento de \textit{containers} para as filas. Antes da decisão de lançar o \textit{container} ou não, existe um teste que, ao contrário do inicialmente esperado, testa se o total de recursos utilizados \textbf{do \textit{cluster}} é menor que o total de recursos informados. Uma vez que o teste ignora a situação dos recursos específicos de cada nó e é feito com a situação dos recursos do \textit{cluster}, a atualização da capacidade de alguns nós fará com que os recursos utilizados sejam maiores que a capacidade total do \textit{cluster}.
 
-Nota-se, mais uma vez, que os tempos de execução das aplicações apresenta a ordem DefDed, MyBef, MyDur e DefSha. Contudo, neste experimento a diferença de tempo entre os casos DefDed e MyBef, tanto do tempo total como do tempo médio dos \textit{containers} é maior, sugerindo que a solução deste trabalho possui uma efetividade diretamente proporcional ao tamanho da aplicação que é executada.
+O processo de lançamento sofre influência do recurso de cada nó informado ao escalonador, porém a influência da atualização dos recursos não é local, no sentido de afetar somente o lançamento de \textit{containers} do próprio nó que foi atualizado, mas sim global. Isso implica que a atualização dos recursos de 1 nó infuenciará em todos os \textit{containers} que serão lançados, independentemente de serem lançado ou não no nó que teve seus recursos atualizados. Por exemplo, todos os nós terão inicialmente 7 Gbs de memória e 7 \textit{cores} disponíveis, fazendo com que o \textit{cluster} tenha um total de 70 Gbs e 70 cores. Assim, serão alocados 70 \textit{containers} de 1 Gb de memória e 1 \textit{core} cada. Após o término da alocação, 5 destes nós sofrem atualização dos recursos informados ao escalonador, deixando o \textit{cluster} com um total de 55 Gb e 55 \textit{cores}. Porém, existem 70 \textit{containers} em execução, o que significa que a quantidade de recursos utilizados é de  70 Gb e 70 \textit{cores}. Mesmo que cada um dos 5 nós não sobrecarregados utilizem apenas 2 Gb e 2 \textit{cores} (dos seus 7 disponíveis), caso os \textit{containers} alocados aos nós sobrecarregados não terminem, a utilização do \textit{cluster} continuará acima de 100\% (60 Gb e 60 \textit{cores} usados, 55 Gb e 55 \textit{cores} informados), e portanto, nenhum novo \textit{container} será lançado por mais que existam recursos ociosos em alguns nós.
+
+Para seguir o objetivo inicial de não fazer grandes modificações no algoritmo de escalonamento, seria necessário um controle intermediário da quantidade de recursos disponíveis para o Hadoop e a quantidade de recursos atualmente sendo utilizada pelo Hadoop. Fazendo a redução desta informação no escalonador de forma gradual, à medida que os \textit{containers} finalizam seu processamento. Se este controle for implementado, o problema identificado nestes diagramas de Gantt seria eliminado e não haveriam recursos ociosos em nenhum momento.
+
+Ainda assim, os casos que utilizam a solução deste estudo apresentaram um desempenho melhor que a distribuição \textit{default} do Hadoop.
+
 
 HAHAHA
 
