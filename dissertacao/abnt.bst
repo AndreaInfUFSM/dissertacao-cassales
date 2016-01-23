@@ -1303,7 +1303,8 @@ FUNCTION {make.label}
 		year year.char *
 	} if$ *
 	")" *
-	get.labelstring.all *
+	%get.labelstring.all *
+  get.labelstring *
 	#1 entry.max$ substring$
 	#1 global.max$ substring$
 	'label :=

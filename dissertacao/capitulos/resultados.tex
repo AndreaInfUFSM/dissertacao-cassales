@@ -55,7 +55,7 @@ Os resultados dos experimentos com as aplicações TeraSort, TestDFSIO e WordCou
 
 \begin{table}[!ht]
 	\caption{Resumo dos resultados do TeraSort controlado em segundos.} \label{tab:exp1TS}
-	\begin{tabular*}{\hsize}{lllll}
+	\begin{tabular*}{\hsize}{l|llll}
 		\textbf{Caso} & \textbf{DefDed} & \textbf{DefSha} & \textbf{AdaptBef} & \textbf{AdaptDur}\\
 		\hline
 		Tempo Total de Map ({\it{s}}) & 149 & 788 & 348 & 477 \\
@@ -67,7 +67,7 @@ Os resultados dos experimentos com as aplicações TeraSort, TestDFSIO e WordCou
 
 \begin{table}[!ht]
 	\caption{Resumo dos resultados do TestDFSIO controlado em segundos.} \label{tab:exp1IO}
-	\begin{tabular*}{\hsize}{lllll}
+	\begin{tabular*}{\hsize}{l|llll}
 		\textbf{Caso} & \textbf{DefDed} & \textbf{DefSha} & \textbf{AdaptBef} & \textbf{AdaptDur}\\
 		\hline
 		Tempo Total de Map ({\it{s}}) & 139 & 444 & 239 & 364 \\
@@ -80,7 +80,7 @@ Os resultados dos experimentos com as aplicações TeraSort, TestDFSIO e WordCou
 
 \begin{table}[!ht]
 	\caption{Resumo dos resultados do WordCount controlado em segundos.} \label{tab:exp1WC}
-	\begin{tabular*}{\hsize}{lllll}
+	\begin{tabular*}{\hsize}{l|llll}
 		\textbf{Caso} & \textbf{DefDed} & \textbf{DefSha} & \textbf{AdaptBef} & \textbf{AdaptDur}\\
 		\hline
 		Tempo Total de Map ({\it{s}}) & 155 & 1009 & 309 & 805 \\
@@ -92,21 +92,21 @@ Os resultados dos experimentos com as aplicações TeraSort, TestDFSIO e WordCou
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[height=15cm]{figuras/TS-simul.png}
+	\includegraphics[width=\textwidth]{figuras/TS-simul.png}
 	\caption{Diagrama de Gantt para os experimentos controlados com TeraSort}
 	\label{fig:exp1TS}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[height=15cm]{figuras/DFS-simul.png} 
+	\includegraphics[width=\textwidth]{figuras/DFS-simul.png} %
 	\caption{Diagrama de Gantt para os experimentos controlados com TestDFSIO}
 	\label{fig:exp1IO}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[height=15cm]{figuras/WC-simul.png}
+	\includegraphics[width=\textwidth]{figuras/WC-simul.png}
 	\caption{Diagrama de Gantt para os experimentos controlados com WordCount}
 	\label{fig:exp1WC}
 \end{figure}
@@ -144,9 +144,9 @@ Diferentemente do experimento anterior, neste experimento buscou-se o comportame
 \subsection{Resultados e Interpretações}
 Os resultados dos experimentos com as aplicações TeraSort, TestDFSIO e WordCount podem ser visualizados nas Tabelas \ref{tab:exp2TS}, \ref{tab:exp2IO} e \ref{tab:exp2WC} e nas Figuras \ref{fig:exp2TS}, \ref{fig:exp2IO} e \ref{fig:exp2WC}, respectivamente.
 
-\begin{table}[!ht]
+\begin{table}[h]
 	\caption{Resumo dos resultados do TeraSort real em segundos.} \label{tab:exp2TS}
-	\begin{tabular*}{\hsize}{lllll}
+	\begin{tabular*}{\hsize}{l|llll}
 		\textbf{Caso} & \textbf{DefDed} & \textbf{DefSha} & \textbf{AdaptBef} & \textbf{AdaptDur}\\
 		\hline
 		Tempo Total de Map ({\it{s}}) & 281 & 1372 & 740 & 888 \\
@@ -156,9 +156,9 @@ Os resultados dos experimentos com as aplicações TeraSort, TestDFSIO e WordCou
 	\end{tabular*}
 \end{table}
 
-\begin{table}[!ht]
+\begin{table}[ht]
 	\caption{Resumo dos resultados do TestDFSIO real em segundos.} \label{tab:exp2IO}
-	\begin{tabular*}{\hsize}{lllll}
+	\begin{tabular*}{\hsize}{l|llll}
 		\textbf{Caso} & \textbf{DefDed} & \textbf{DefSha} & \textbf{AdaptBef} & \textbf{AdaptDur}\\
 		\hline
 		Tempo Total de Map ({\it{s}}) & 194 & 674 & 264 & 431 \\
@@ -169,9 +169,9 @@ Os resultados dos experimentos com as aplicações TeraSort, TestDFSIO e WordCou
 \end{table}
 
 
-\begin{table}[!ht]
+\begin{table}[ht]
 	\caption{Resumo dos resultados do WordCount real em segundos.} \label{tab:exp2WC}
-	\begin{tabular*}{\hsize}{lllll}
+	\begin{tabular*}{\hsize}{l|llll}
 		\textbf{Caso} & \textbf{DefDed} & \textbf{DefSha} & \textbf{AdaptBef} & \textbf{AdaptDur}\\
 		\hline
 		Tempo Total de Map ({\it{s}}) & 153 & 533 & 361 & 396 \\
@@ -181,32 +181,36 @@ Os resultados dos experimentos com as aplicações TeraSort, TestDFSIO e WordCou
 	\end{tabular*}
 \end{table}
 
-\begin{figure}[!ht]
+Através da análise das tabelas e dos diagramas, nota-se que muitos padrões foram mantidos apesar da alteração de procedimento nos experimentos. Primeiramente, é importante notar que nas aplicações anteriores a sobrecarga dos nós era de 100\%, uma vez que o Hadoop estava tentando utilizar o dobro da capacidade. Na execução das aplicações deste experimento a sobrecarga é levemente menor, pois a informação passada ao Hadoop nos casos default não é alterada. A sobrecarga nestes experimentos é de aproximadamente 6 Gb de RAM e 6 cores, fazendo com que o nó, nos piores casos, tenha uma demanda de aproximadamente 14 Gb e 14 cores (sem considerar recursos requisitados pelo sistema operacional e serviços do Hadoop) alocada aos seus 8 Gb e 8 cores.
+
+Novamente, todas aplicações apresentam um comportamento similar com relação ao tempo total dos \textit{containers Map} e tempo médio destes: DefDed apresentou o menor tempo total e médio dos \textit{containers Map}, seguido pelos casos AdaptBef, AdaptDur e finalmente DefSha. Também seguindo o padrão do experimento anterior, os tempos médio de Map nos casos DefDed e AdaptBef são muito semelhantes não importando a aplicação analizada. Embora alguns padrões foram mantidos, a proporção de tempo entre os casos DefDed e AdaptBef não apresenta uma relação tão constante quanto no experimento anterior e algumas particularidades podem ser observadas nos diagramas. Ainda assim, estes dados iniciais sugerem que uma sobrecarga de alguns nós, mesmo em menor intensidade se comparado ao experimento anterior, deteriora significativamente o desempenho da aplicação.
+
+Com relação às tarefas especulativas, nota-se que neste experimento o caso DefSha apresentou um número alto de tarefas especulativas nas 3 aplicações, enquanto os demais casos mantiveram valores baixos salvo o caso AdaptDur na aplicação TestDFSIO. Os resultados deste experimento sugerem que embora a sobrecarga, com relação à demanda total, tenha sido menor, os efeitos provocados por ela foram mais visíveis, pois os casos onde a sobrecarga esteve presente durante toda aplicação apresentam um número elevado de tarefas especulativas.
+
+\clearpage
+\begin{sidewaysfigure}[!ht]
 	\centering
 	\includegraphics[width=1\textwidth]{figuras/TS-real.png}
 	\caption{Diagrama de Gantt para os experimentos reais com TeraSort}
 	\label{fig:exp2TS}
-\end{figure}
+\end{sidewaysfigure}
+\clearpage
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[height=15cm]{figuras/DFS-real.png}
+	\includegraphics[width=\textwidth]{figuras/DFS-real.png}
 	\caption{Diagrama de Gantt para os experimentos reais com TestDFSIO}
 	\label{fig:exp2IO}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[height=15cm]{figuras/WC-real.png}
+	\includegraphics[width=\textwidth]{figuras/WC-real.png}
 	\caption{Diagrama de Gantt para os experimentos reais com WordCount}
 	\label{fig:exp2WC}
 \end{figure}
 
-Através da análise das tabelas e dos diagramas, nota-se que muitos padrões foram mantidos apesar da alteração de procedimento nos experimentos. Primeiramente, é importante notar que nas aplicações anteriores a sobrecarga dos nós era de 100\%, uma vez que o Hadoop estava tentando utilizar o dobro da capacidade. Na execução das aplicações deste experimento a sobrecarga é levemente menor, pois a informação passada ao Hadoop nos casos default não é alterada. A sobrecarga nestes experimentos é de aproximadamente 6 Gb de RAM e 6 cores, fazendo com que o nó, nos piores casos, tenha uma demanda de aproximadamente 14 Gb e 14 cores (sem considerar recursos requisitados pelo sistema operacional e serviços do Hadoop) alocada aos seus 8 Gb e 8 cores.
 
-Novamente, todas aplicações apresentam um comportamento similar com relação ao tempo total dos \textit{containers Map} e tempo médio destes: DefDed apresentou o menor tempo total e médio dos \textit{containers Map}, seguido pelos casos AdaptBef, AdaptDur e finalmente DefSha. Também seguindo o padrão do experimento anterior, os tempos médio de Map nos casos DefDed e AdaptBef são muito semelhantes não importando a aplicação analizada. Embora alguns padrões foram mantidos, a proporção de tempo entre os casos DefDed e AdaptBef não apresenta uma relação tão constante quanto no experimento anterior e algumas particularidades podem ser observadas nos diagramas. Ainda assim, estes dados iniciais sugerem que uma sobrecarga de alguns nós, mesmo em menor intensidade se comparado ao experimento anterior, deteriora significativamente o desempenho da aplicação.
-
-Com relação às tarefas especulativas, nota-se que neste experimento o caso DefSha apresentou um número alto de tarefas especulativas nas 3 aplicações, enquanto os demais casos mantiveram valores baixos salvo o caso AdaptDur na aplicação TestDFSIO. Os resultados deste experimento sugerem que embora a sobrecarga, com relação à demanda total, tenha sido menor, os efeitos provocados por ela foram mais visíveis, pois os casos onde a sobrecarga esteve presente durante toda aplicação apresentam um número elevado de tarefas especulativas.
 
 Antes de realizar a análise dos diagramas deste experimento é necessário salientar uma característica importante, todos os diagramas a gerados para este experimento possuem no máximo 8 \textit{containers} em execução, enquanto no experimento anterior este valor era de 16. Além disso, os diagramas possuem características que permitem uma visualização das tarefas que originam tarefas especulativas e da reação à mudança de recursos nos nós. 
 
@@ -259,10 +263,13 @@ Os resultados dos experimentos em escala (de entrada e de ambiente) com a aplica
 
 \begin{sidewaysfigure}
     \centering
-	\includegraphics[width=1\textwidth]{figuras/TS-esc-ent.png}
+%	\includegraphics[width=1\textwidth]{figuras/TS-esc-ent.png}
+	\includegraphics[width=1\textwidth]{figuras/TS-esc-ent-cut.png}
     \caption{Diagrama de Gantt para o experimento em escala (tamanho da entrada) com TeraSort}
 	\label{fig:exp3TS}
+\end{sidewaysfigure}
 
+\begin{sidewaysfigure}
 	\includegraphics[width=1\textwidth]{figuras/TS-esc-amb.png}
     \caption{Diagrama de Gantt para o experimento em escala (tamanho do ambiente) com TeraSort}
 	\label{fig:exp31TS}	
@@ -276,10 +283,7 @@ Os diagramas de Gantt dos experimentos em escala possibilitaram a identificaçã
 
 O processo de lançamento sofre influência do recurso de cada nó informado ao escalonador, porém a influência da atualização dos recursos não é local, no sentido de afetar somente o lançamento de \textit{containers} do próprio nó que foi atualizado, mas sim global. Isso implica que a atualização dos recursos de 1 nó infuenciará em todos os \textit{containers} que serão lançados, independentemente de serem lançado ou não no nó que teve seus recursos atualizados. Por exemplo, todos os nós terão inicialmente 7 Gbs de memória e 7 \textit{cores} disponíveis, fazendo com que o \textit{cluster} tenha um total de 70 Gbs e 70 cores. Assim, serão alocados 70 \textit{containers} de 1 Gb de memória e 1 \textit{core} cada. Após o término da alocação, 5 destes nós sofrem atualização dos recursos informados ao escalonador, deixando o \textit{cluster} com um total de 55 Gb e 55 \textit{cores}. Porém, existem 70 \textit{containers} em execução, o que significa que a quantidade de recursos utilizados é de  70 Gb e 70 \textit{cores}. Mesmo que cada um dos 5 nós não sobrecarregados utilizem apenas 2 Gb e 2 \textit{cores} (dos seus 7 disponíveis), caso os \textit{containers} alocados aos nós sobrecarregados não terminem, a utilização do \textit{cluster} continuará acima de 100\% (60 Gb e 60 \textit{cores} usados, 55 Gb e 55 \textit{cores} informados), e portanto, nenhum novo \textit{container} será lançado por mais que existam recursos ociosos em alguns nós.
 
-Para seguir o objetivo inicial de não fazer grandes modificações no algoritmo de escalonamento, seria necessário um controle intermediário da quantidade de recursos disponíveis para o Hadoop e a quantidade de recursos atualmente sendo utilizada pelo Hadoop. Fazendo a redução desta informação no escalonador de forma gradual, à medida que os \textit{containers} finalizam seu processamento. Se este controle for implementado, o problema identificado nestes diagramas de Gantt seria eliminado e não haveriam recursos ociosos em nenhum momento. Ainda assim, os casos que utilizam a solução deste estudo apresentaram um desempenho superior quando comparados com o desempenho da distribuição \textit{default} do Hadoop.
-
-
-HAHAHA
+Para seguir o objetivo inicial de não fazer grandes modificações no algoritmo de escalonamento, seria necessário um controle intermediário da quantidade de recursos disponíveis para o Hadoop e a quantidade de recursos atualmente sendo utilizada pelo Hadoop. Fazendo a redução dos recursos no escalonador de forma gradual, à medida que os \textit{containers} sobrecarregados finalizam seu processamento. Se este controle for implementado, o problema identificado nestes diagramas de Gantt seria eliminado e não haveriam recursos ociosos em nenhum momento. Ainda assim, os casos que utilizam a solução deste estudo apresentaram um desempenho superior quando comparados com o desempenho da distribuição \textit{default} do Hadoop.
 
 
 %

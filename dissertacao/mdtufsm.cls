@@ -74,7 +74,7 @@
   \AtEndOfClass{
     \newcommand{\titlepagespecificinfo}{
         Disserta{\c{c}}{\~a}o apresentada ao Curso de Mestrado %em Computa{\c{c}}{\~a}o
-        Programa de \\ P\'{o}s-Gradua{\c{c}}{\~a}o em Inform\'{a}tica (PPGI), \'{A}rea de Concentra{\c{c}}{\~a}o em Computa{\c{c}}{\~a}o,  
+        do Programa de \\ P\'{o}s-Gradua{\c{c}}{\~a}o em Inform\'{a}tica (PPGI), \'{A}rea de Concentra{\c{c}}{\~a}o em Computa{\c{c}}{\~a}o,  
 %        do \@altcourse{}, \'{A}rea de Concentra{\c{c}}{\~a}o em Computa{\c{c}}{\~a}o, 
         da \ufsm{} (UFSM, RS), \\ como requisito parcial para obten{\c{c}}{\~a}o do grau de\\[6pt]
       \textbf{\@degree}
