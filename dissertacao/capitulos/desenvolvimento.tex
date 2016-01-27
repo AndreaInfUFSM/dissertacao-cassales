@@ -29,7 +29,7 @@ A interface OperatingSystemMXBean, possibilita o acesso às informações do sis
 As classes utilizadas neste trabalho fazem a coleta de memória física disponível e processadores disponíveis, os recursos suportados por padrão no Hadoop. É possível visualizar o digrama de classes na Figura \ref{fig:collectorUML}, onde estão presentes alguns exemplos de possíveis coletores a serem utilizados.
 
 %TODO fazer outro DC
-\begin{figure}[!hbtn]
+\begin{figure}[!hbt]
    \centering
    \includegraphics[width=15cm]{figuras/CollectorUML2.pdf}
    \caption{Diagrama de classes dos coletores de contexto}
@@ -68,14 +68,14 @@ Uma outra estrutura possível de ser utilizada, e mais simples, está representa
 %Qualquer alteração na tabela dispara uma \textit{callback} no escalonador, que por sua vez percorre a tabela à procura das modificações e realiza as alterações pertinentes nas informações sobre os recursos. Esta abordagem permite que o escalonador realize operações apenas quando necessário e não desperdice tempo acessando a tabela quando não houverem atualizações a fazer. A estrutura adotada no trabalho podes ser visualizada na Figura \ref{fig:zk}.
 
 
-%\begin{figure}[!hbtn]
+%\begin{figure}[!hbt]
 %   \centering
 %   \includegraphics[width=15cm]{figuras/Zookeeper.pdf}
 %   \caption{Estrutura do ZooKeeper}
 %   \label{fig:zk}
 %\end{figure}
 
-\begin{figure}[!hbtn]
+\begin{figure}[!hbt]
 
 \center
 \subfigure[Estrutura do ZooKeeper com HashTable]{\includegraphics[width=.45\textwidth]{figuras/HashTable.png} \label{fig:zk-ht}}
@@ -95,7 +95,7 @@ Uma alternativa à utilização de um \textit{zNode} para cada nó escravo, seri
 Como todos os nós escravos são, geralmente, inicializados ao mesmo tempo, as coletas de dado são realizadas em períodos semelhantes, estes períodos serão denominados neste estudo como fase de coleta. Durante estas fases, é possível que muitas atualizações sejam feitas em um pequeno espaço de tempo, gerando um risco à consistência das informações, uma vez que o ZooKeeper não fornece garantias de que todas as alterações notificarão a \textit{thread Watcher}. Este comportamento ocorre devido à possibilidade de atualizações serem feitas antes da re-inserção do \textit{Watcher} no \textit{zNode} que contém a Tabela Hash, como consequência a notificação de atualização não será gerada. Esta falha só ocorre quando a segunda atualização é feitas antes que a primeira termine de ser processada, e existem duas situações que isto pode ocorrer. A primeira situação (Figura \ref{fig:mesmo}) não apresenta grandes riscos à consistência das informações, pois a atualização perdida  ocorre entre duas atualizações normais (notificam o \textit{Watcher}) na mesma fase de coleta. Sendo assim, a atualização seguinte fará com que o escalonador ajuste os valores de recursos dos dois nós. Já a segunda situação (Figura \ref{fig:proximo}) apresenta riscos à consistência das informações, pois ocorre quando não há uma atualização normal na mesma fase de coleta após a atualização perdida, ou seja, a atualização perdida só terá suas informações atualizadas no escalonador na próxima fase de coleta, a qual ocorrerá em aproximadamente 30 segundos. Este período que o escalonador opera com informações inconsistentes pode causar o lançamento de \textit{containers} que irão exceder o limite dos nós, gerando sobrecarga e lentidão tanto na aplicação do novo usuário como na aplicação MapReduce.
 
 
-\begin{figure}[!hbtn]
+\begin{figure}[!hbt]
    \centering
    \includegraphics[width=\textwidth]{figuras/seq-sam-per.png}
    \caption{Diagrama de sequência de uma notificação perdida quando a próxima notificação ocorre na mesma fase de coleta.}
@@ -103,7 +103,7 @@ Como todos os nós escravos são, geralmente, inicializados ao mesmo tempo, as c
 \end{figure}
 
 
-\begin{figure}[!hbtn]
+\begin{figure}[!hbt]
    \centering
    \includegraphics[width=\textwidth]{figuras/seq-prox-per.png}
    \caption{Diagrama de sequência de uma notificação perdida quando a próxima notificação ocorre na próxima fase de coleta.}

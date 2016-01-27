@@ -23,7 +23,7 @@ Nesta figura, é possível notar a existência de 4 componentes do \textit{frame
 \subsubsection{HDFS}
 Grande parte do ganho de desempenho oferecido pelo Hadoop decorre do comportamento de levar o processamento até os dados, ou seja, todo processamento é feito com dados locais. Para realizar esta tarefa, o Name Node mantém informações de quais partes de quais arquivos estão em cada Data Node, ou seja, todos os arquivos estão divididos em um grande HD distribuído e o mestre sabe exatamente quais blocos cada escravo possui. Dessa forma, cada nó executa tantos Maps ou Reduces quanto a quantidade de arquivos locais permitir, diminuindo a necessidade de utilizar a rede para transferência de arquivos e deixando-a disponível para ser utilizada para a transferência dos resultados que são os dados já reduzidos. Um problema dessa abordagem é que o Hadoop possui uma latência muito alta, sendo desaconselhável o uso do Hadoop em aplicações críticas ou de tempo real \cite{BookHadoop}. A Figura \ref{fig:ArqHDFS} apresenta um esquema básico da arquitetura do HDFS.
 
-\begin{figure}[!hbtn]
+\begin{figure}[!hbt]
    \centering
    \includegraphics[width=8cm]{figuras/Figura07-HDFS.png}
    \caption{Arquitetura geral do HDFS \cite{HDFS}}
@@ -33,7 +33,7 @@ Grande parte do ganho de desempenho oferecido pelo Hadoop decorre do comportamen
 \subsubsection{YARN}
 Sendo o componente do Apache Hadoop responsável pela execução do \emph{MapReduce}, o YARN realiza tarefas de gerenciamento e execução do processamento. Um dos objetivos do YARN é tornar a tarefa de processamento totalmente independente das tarefas de armazenamento, possibilitando que o \textit{cluster} seja utilizado em conjunto com outras ferramentas que não utilizem o paradigma MapReduce \cite{Vavilapalli}. A Figura \ref{fig:ArqYARN} apresenta um esquema básico da arquitetura do YARN, onde é possível observar dois novos componentes do YARN.
 
-\begin{figure}[!hbtn]
+\begin{figure}[!hbt]
    \centering
    \includegraphics[width=12cm]{figuras/Figura06-YarnArch.png}
    \caption{Arquitetura geral do YARN \cite{YARN}}
